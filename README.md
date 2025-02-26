@@ -27,3 +27,6 @@ pip install -r requirements.txt
 
 Visitar la url: http://127.0.0.1:8000
 
+## Colores
+
+border-lime-600 bg-lime-500
