@@ -8,10 +8,10 @@
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen p-6">
     
-    <div class="max-w-md w-full bg-white rounded-xl shadow-lg p-8 border border-gray-200">
-      <h2 class="text-3xl font-extrabold text-gray-900 mb-6 text-center">Recuperar Contraseña</h2>
+    <div class="font-roboto max-w-md w-full bg-white rounded-xl shadow-lg p-8 border border-gray-200">
+      <h2 class="text-3xl font-semibold text-gray-900 mb-6 text-center">Recuperar Contraseña</h2>
       
-      <p class="text-gray-600 text-sm text-center mb-4">Ingresa tu correo electrónico y te enviaremos un enlace para restablecer tu contraseña.</p>
+      <p class="text-justify text-gray-700 text-sm mb-4">Ingresa tu correo electrónico y te enviaremos un enlace para restablecer tu contraseña.</p>
       
       <form class="space-y-6">
         <div>
@@ -24,14 +24,14 @@
           />
         </div>
   
-        <button aria-label="Recuperar contraseña" class="w-full bg-lime-600 hover:bg-lime-500 text-white font-bold py-3 rounded-lg transition-all shadow-md hover:shadow-lg">
+        <button aria-label="Recuperar contraseña" class="w-full button">
           Enviar enlace de recuperación
         </button>
       </form>
   
-      <div class="mt-6 text-center text-sm text-gray-700">
+      <div class="mt-6 text-start text-sm text-gray-700">
         ¿Recordaste tu contraseña? 
-        <a href="{{ url_for('login') }}" class="text-red-800 hover:text-red-600 font-medium transition">Iniciar sesión</a>
+        <a href="{{ url_for('login') }}" class="text-gray-900 hover:text-red-600 font-medium transition">Iniciar sesión</a>
       </div>
     </div>
   
