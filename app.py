@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+from data import items
 
 app = Flask(__name__)
 
@@ -17,6 +18,11 @@ def registrarse():
 @app.route("/recuperacion")
 def recuperar():
     return render_template("recuperacion.html")
+
+@app.route("/dashboard")
+def show_dashboard():
+    return render_template("dashboard.html", items = items)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
