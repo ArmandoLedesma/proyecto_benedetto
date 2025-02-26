@@ -325,3 +325,5 @@ dist
 .vscode
 __pycache__
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,flask,node
+
+static/css/output.css
