@@ -1,0 +1,73 @@
+CREATE DATABASE BenedettoPizza;
+USE BenedettoPizza;
+
+-- Tabla de Empleados
+CREATE TABLE Empleados (
+    id_empleado INT AUTO_INCREMENT PRIMARY KEY, -- Identificador único del empleado
+    nombre VARCHAR(100) NOT NULL, -- Nombre del empleado
+    cargo ENUM('Administrador', 'Cocinero', 'Repartidor', 'Mesero') NOT NULL, -- Cargo del empleado
+    telefono VARCHAR(20) NOT NULL -- Teléfono del empleado
+);
+
+-- Tabla de Clientes
+CREATE TABLE Clientes (
+    id_cliente INT AUTO_INCREMENT PRIMARY KEY, -- Identificador único del cliente
+    nombre VARCHAR(100) NOT NULL, -- Nombre del cliente
+    telefono VARCHAR(20) NOT NULL, -- Teléfono de contacto
+    direccion VARCHAR(255) NOT NULL, -- Dirección del cliente
+    correo VARCHAR(100) UNIQUE NOT NULL, -- Correo electrónico único
+    contrasena_hash VARCHAR(255) NOT NULL -- Contraseña en formato hash
+);
+
+-- Tabla de Productos (Pizzas y otros productos)
+CREATE TABLE Productos (
+    id_producto INT AUTO_INCREMENT PRIMARY KEY, -- Identificador único del producto
+    nombre VARCHAR(100) NOT NULL, -- Nombre del producto
+    descripcion VARCHAR(1000) NOT NULL, -- Descripción detallada
+    ingredientes VARCHAR(1000) NOT NULL, -- Lista de ingredientes
+    precio DECIMAL(10,2) NOT NULL, -- Precio del producto
+    categoria ENUM('Sencillas', 'Especiales', 'Mexicanas', 'Sorpresa') NOT NULL -- Categoría de la pizza
+);
+
+-- Tabla de Pedidos con métodos de pago actualizados
+CREATE TABLE Pedidos (
+    id_pedido INT AUTO_INCREMENT PRIMARY KEY, -- Identificador único del pedido
+    id_cliente INT NOT NULL, -- Cliente que realizó el pedido
+    fecha_pedido TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Fecha y hora del pedido
+    metodo_pago ENUM('Efectivo', 'Nequi', 'Bancolombia') NOT NULL, -- Métodos de pago actualizados
+    total DECIMAL(10,2) NOT NULL, -- Monto total del pedido
+    FOREIGN KEY (id_cliente) REFERENCES Clientes(id_cliente) ON DELETE CASCADE
+);
+
+-- Tabla de Detalles de Pedido
+CREATE TABLE DetallesPedido (
+    id_detalle INT AUTO_INCREMENT PRIMARY KEY, -- Identificador único del detalle de pedido
+    id_pedido INT NOT NULL, -- Pedido asociado
+    id_producto INT NOT NULL, -- Producto asociado al pedido
+    cantidad INT NOT NULL, -- Cantidad de productos
+    subtotal DECIMAL(10,2) NOT NULL, -- Subtotal de la compra
+    FOREIGN KEY (id_pedido) REFERENCES Pedidos(id_pedido) ON DELETE CASCADE,
+    FOREIGN KEY (id_producto) REFERENCES Productos(id_producto) ON DELETE CASCADE
+);
+
+-- Tabla de Usuarios (Clientes y Empleados)
+CREATE TABLE Usuarios (
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY, -- Identificador único del usuario
+    id_empleado INT NULL, -- Clave foránea opcional, si el usuario es un empleado
+    id_cliente INT NULL, -- Clave foránea opcional, si el usuario es un cliente
+    nombre_usuario VARCHAR(50) UNIQUE NOT NULL, -- Nombre de usuario único
+    contrasena_hash VARCHAR(255) NOT NULL, -- Contraseña en formato hash
+    rol ENUM('Administrador', 'Empleado', 'Cliente') NOT NULL, -- Tipo de usuario
+    estado ENUM('Activo', 'Inactivo') DEFAULT 'Activo', -- Estado del usuario
+    FOREIGN KEY (id_empleado) REFERENCES Empleados(id_empleado) ON DELETE SET NULL,
+    FOREIGN KEY (id_cliente) REFERENCES Clientes(id_cliente) ON DELETE SET NULL
+);
+
+-- Tabla de Estado de Pedidos
+CREATE TABLE EstadoPedidos (
+    id_estado INT AUTO_INCREMENT PRIMARY KEY, -- Identificador único del estado
+    id_pedido INT NOT NULL, -- Pedido asociado
+    estado ENUM('Pendiente', 'En preparación', 'Listo para entrega', 'Entregado', 'Cancelado') NOT NULL, -- Estado del pedido
+    fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Fecha de última actualización del estado
+    FOREIGN KEY (id_pedido) REFERENCES Pedidos(id_pedido) ON DELETE CASCADE
+);
