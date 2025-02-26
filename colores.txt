@@ -1,0 +1,7 @@
+Colores primarios
+red-600
+lime-600
+black 
+
+Colores secundarios
+zinc-700git
