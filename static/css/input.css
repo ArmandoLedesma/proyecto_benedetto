@@ -3,14 +3,14 @@
 
 /*npx @tailwindcss/cli -i static/css/input.css -o static/css/output.css --watch*/
 
-@theme{
+@theme {
     --font-amatic: "Amatic SC", serif;
     --font-roboto: "Roboto", serif;
 
 }
 
 .levitate {
-    animation: levitate 2s  infinite;
+    animation: levitate 2s infinite;
 }
 
 .shadow-3d {
@@ -18,11 +18,13 @@
 }
 
 @keyframes levitate {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateY(0);
     }
+
     50% {
         transform: translateY(-10px);
     }
 }
-
