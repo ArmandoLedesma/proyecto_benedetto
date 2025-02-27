@@ -7,6 +7,21 @@
     --font-amatic: "Amatic SC", serif;
     --font-roboto: "Roboto", serif;
 
+    /* Colores primarios */
+    /* verde lima */
+    /* Rojo */
+    /* Negro */
+
+
+    /* Colores primarios */
+    /* Colores fondo */
+    /* Colores index */
+    /* Colores texto */
+    /* Colores texto */
+    /* Colores texto */
+
+
+
 }
 
 
@@ -77,12 +92,10 @@
     position: absolute;
     width: 100px;
     height: 100%;
-    background-image: linear-gradient(
-        120deg,
-        rgba(255, 255, 255, 0) 30%,
-        rgba(255, 255, 255, 0.8),
-        rgba(255, 255, 255, 0) 70%
-    );
+    background-image: linear-gradient(120deg,
+            rgba(255, 255, 255, 0) 30%,
+            rgba(255, 255, 255, 0.8),
+            rgba(255, 255, 255, 0) 70%);
     top: 0;
     left: -100px;
     opacity: 0.6;
@@ -92,11 +105,14 @@
     0% {
         left: -100px;
     }
+
     60% {
         left: 100%;
     }
+
     100% {
         left: 100%;
     }
 }
+
 /*Fin de los nuevos estilos para los botones*/
