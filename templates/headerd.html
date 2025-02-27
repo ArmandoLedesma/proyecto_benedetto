@@ -1,0 +1,73 @@
+<header>
+    <!-- Navbar Responsive -->
+    <div class="relative flex items-center justify-between py-4 px-6 bg-white">
+
+        <!-- Logo -->
+        <div class="flex flex-row justify-center items-center font-roboto text-3xl font-semibold tracking-wide">
+            <img class="h-auto max-h-16 max-w-16 object-contain"
+                src="{{ url_for('static', filename='img/pizzas/logo.png') }}" alt="Logo Benedetto Pizza">
+            <span class="ml-2 text-zinc-700">Benedetto Pizza</span>
+        </div>
+
+        <!-- Menú hamburguesa (móvil) -->
+        <button id="menu-toggle" class="md:hidden text-2xl text-gray-700 absolute right-6 top-3 focus:outline-none">
+            &#9776;
+        </button>
+
+        <!-- Navbar en pantallas grandes -->
+        <nav class="hidden md:flex font-roboto text-gray-600 drop-shadow-md">
+            <ul class="flex space-x-8 ">
+                <li><a href="#"
+                        class="border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Home</a>
+                </li>
+                <li><a href="/categorias"
+                        class="border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Categorias</a>
+                </li>
+                <li><a href="/empleados"
+                        class="border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Empleados</a>
+                </li>
+                <li><a href="/clientes"
+                        class="border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Clientes</a>
+                </li>
+                <li><a href="/sucursales"
+                        class="border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Sucursales</a>
+                </li>
+                <li><a href="#"
+                        class="border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Gallery</a>
+                </li>
+                <li><a href="#"
+                        class="border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Dropdown</a>
+                </li>
+                <li><a href="#"
+                        class="border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Contact</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Botón de Inicio de sesión -->
+        <!-- 
+        <div class="hidden md:flex">
+            <a href="{{ url_for('login') }}"
+                class="button">
+                Iniciar sesión
+            </a>
+        </div>
+        -->
+    </div>
+
+
+
+    <!-- Navbar en móviles -->
+    <nav id="menu" class="hidden md:hidden fixed top-16 left-0 w-full bg-white shadow-md z-50 p-6">
+        <ul class="flex flex-col space-y-4 text-center">
+            <li><a href="#" class="block py-2 hover:text-red-600">Home</a></li>
+            <li><a href="#" class="block py-2 hover:text-red-600">About</a></li>
+            <li><a href="#" class="block py-2 hover:text-red-600">Menú</a></li>
+            <li><a href="#" class="block py-2 hover:text-red-600">Events</a></li>
+            <li><a href="#" class="block py-2 hover:text-red-600">Chefs</a></li>
+            <li><a href="#" class="block py-2 hover:text-red-600">Gallery</a></li>
+            <li><a href="#" class="block py-2 hover:text-red-600">Dropdown</a></li>
+            <li><a href="#" class="block py-2 hover:text-red-600">Contact</a></li>
+        </ul>
+    </nav>
+</header>
