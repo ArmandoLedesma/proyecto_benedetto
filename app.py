@@ -1,11 +1,29 @@
 # Importar modulos
 from flask import Flask, render_template
 from data import items, items_categorias, items_empleados, items_clientes, items_sucursales
-
+from views.routes_main import main_bp
+from views.routes_auth import auth_bp
+from views.routes_dashboard import dashboard_bp 
 
 
 
 app = Flask(__name__)
+
+
+# Registrar blueprints de vistas
+
+app.register_blueprint(main_bp)
+app.register_blueprint(auth_bp, url_prefix="/auth")
+app.register_blueprint(dashboard_bp, url_prefix="/dashboard")
+
+
+@app.route("/dashboard")
+def show_dashboard():
+    return render_template("dashboard.html", items = items, items_categorias= items_categorias)
+
+# Ruta principal
+
+""" 
 @app.route("/")
 def home():
     return render_template("index.html")  
@@ -22,9 +40,7 @@ def registrarse():
 def recuperar():
     return render_template("recuperacion.html")
 
-@app.route("/dashboard")
-def show_dashboard():
-    return render_template("dashboard.html", items = items, items_categorias= items_categorias)
+
 
 @app.route("/categorias")
 def show_categorias():
@@ -41,8 +57,9 @@ def show_clientes():
 @app.route("/sucursales")
 def show_sucursales():
     return render_template("sucursales.html", items= items_sucursales)
+"""
 
-
+print(app.url_map)
 
 if __name__ == "__main__":
     app.run(debug=True)
