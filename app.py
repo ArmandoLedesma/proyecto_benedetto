@@ -4,6 +4,8 @@ from data import items, items_categorias, items_empleados, items_clientes, items
 from config import Config
 from database.db import db
 
+# Importar blueprint de api
+from modules.employees.routes import empleados_bp
 
 # Importar blueprint de vistas
 from views.routes_main import main_bp
@@ -20,10 +22,14 @@ def create_app():
 
     db.init_app(app)
 
+    # Registrar blueprint de api
+
     # Registrar blueprints de vistas
     app.register_blueprint(main_bp)
     app.register_blueprint(auth_bp, url_prefix="/auth")
     app.register_blueprint(dashboard_bp, url_prefix="/dashboard")    
+    # Registrar blueprint de empleados
+    app.register_blueprint(empleados_bp, url_prefix="/api/v1")
     
     print(app.url_map)
     
