@@ -1,30 +1,28 @@
-# Importar modulos
-from flask import Flask, render_template
-from data import items, items_categorias, items_empleados, items_clientes, items_sucursales
+from flask import Blueprint,render_template 
+
+
+author_bp = Blueprint('author_bp', __name__, template_folder="auth")
+dashboard_bp = Blueprint('dashboard_bp', __name__, template_folder="dashboard")
 
 
 
-
-app = Flask(__name__)
-@app.route("/")
-def home():
-    return render_template("index.html")  
-
-@app.route("/iniciar_sesion")
+@author_bp.route("/iniciar_sesion")
 def login():
     return render_template("login.html")
 
-@app.route("/registro")
+@author_bp.route("/registro")
 def registrarse():
     return render_template("registro.html")
 
-@app.route("/recuperacion")
+@author_bp.route("/recuperacion")
 def recuperar():
     return render_template("recuperacion.html")
 
-@app.route("/dashboard")
-def show_dashboard():
-    return render_template("dashboard.html", items = items, items_categorias= items_categorias)
+
+
+@dashboard_bp.route('/')
+def dashboard():
+    return render_template('dashboard/dashboard.html')
 
 @app.route("/categorias")
 def show_categorias():
@@ -44,5 +42,4 @@ def show_sucursales():
 
 
 
-if __name__ == "__main__":
-    app.run(debug=True)
+
