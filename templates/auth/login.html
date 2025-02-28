@@ -37,9 +37,15 @@
           class="text-sm text-gray-800 hover:text-red-600 transition">¿Olvidaste tu contraseña?</a>
       </div>
 
-      <button aria-label="Iniciar sesión" class="w-full button">
+      <!--! Cambiar a  un botoon con submit  -->
+      <!-- <button aria-label="Iniciar sesión" class="w-full button">
         Iniciar sesión
-      </button>
+      </button> -->
+
+      <a href="{{ url_for('dashboard_bp.show_dashboard') }}" aria-label="Iniciar sesión" class="w-full button">
+        Iniciar sesión
+      </a>
+
     </form>
 
     <div class="mt-6 text-center text-sm text-gray-700">
