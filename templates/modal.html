@@ -131,14 +131,14 @@
             products.forEach((product, index) => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-          <td class="py-2 px-4 border">${product.name}</td>
-          <td class="py-2 px-4 border">${product.price}</td>
-          <td class="py-2 px-4 border">${product.category}</td>
-          <td class="py-2 px-4 border">${product.description}</td>
-          <td class="py-2 px-4 border">
+        <td class="py-2 px-4 border">${product.name}</td>
+        <td class="py-2 px-4 border">${product.price}</td>
+        <td class="py-2 px-4 border">${product.category}</td>
+        <td class="py-2 px-4 border">${product.description}</td>
+        <td class="py-2 px-4 border">
             <button data-index="${index}" class="editBtn bg-green-500 text-white px-2 py-1 rounded">Editar</button>
             <button data-index="${index}" class="deleteBtn bg-red-500 text-white px-2 py-1 rounded ml-2">Eliminar</button>
-          </td>
+        </td>
         `;
                 productTableBody.appendChild(tr);
             });
