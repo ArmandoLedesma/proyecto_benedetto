@@ -39,5 +39,7 @@ def show_sucursales():
     return render_template("dashboard/sucursales.html", items= items_sucursales)
 
 
-
+@dashboard_bp.route("/carta_pizza")
+def show_carta_pizza():
+    return render_template("dashboard/carta_pizza.html", items= items_sucursales)
 
