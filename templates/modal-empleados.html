@@ -15,17 +15,42 @@
         <h3 class="text-lg font-semibold mb-4">Crear / Editar Empleado</h3>
         <hr class="mb-4 border-gray-500">
         <!-- Formulario -->
-        <form id="productForm" class="grid gap-4">
+        <form id="empleadosForm" class="grid gap-4" method="POST" action="">
             <div>
-                <label for="name" class="block text-sm font-medium text-gray-900">Nombre</label>
-                <input type="text" id="name" required placeholder="Escribe el nombre"
+                <label for="nombre" class="block text-sm font-medium text-gray-900">Nombre</label>
+                <input type="text" id="nombre" name="nombre" required placeholder="Escribe el nombre"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
             </div>
             <div>
-                <label for="price" class="block text-sm font-medium text-gray-900">Precio</label>
-                <input type="number" id="price" required placeholder="Ej. 2999"
+                <label for="cargo" class="block text-sm font-medium text-gray-900">Cargo</label>
+                <select id="category" name="cargo"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+                    <option value="">Selecciona cargo del empleado</option>
+                    <option value="Cajero">Cajero</option>
+                    <option value="Administrador">Administrador</option>
+                    <option value="Mesero">Mesero</option>
+                    <option value="Cocinero">Cocinero</option>
+                    <option value="Repartidor">Repartidor</option>
+                </select>
+            </div>
+            <div>
+                <label for="salario" class="block text-sm font-medium text-gray-900">Salario</label>
+                <input type="number" id="salario" name="salario" required placeholder="Ej. 2000000"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
             </div>
+            <div>
+                <label for="telefono" class="block text-sm font-medium text-gray-900">Telefono</label>
+                <input type="text" id="telefono" name="telefono" required placeholder="Ej. 3001234567"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+            </div>
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-900">Email</label>
+                <input type="email" id="email" name="email" required placeholder="Ej. daniel@gmail.com"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+            </div>
+
+            <!--! Campos para otro modal -->
+            <!-- Campos para otro modal
             <div>
                 <label for="category" class="block text-sm font-medium text-gray-900">Categoría</label>
                 <select id="category"
@@ -37,18 +62,22 @@
                     <option value="PH">Phones</option>
                 </select>
             </div>
+
             <div>
                 <label for="description" class="block text-sm font-medium text-gray-900">Descripción</label>
                 <textarea id="description" rows="4" placeholder="Escribe la descripción del producto"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"></textarea>
             </div>
+            <!--! Campos para otro modal -->
+
+
             <button type="submit" class="button">
                 <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd"
                         d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
                         clip-rule="evenodd"></path>
                 </svg>
-                Guardar Producto
+                Guardar Empleado
             </button>
         </form>
     </div>
@@ -60,6 +89,8 @@
     const openModalBtn = document.getElementById('openModalBtn');
     const closeModalBtn = document.getElementById('closeModalBtn');
     const modal = document.getElementById('crud-modal');
+    // Recibir el formulario 
+    const empleadosForm = document.getElementById('empleadosForm');
 
     // Función para abrir el modal
     openModalBtn.addEventListener('click', () => {
@@ -67,9 +98,13 @@
     });
 
     // Función para cerrar el modal
-    closeModalBtn.addEventListener('click', () => {
+    function closeModal() {
         modal.classList.add('hidden');
         resetForm();
+    }
+
+    closeModalBtn.addEventListener('click', () => {
+        closeModal();
     });
 
     // Cerrar el modal al hacer clic fuera del contenido
@@ -79,6 +114,42 @@
             resetForm();
         }
     });
+
+    // Manejo del envío asíncrono del formulario
+    empleadosForm.addEventListener('submit', function (e) {
+        e.preventDefault(); // Evita el comportamiento por defecto
+
+        // Crear objeto FormData con los datos del formulario
+        const formData = new FormData(empleadosForm);
+        console.log('Datos del formulario:', formData);
+
+        // Enviar los datos al endpoint de la API (/empleados) mediante fetch
+        fetch('/api/v1/empleados', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Error en el envío");
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Empleado guardado:', data);
+                // Aquí puedes actualizar la tabla de empleados sin recargar la página
+                closeModal();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Manejo de errores: mostrar mensaje al usuario, etc.
+            });
+    });
+
+    // Función para resetear el formulario
+    function resetForm() {
+        empleadosForm.reset();
+    }
+
 
 
 
