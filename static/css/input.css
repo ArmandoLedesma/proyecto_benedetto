@@ -8,14 +8,14 @@
     --font-roboto: "Roboto", serif;
 
     /* Colores primarios */
-    /* verde lima */
-    /* Rojo */
-    /* Negro */
-
-
-    /* Colores primarios */
+    --color-red: #E7000B;
+    --color-green: #7CCF00;
+    --color-black: #27272A;
+     
     /* Colores fondo */
-    /* Colores index */
+    --color-white: #FFFFFF;
+    --color-gray: #F9FAFB;
+
     /* Colores texto */
     /* Colores texto */
     /* Colores texto */
