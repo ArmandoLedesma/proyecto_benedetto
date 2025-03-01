@@ -53,9 +53,15 @@ items_categorias = [
         "button_text": "Ver más"
     },
     {
-        "title": "Salchipapas",
-        "image": "img/categorias_subcategorias/salchipapa.jpg",
-        "description": "Salchipapas irresistibles: papas crujientes, salchichas doradas y el toque perfecto de salsas. 🍟🔥 Un solo bocado y te envuelve.",
+        "title": "Perro caliente",
+        "image": "img/categorias_subcategorias/hotdog.jpeg",
+        "description": "Pan suave, salchicha jugosa y los toppings perfectos. 🌭🔥 Un solo bocado y se vuelve tu favorito.",
+        "button_text": "Ver más"
+    },
+    {
+        "image": "img/categorias_subcategorias/desgranado.jpeg",
+        "title": "Desgranado",
+        "description": "Carne jugosa, maíz tierno y el mix perfecto de salsas y queso. 🌽🔥 Un solo bocado y no querrás soltarlo.",
         "button_text": "Ver más"
     },
     {
@@ -64,18 +70,7 @@ items_categorias = [
         "description": "Bebidas irresistibles: refrescantes, intensas y el complemento perfecto para cada antojo. 🥤🔥 Un solo sorbo y lo disfrutas.",
         "button_text": "Ver más"
     },
-    {
-        "image": "img/sucursal/sucursales.svg",
-        "title": "Sucursales",
-        "description": "Esta es la descripción de la segunda tarjeta.",
-        "button_text": "Gestionar Sucursales"
-    },
-    {
-        "image": "img/sucursal/sucursales.svg",
-        "title": "Sucursales",
-        "description": "Esta es la descripción de la segunda tarjeta.",
-        "button_text": "Gestionar Sucursales"
-    }
+   
 ]
 
 pizza_tradicionales = [
