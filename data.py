@@ -277,7 +277,7 @@ pizza_autor = [
 
 items_empleados = [
     {
-        "id": "10001",
+        "id": "1",
         "nombre": "Daniel 3",
         "cargo": "mesero",
         "salario": "2000000",
