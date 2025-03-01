@@ -5,7 +5,7 @@ from config import Config
 from database.db import db
 
 # Importar blueprint de api
-from modules.employees.routes import empleados_bp
+#from modules.employees.routes import empleados_bp
 
 # Importar blueprint de vistas
 from views.routes_main import main_bp
@@ -29,7 +29,7 @@ def create_app():
     app.register_blueprint(auth_bp, url_prefix="/auth")
     app.register_blueprint(dashboard_bp, url_prefix="/dashboard")    
     # Registrar blueprint de empleados
-    app.register_blueprint(empleados_bp, url_prefix="/api/v1")
+    #app.register_blueprint(empleados_bp, url_prefix="/api/v1")
     
     print(app.url_map)
     
