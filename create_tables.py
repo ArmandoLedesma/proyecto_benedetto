@@ -12,7 +12,7 @@ with app.app_context():
     # Insertar datos
     # Inserción de 3 datos de prueba utilizando Decimal para el salario
     empleado1 = Empleado(
-        id="10001",
+        id="1",
         nombre="Daniel 3",
         cargo="mesero",
         salario=Decimal("2000000.00"),
@@ -20,7 +20,7 @@ with app.app_context():
         email="micorreo@gmail.com"
     )
     empleado2 = Empleado(
-        id="10002",
+        id="2",
         nombre="Juan Perez",
         cargo="cocinero",
         salario=Decimal("3000000.00"),
@@ -28,7 +28,7 @@ with app.app_context():
         email="juan.perez@gmail.com"
     )
     empleado3 = Empleado(
-        id="10003",
+        id="3",
         nombre="Maria Lopez",
         cargo="cajera",
         salario=Decimal("2500000.00"),

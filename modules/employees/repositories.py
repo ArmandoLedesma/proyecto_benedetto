@@ -2,7 +2,7 @@ from database.db import db
 from modules.employees.model import Empleado
 
 # Repositorio para manejar los empleados en la base de datos
-class EmpleadoRepository(db.Model):
+class EmpleadoRepository:
     # Recuperar todos los empleados
     def get_all(self):
         return Empleado.query.all()
