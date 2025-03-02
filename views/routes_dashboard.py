@@ -27,7 +27,7 @@ def show_empleados():
     # Convertimos cada objeto empleado a diccionario
     empleados_list = [empleado.to_dict() for empleado in empleados]
     # Renderizamos la vista pasando los empleados obtenidos
-    return render_template("dashboard/empleados.html", items=empleados_list)
+    return render_template("dashboard/empleados.html")
     #return render_template("dashboard/empleados.html", items= items_empleados)
 
 @dashboard_bp.route("/clientes")

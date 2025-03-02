@@ -1,18 +1,18 @@
 <!--! Botón para abrir el modal -->
 <div class="container mx-auto mt-1">
     <!--! Botoooon -->
-    <button id="openModalBtn" class="button">
-        Abrir Modal
+    <button id="openEditModalBtn" class="button">
+        Abrir Edit Modal
     </button>
 </div>
 
 <!--! Modal (oculto por defecto) -->
-<div id="crud-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-gray-900/85 ">
+<div id="crud-modal-edit" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-gray-900/85 ">
     <div class="bg-white rounded-lg shadow p-6 w-full max-w-md relative">
         <!-- Botón de cierre -->
-        <button id="closeModalBtn" class="absolute top-2 right-2 text-gray-500 text-2xl">&times;</button>
+        <button id="closeEditModalBtn" class="absolute top-2 right-2 text-gray-500 text-2xl">&times;</button>
         <!-- Título del modal -->
-        <h3 class="text-lg font-semibold mb-4">Crear Empleado</h3>
+        <h3 class="text-lg font-semibold mb-4">Editar Empleado</h3>
         <hr class="mb-4 border-gray-500">
         <!-- Formulario -->
         <form id="empleadosForm" class="grid gap-4" method="POST" action="">
@@ -86,31 +86,31 @@
 <!--! Código JavaScript -->
 <script>
     // Elementos del DOM
-    const openModalBtn = document.getElementById('openModalBtn');
-    const closeModalBtn = document.getElementById('closeModalBtn');
-    const modal = document.getElementById('crud-modal');
+    const openEditModalBtn = document.getElementById('openEditModalBtn');
+    const closeEditModalBtn = document.getElementById('closeEditModalBtn');
+    const modal2 = document.getElementById('crud-modal-edit');
     // Recibir el formulario 
     const empleadosForm = document.getElementById('empleadosForm');
 
     // Función para abrir el modal
-    openModalBtn.addEventListener('click', () => {
-        modal.classList.remove('hidden');
+    openEditModalBtn.addEventListener('click', () => {
+        modal2.classList.remove('hidden');
     });
 
     // Función para cerrar el modal
     function closeModal() {
-        modal.classList.add('hidden');
+        modal2.classList.add('hidden');
         resetForm();
     }
 
-    closeModalBtn.addEventListener('click', () => {
+    closeEditModalBtn.addEventListener('click', () => {
         closeModal();
     });
 
     // Cerrar el modal al hacer clic fuera del contenido
     window.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.classList.add('hidden');
+        if (e.target === modal2) {
+            modal2.classList.add('hidden');
             resetForm();
         }
     });
