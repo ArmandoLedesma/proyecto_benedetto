@@ -7,23 +7,21 @@
 
 <!-- Contenido -->
 <main>
-
-
     <!-- Contenedor de empleados -->
     <div class="container font-roboto mt-8 mx-auto py-5">
         <div class="flex flex-col justify-center items-center py-4 gap-1 ">
             <h2 class="text-4xl font-medium text-zinc-800">Empleados</h2>
             <p class="font-light text-gray-800">¡Bienvenido al panel de control de Empleados!</p>
+
             <div>
+                <!--! Modal  -->
                 {% include 'modal-unificado.html' %}
             </div>
         </div>
     </div>
     <!-- Fin de contenedor de empleados -->
 
-
-
-
+    <!-- Tabla para el listado -->
     <div class="container mx-auto p-5">
         <div class="overflow-x-auto bg-neutral-200 rounded-lg shadow-lg">
             <table class="w-full table-auto border-collapse">
@@ -39,43 +37,11 @@
                     </tr>
                 </thead>
                 <tbody id="usuariosTablebody" class="text-gray-700 text-sm font-medium">
-
-
-
+                    <!--! Aquí se renderizarán los datos de la tabla desde el fetch-->
                 </tbody>
             </table>
         </div>
     </div>
-
-    <!-- Tarjeta -->
-    <!--     <div class="container mx-auto">
-        <div class="flex flex-wrap m-4">
-            {% for item in items %}
-            <div class="w-full lg:w-1/2 p-4 {% if loop.last %}mx-auto{% endif %}">
-                <div
-                    class="rounded-lg overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow duration-300">
-                    <img class="w-full min-w-md h-auto object-contain" src="{{ item.image }}" alt="{{ item.title }}">
-                    <div class="px-6 py-4 font-roboto">
-                        <h2 class="text-xl mb-2 text-zinc-800">{{ item.title }}</h2>
-                        <p class="text-gray-700 text-balance">{{ item.description }}</p>
-                    </div>
-                    <div class="px-6 py-4">
-                        <button class="button">
-                            {{ item.button_text|default('Ver más') }}
-                        </button>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div> -->
-
-    <!-- Tarjeta Fin -->
-
-
-
-
-
 
     <script>
         // Función para renderizar la tabla de empleados
@@ -235,7 +201,6 @@
                     console.error('Error al eliminar el empleado:', error);
                 });
         }
-
         function editEmployee(id) {
             fetch(`/api/v1/empleados/${id}`, {
                 method: 'PUT'
@@ -256,7 +221,6 @@
         }
 
     </script>
-
 </main>
 
 
@@ -265,6 +229,3 @@
 {% include 'footer.html' %}
 
 {% endblock %}
-
-
-<!-- Script para renderizar la tabla y escuchar el evento personalizado -->
