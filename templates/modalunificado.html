@@ -1,0 +1,125 @@
+<!-- modal-empleados-unificado.html -->
+<div id="empleadoModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-gray-900/85">
+    <div class="bg-white rounded-lg shadow p-6 w-full max-w-md relative">
+
+        <!-- Botón de cierre -->
+        <button id="closeEmpleadoModalBtn" class="absolute top-2 right-2 text-gray-500 text-2xl">&times;</button>
+        <!-- Título dinámico -->
+        <h3 id="empleadoModalTitle" class="text-lg font-semibold mb-4">Crear Empleado</h3>
+
+        <hr class="mb-4 border-gray-500">
+
+        <!--! Formulario con campo oculto para el id -->
+        <form id="empleadoForm" class="grid gap-4">
+
+            <!-- Campo oculto para el id (para edición) -->
+            <input type="hidden" id="empleadoId" name="empleado_id">
+
+            <div>
+                <label for="nombre" class="block text-sm font-medium text-gray-900">Nombre</label>
+                <input type="text" id="nombre" name="nombre" required placeholder="Escribe el nombre"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+            </div>
+
+            <!-- Otros campos similares para cargo, salario, teléfono, email -->
+            <div>
+                <label for="cargo" class="block text-sm font-medium text-gray-900">Cargo</label>
+                <select id="cargo" name="cargo"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+                    <option value="">Selecciona cargo del empleado</option>
+                    <option value="Cajero">Cajero</option>
+                    <option value="Administrador">Administrador</option>
+                    <option value="Mesero">Mesero</option>
+                    <option value="Cocinero">Cocinero</option>
+                    <option value="Repartidor">Repartidor</option>
+                </select>
+            </div>
+            <!-- ... otros campos ... -->
+            <button type="submit" id="submitEmpleadoBtn" class="button">
+                Guardar Empleado
+            </button>
+        </form>
+    </div>
+</div>
+
+<script>
+    const empleadoModal = document.getElementById('empleadoModal');
+    const closeEmpleadoModalBtn = document.getElementById('closeEmpleadoModalBtn');
+    const empleadoForm = document.getElementById('empleadoForm');
+
+    const empleadoModalTitle = document.getElementById('empleadoModalTitle');
+    const submitEmpleadoBtn = document.getElementById('submitEmpleadoBtn');
+    const empleadoIdInput = document.getElementById('empleadoId');
+
+    // Función para abrir el modal en modo creación
+    function openCrearModal() {
+        empleadoModalTitle.textContent = 'Crear Empleado';
+        submitEmpleadoBtn.textContent = 'Guardar Empleado';
+        empleadoIdInput.value = ''; // Asegurarse de que no hay id para creación
+        empleadoForm.reset();
+        empleadoModal.classList.remove('hidden');
+    }
+
+    // Función para abrir el modal en modo edición
+    // Aquí se recibirían los datos del empleado y se precargarían los campos.
+    function openEditarModal(empleado) {
+        empleadoModalTitle.textContent = 'Editar Empleado';
+        submitEmpleadoBtn.textContent = 'Actualizar Empleado';
+        //Datos del empleado        
+        empleadoIdInput.value = empleado.id;
+        document.getElementById('nombre').value = empleado.nombre;
+        document.getElementById('cargo').value = empleado.cargo;
+        // Rellenar los otros campos...
+        empleadoModal.classList.remove('hidden');
+    }
+
+    // Cerrar el modal
+    closeEmpleadoModalBtn.addEventListener('click', () => {
+        empleadoModal.classList.add('hidden');
+        empleadoForm.reset();
+    });
+
+    window.addEventListener('click', (e) => {
+        if (e.target === empleadoModal) {
+            empleadoModal.classList.add('hidden');
+            empleadoForm.reset();
+        }
+    });
+
+    // Manejo del submit del formulario unificado
+    empleadoForm.addEventListener('submit', function (e) {
+
+        e.preventDefault();
+
+        // Crear objeto FormData con los datos del formulario
+        const formData = new FormData(empleadoForm);
+
+        // Determinar la URL y el método según si se está editando o creando
+        const isEditing = empleadoIdInput.value !== '';
+
+        const url = isEditing ? `/api/v1/empleados/${empleadoIdInput.value}` : '/api/v1/empleados';
+
+        const method = isEditing ? 'PUT' : 'POST';
+
+        fetch(url, {
+            method: method,
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Error en el envío");
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Despachar evento para actualizar la tabla y mostrar notificación
+                document.dispatchEvent(new CustomEvent('empleadoGuardado', { detail: data }));
+                empleadoModal.classList.add('hidden');
+                empleadoForm.reset();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Manejo de errores
+            });
+    });
+</script>

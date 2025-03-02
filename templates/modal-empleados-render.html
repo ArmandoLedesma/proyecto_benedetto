@@ -1,5 +1,5 @@
 <!--! Botón para abrir el modal -->
-<div class="container mx-auto mt-1">
+<div class="container mx-auto">
     <!--! Botoooon -->
     <button id="openModalBtn" class="button">
         Abrir Modal
@@ -12,9 +12,9 @@
         <!-- Botón de cierre -->
         <button id="closeModalBtn" class="absolute top-2 right-2 text-gray-500 text-2xl">&times;</button>
         <!-- Título del modal -->
-        <h3 class="text-lg font-semibold mb-4">Crear Empleado</h3>
+        <h3 class="text-lg font-semibold mb-4">Crear / Editar Empleado</h3>
         <hr class="mb-4 border-gray-500">
-        <!-- Formulario -->
+        <!-- Formulario  del modal-->
         <form id="empleadosForm" class="grid gap-4" method="POST" action="">
             <div>
                 <label for="nombre" class="block text-sm font-medium text-gray-900">Nombre</label>
@@ -85,6 +85,7 @@
 
 <!--! Código JavaScript -->
 <script>
+    //Logiaca del modal
     // Elementos del DOM
     const openModalBtn = document.getElementById('openModalBtn');
     const closeModalBtn = document.getElementById('closeModalBtn');
@@ -137,10 +138,6 @@
             .then(data => {
                 console.log('Empleado guardado:', data);
                 // Aquí puedes actualizar la tabla de empleados sin recargar la página
-
-                // Despachar un evento personalizado para notificar que se guardó un empleado.
-                document.dispatchEvent(new CustomEvent('empleadoGuardado', { detail: data }));
-
                 closeModal();
             })
             .catch(error => {
