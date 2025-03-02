@@ -104,8 +104,12 @@
                             <td class="py-4 px-6 text-center bg-white">
                             <div class="flex items-center justify-center space-x-3">
                                 <!--!Boton de edición  -->
-                                    <button id="openEditModalBtn" class="p-2 text-blue-500 hover:text-blue-700 transition transform hover:scale-110"
-                                        onclick="openEditarModal(${empleado.id})">
+                                    <button  
+                                        class="p-2 text-blue-500 hover:text-blue-700 transition transform hover:scale-110"
+                                        data-employee='${JSON.stringify(empleado)}'
+                                        onclick="handleEdit(this)">
+                                        
+                                        
                                         <!-- Icono editar -->
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -134,6 +138,12 @@
         }
 
         // Función para mostrar un mensaje de notificación
+
+        function handleEdit(button) {
+            // Obtener la data del empleado del atributo data-employee y parsearla
+            const empleadoData = JSON.parse(button.getAttribute('data-employee'));
+            openEditarModal(empleadoData);
+        }
 
         // Función para mostrar un toast con la información del empleado creado
         function showToast(empleado) {
