@@ -1,20 +1,26 @@
 <!-- modal-empleados-unificado.html -->
+<div class="container mx-auto mt-1">
+    <!--! Botoooon -->
+    <button onclick="openCrearModal()" class="button">
+        Abrir Edit Modal
+    </button>
+</div>
+<!-- Modal cerrado inicialmente -->
 <div id="empleadoModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-gray-900/85">
     <div class="bg-white rounded-lg shadow p-6 w-full max-w-md relative">
 
         <!-- Botón de cierre -->
         <button id="closeEmpleadoModalBtn" class="absolute top-2 right-2 text-gray-500 text-2xl">&times;</button>
+
         <!-- Título dinámico -->
         <h3 id="empleadoModalTitle" class="text-lg font-semibold mb-4">Crear Empleado</h3>
-
         <hr class="mb-4 border-gray-500">
 
         <!--! Formulario con campo oculto para el id -->
         <form id="empleadoForm" class="grid gap-4">
-
             <!-- Campo oculto para el id (para edición) -->
             <input type="hidden" id="empleadoId" name="empleado_id">
-
+            <!--! Inputs del modal  -->
             <div>
                 <label for="nombre" class="block text-sm font-medium text-gray-900">Nombre</label>
                 <input type="text" id="nombre" name="nombre" required placeholder="Escribe el nombre"
@@ -22,6 +28,7 @@
             </div>
 
             <!-- Otros campos similares para cargo, salario, teléfono, email -->
+            <!-- Esta data debe ser obtenida desde la bd -->
             <div>
                 <label for="cargo" class="block text-sm font-medium text-gray-900">Cargo</label>
                 <select id="cargo" name="cargo"
@@ -44,6 +51,7 @@
 
 <script>
     const empleadoModal = document.getElementById('empleadoModal');
+
     const closeEmpleadoModalBtn = document.getElementById('closeEmpleadoModalBtn');
     const empleadoForm = document.getElementById('empleadoForm');
 
@@ -78,7 +86,7 @@
         empleadoModal.classList.add('hidden');
         empleadoForm.reset();
     });
-
+    // Cerrar el modal al hacer clic fuera del contenido
     window.addEventListener('click', (e) => {
         if (e.target === empleadoModal) {
             empleadoModal.classList.add('hidden');
@@ -89,16 +97,14 @@
     // Manejo del submit del formulario unificado
     empleadoForm.addEventListener('submit', function (e) {
 
-        e.preventDefault();
+        e.preventDefault(); // Evitar comportamiento por defecto
 
         // Crear objeto FormData con los datos del formulario
         const formData = new FormData(empleadoForm);
 
         // Determinar la URL y el método según si se está editando o creando
         const isEditing = empleadoIdInput.value !== '';
-
         const url = isEditing ? `/api/v1/empleados/${empleadoIdInput.value}` : '/api/v1/empleados';
-
         const method = isEditing ? 'PUT' : 'POST';
 
         fetch(url, {

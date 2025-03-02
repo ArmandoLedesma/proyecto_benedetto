@@ -14,13 +14,13 @@
         <div class="flex flex-col justify-center items-center py-4 gap-1 ">
             <h2 class="text-4xl font-medium text-zinc-800">Empleados</h2>
             <p class="font-light text-gray-800">¡Bienvenido al panel de control de Empleados!</p>
-            <span>
-                {% include 'modal-empleados.html' %}
-                {% include 'modal-empleados-editar-copy.html' %}
-            </span>
+            <div>
+                {% include 'modal-unificado.html' %}
+            </div>
         </div>
     </div>
     <!-- Fin de contenedor de empleados -->
+
 
 
 
@@ -103,15 +103,16 @@
                             <td class="py-4 px-6 bg-white">${empleado.email}</td>
                             <td class="py-4 px-6 text-center bg-white">
                             <div class="flex items-center justify-center space-x-3">
-                                
-                                <button id="openEditModalBtn" class="p-2 text-blue-500 hover:text-blue-700 transition transform hover:scale-110">
-                                <!-- Icono editar -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                                    </svg>
-                                </button>
+                                <!--!Boton de edición  -->
+                                    <button id="openEditModalBtn" class="p-2 text-blue-500 hover:text-blue-700 transition transform hover:scale-110"
+                                        onclick="openEditarModal(${empleado.id})">
+                                        <!-- Icono editar -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                        </svg>
+                                    </button>
+
                                 ${empleado.id}
                                 <button class="p-2 text-red-500 hover:text-red-700 transition transform hover:scale-110" onclick="deleteEmployee(${empleado.id})">
                                     <!-- Icono eliminar -->
