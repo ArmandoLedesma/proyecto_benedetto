@@ -65,6 +65,7 @@
 </div>
 
 <script>
+
     const empleadoModal = document.getElementById('empleadoModal');
 
     const closeEmpleadoModalBtn = document.getElementById('closeEmpleadoModalBtn');
@@ -126,7 +127,6 @@
 
         // Determinar la URL y el método según si se está editando o creando
         const isEditing = empleadoIdInput.value !== '';
-
         const url = isEditing ? `/api/v1/empleados/${empleadoIdInput.value}` : '/api/v1/empleados';
         const method = isEditing ? 'PUT' : 'POST';
 
@@ -143,10 +143,8 @@
             .then(data => {
                 // Despachar evento para actualizar la tabla y mostrar notificación
                 document.dispatchEvent(new CustomEvent('empleadoGuardado', { detail: data }));
-
                 empleadoModal.classList.add('hidden');
                 empleadoForm.reset();
-
             })
             .catch(error => {
                 console.error('Error:', error);

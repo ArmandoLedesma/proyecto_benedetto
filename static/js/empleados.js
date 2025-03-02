@@ -1,0 +1,198 @@
+//! Funciones para consumir la API de empleados
+
+//! Función para renderizar la tabla de empleados
+function renderEmployeeTable() {
+    //Consulto la API en el endpoint de empleados para obtener la lista de empleados
+    fetch('/api/v1/empleados')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al obtener la lista de empleados');
+            }
+            return response.json();
+        })
+        .then(
+            data => {
+                //Se selecciona el tbody de la tabla de empleados
+                const tbody = document.getElementById('usuariosTablebody');
+                tbody.innerHTML = ''; // Limpiar contenido previo
+
+                data.empleados.forEach(empleado => {
+                    //Crear una fila por cada empleado
+                    const row = document.createElement('tr');
+                    row.className = 'border-b border-gray-300 hover:bg-gray-300 transition duration-200 ease-in-out';
+                    //Agregar los datos de cada empleado a la fila
+                    row.innerHTML = `
+                    <td class="py-4 px-6 bg-white">${empleado.id}</td>
+                    <td class="py-4 px-6 bg-white">${empleado.nombre}</td>
+                    <td class="py-4 px-6 bg-white">${empleado.cargo}</td>
+                    <td class="py-4 px-6 bg-white">${empleado.salario}</td>
+                    <td class="py-4 px-6 bg-white">${empleado.telefono}</td>
+                    <td class="py-4 px-6 bg-white">${empleado.email}</td>
+                    <td class="py-4 px-6 text-center bg-white">
+                    
+                    <!-- Botónes de acción  -->
+                    <div class="flex items-center justify-center space-x-3">
+                        <!--! Boton de edición  -->
+                            <button  
+                                class="p-2 text-blue-500 hover:text-blue-700 transition transform hover:scale-110"
+                                data-employee='${JSON.stringify(empleado)}'
+                                onclick="handleEdit(this)"
+                                >
+
+                                <!-- Icono editar -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                </svg>
+                            </button>
+
+                        <!--! Boton de edición  -->    
+                            <button class="p-2 text-red-500 hover:text-red-700 transition transform hover:scale-110" onclick="deleteEmployee(${empleado.id})">
+                            
+                                <!-- Icono eliminar -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+
+                            </button>
+                    </div>
+                    </td>
+                    `;
+                    //Agregar la fila al tbody
+                    tbody.appendChild(row);
+                });
+            })
+        .catch(error => {
+            console.error('Error al renderizar la tabla:', error);
+        });
+}
+
+//! Función para editar un registro de la tabla abriendo el modal en modo edicion
+function handleEdit(button) {
+    // Obtener la data del empleado del atributo data-employee y parsearla
+    const empleadoData = JSON.parse(button.getAttribute('data-employee'));
+    // Despachar un evento personalizado para abrir el modal en modo edición con la data del empleado a editar
+    openEditarModal(empleadoData);
+}
+
+
+// Función para mostrar un toast con la información del empleado creado
+function showToast(empleado) {
+    const toast = document.createElement('div');
+    // toast.className = 'fixed top-4 left-1/2 -translate-x-1/2 z-50 max-w-xs w-full bg-green-500 text-white shadow-lg rounded-lg p-4 flex items-center space-x-3 transition-transform transform hover:scale-105';
+    //! Estilos del toast
+    toast.style.position = 'fixed';
+    toast.style.top = '7rem'; // equivale a top-4 (1rem)
+    toast.style.left = '50%';
+    toast.style.transform = 'translateX(-50%)';
+    toast.style.zIndex = '9999';
+    toast.style.maxWidth = '30rem'; // similar a max-w-xs
+    toast.style.width = 'auto';
+    toast.style.backgroundColor = '#48bb78'; // bg-green-500
+    toast.style.color = '#fff';
+    toast.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)';
+    toast.style.borderRadius = '0.5rem';
+    toast.style.padding = '10px';
+    toast.style.display = 'flex';
+    toast.style.alignItems = 'center';
+    toast.style.gap = '0.75rem';
+    toast.style.transition = 'transform 0.2s ease-in-out';
+    //! Estilos del toast
+    toast.innerHTML = `
+    
+    <div class="flex-1">
+        <p class="font-bold">Empleado Creado, Nombre: ${empleado.nombre}</p>
+    
+    </div>
+    <button class="text-white hover:text-gray-300 focus:outline-none" id="closeToastBtn">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 011.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+    </button>
+`;
+    document.body.appendChild(toast);
+    // Eliminar el toast al hacer clic en el botón de cerrar
+    toast.querySelector('#closeToastBtn').addEventListener('click', () => {
+        toast.remove();
+    });
+    // O eliminar automáticamente después de 5 segundos
+    setTimeout(() => {
+        toast.remove();
+    }, 3000);
+}
+
+//! Llamar a la función cuando se carga la página para renderizar la tabla
+document.addEventListener('DOMContentLoaded', renderEmployeeTable);
+
+//! Escuchar el evento personalizado que se despacha desde el modal cuando se guarda un empleado
+document.addEventListener('empleadoGuardado', function (e) {
+    console.log('Empleado guardado, actualizando tabla...', e.detail);
+    renderEmployeeTable();
+    showToast(e.detail);
+});
+
+
+// Funciones para consumir la API de empleados
+let id = 35
+let uri = `/api/v1/empleados/${id}`
+
+
+function deleteRegistro(id) {
+    fetch(uri, {
+        method: 'DELETE'
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al eliminar el registro');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Registro eliminado:', data);
+            renderEmployeeTable();
+        })
+        .catch(error => {
+            console.error('Error al eliminar el empleado:', error);
+        });
+}
+// Funciones para consumir la API de empleados
+function deleteEmployee(id) {
+    fetch(`/api/v1/empleados/${id}`, {
+        method: 'DELETE'
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al eliminar el empleado');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Empleado eliminado:', data);
+            renderEmployeeTable();
+        })
+        .catch(error => {
+            console.error('Error al eliminar el empleado:', error);
+        });
+}
+
+
+
+function editEmployee(id) {
+    fetch(`/api/v1/empleados/${id}`, {
+        method: 'PUT'
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al editar el empleado');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Empleado editado:', data);
+            renderEmployeeTable();
+        })
+        .catch(error => {
+            console.error('Error al editar el empleado:', error);
+        });
+}
