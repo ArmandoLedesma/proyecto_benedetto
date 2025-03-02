@@ -133,31 +133,11 @@ document.addEventListener('empleadoGuardado', function (e) {
 });
 
 
-// Funciones para consumir la API de empleados
-let id = 35
-let uri = `/api/v1/empleados/${id}`
 
 
-function deleteRegistro(id) {
-    fetch(uri, {
-        method: 'DELETE'
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Error al eliminar el registro');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Registro eliminado:', data);
-            renderEmployeeTable();
-        })
-        .catch(error => {
-            console.error('Error al eliminar el empleado:', error);
-        });
-}
+
 // Funciones para consumir la API de empleados
-function deleteEmployee(id) {
+/* function deleteEmployee(id) {
     fetch(`/api/v1/empleados/${id}`, {
         method: 'DELETE'
     })
@@ -174,10 +154,10 @@ function deleteEmployee(id) {
         .catch(error => {
             console.error('Error al eliminar el empleado:', error);
         });
-}
+} */
 
 
-
+/* 
 function editEmployee(id) {
     fetch(`/api/v1/empleados/${id}`, {
         method: 'PUT'
@@ -196,3 +176,4 @@ function editEmployee(id) {
             console.error('Error al editar el empleado:', error);
         });
 }
+ */
