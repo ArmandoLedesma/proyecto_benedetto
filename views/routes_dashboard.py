@@ -1,4 +1,4 @@
-from data import items, items_categorias, items_clientes, items_empleados, items_sucursales
+from data import items, items_categorias, items_clientes, items_empleados, items_sucursales, items_tradicionales
 from modules.employees.services import EmpleadoService
 from flask import Blueprint,render_template 
 
@@ -41,5 +41,5 @@ def show_sucursales():
 
 @dashboard_bp.route("/carta_pizza")
 def show_carta_pizza():
-    return render_template("dashboard/carta_pizza.html", items= items_sucursales)
+    return render_template("dashboard/carta_pizza.html", items= items_tradicionales)
 

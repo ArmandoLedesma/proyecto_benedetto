@@ -73,73 +73,72 @@ items_categorias = [
    
 ]
 
-pizza_tradicionales = [
+items_tradicionales = [
 
     {
-        "image": "",
+        "image": "img/categorias_productos/pizzas/tradicionales/hawaiana.jpg",
         "nombre": "Hawaiana",
-        "descripcion": "",
+        "descripcion": "Salsa de tomate, queso mozzarella, jamón y piña.",
         "categoria": "Tradicional",
         "precio": 12500
 
     },
     {
-        "image": "",
-        "nombre": "Jamón queso",
-        "descripcion": "",
+        "image": "img/categorias_productos/pizzas/tradicionales/jamon_queso.jpg",
+        "nombre": "Jamón y queso",
+        "descripcion": "Salsa de tomate, queso mozzarella, jamón y piña.",
         "categoria": "Tradicional",
         "precio": 12500
 
     },
     {
-        "image": "",
+        "image": "img/categorias_productos/pizzas/tradicionales/napolitana.jpg",
         "nombre": "Napolitana",
-        "descripcion": "",
+        "descripcion": "Salsa de tomate, queso mozzarella, tomate en rodajas y orégano.",
         "categoria": "Tradicional",
         "precio": 12500
 
     },
     {
-        "image": "",
+        "image": "img/categorias_productos/pizzas/tradicionales/vegetariana.jpg",
         "nombre": "Vegetariana",
-        "descripcion": "",
+        "descripcion": "Salsa de tomate, queso mozzarella, pimientos, champiñones, cebolla, aceitunas y tomate.",
         "categoria": "Tradicional",
         "precio": 13500
 
     },
     {
-        "image": "",
+        "image": "img/categorias_productos/pizzas/tradicionales/jamon_pollo.jpg",
         "nombre": "Jamón pollo",
-        "descripcion": "",
+        "descripcion": "Salsa de tomate, queso mozzarella, jamón y pollo desmenuzado.",
         "categoria": "Tradicional",
         "precio": 14000
 
     },
     {
-        "image": "",
-        "nombre": "Pollo champiñón",
-        "descripcion": "",
+        "image": "img/categorias_productos/pizzas/tradicionales/pollo_champinon.jpg",
+        "nombre": "Pollo champiñon",
+        "descripcion": "Salsa de tomate, queso mozzarella, pollo desmenuzado y champiñones.",
         "categoria": "Tradicional",
         "precio": 14000
 
     },
     {
-        "image": "",
+        "image": "img/categorias_productos/pizzas/tradicionales/pepperoni.jpg",
         "nombre": "Pepperoni",
-        "descripcion": "",
+        "descripcion": "Salsa de tomate, queso mozzarella y pepperoni.",
         "categoria": "Tradicional",
         "precio": 14500
 
     },
     {
-        "image": "",
+        "image": "img/categorias_productos/pizzas/tradicionales/hawaiana_pollo.webp",
         "nombre": "Hawaiana pollo BBQ",
-        "descripcion": "",
+        "descripcion": "Salsa de tomate, queso mozzarella, pollo en salsa BBQ, piña y jamón.",
         "categoria": "Tradicional",
-        "precio": 15000
+        "precio": 14500
 
     },
-    
 ]
 
 pizza_autor = [
