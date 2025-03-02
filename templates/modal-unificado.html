@@ -118,14 +118,12 @@
 
     // Manejo del submit del formulario unificado
     empleadoForm.addEventListener('submit', function (e) {
-
         e.preventDefault(); // Evitar comportamiento por defecto
 
         // Crear objeto FormData con los datos del formulario
         const formData = new FormData(empleadoForm);
         // Determinar la URL y el método según si se está editando o creando
         const isEditing = empleadoIdInput.value !== '';
-
         const url = isEditing ? `/api/v1/empleados/${empleadoIdInput.value}` : '/api/v1/empleados';
         const method = isEditing ? 'PUT' : 'POST';
 
