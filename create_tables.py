@@ -1,5 +1,6 @@
 from database.db import db
 from modules.employees.model import Empleado
+from modules.clients.model import Cliente
 from app import create_app
 from decimal import Decimal
 app = create_app()
@@ -36,6 +37,33 @@ with app.app_context():
         email="maria.lopez@gmail.com"
     )
     db.session.add_all([empleado1, empleado2, empleado3])
+    db.session.commit()
+
+    # Insertar 10 clientes
+    clientes_data = [
+        {"id": 1, "nombre": "Cliente 1", "telefono": "3000000001", "email": "cliente1@example.com", "estado": "Activo"},
+        {"id": 2, "nombre": "Cliente 2", "telefono": "3000000002", "email": "cliente2@example.com", "estado": "Activo"},
+        {"id": 3, "nombre": "Cliente 3", "telefono": "3000000003", "email": "cliente3@example.com", "estado": "Activo"},
+        {"id": 4, "nombre": "Cliente 4", "telefono": "3000000004", "email": "cliente4@example.com", "estado": "Activo"},
+        {"id": 5, "nombre": "Cliente 5", "telefono": "3000000005", "email": "cliente5@example.com", "estado": "Activo"},
+        {"id": 6, "nombre": "Cliente 6", "telefono": "3000000006", "email": "cliente6@example.com", "estado": "Activo"},
+        {"id": 7, "nombre": "Cliente 7", "telefono": "3000000007", "email": "cliente7@example.com", "estado": "Activo"},
+        {"id": 8, "nombre": "Cliente 8", "telefono": "3000000008", "email": "cliente8@example.com", "estado": "Activo"},
+        {"id": 9, "nombre": "Cliente 9", "telefono": "3000000009", "email": "cliente9@example.com", "estado": "Activo"},
+        {"id": 10, "nombre": "Cliente 10", "telefono": "3000000010", "email": "cliente10@example.com", "estado": "Activo"}
+    ]
+
+    clientes = []
+    for data in clientes_data:
+        cliente = Cliente(
+            id=data["id"],
+            nombre=data["nombre"],
+            telefono=data["telefono"],
+            email=data["email"],
+            estado=data["estado"]
+        )
+        clientes.append(cliente)
+    db.session.add_all(clientes)
     db.session.commit()
 
     # Mensaje de confirmacion
