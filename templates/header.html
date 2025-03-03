@@ -1,70 +1,83 @@
-<header>
-    <!-- Navbar Responsive -->
-    <div class="relative flex items-center justify-between py-4 px-6 bg-white">
-
+<header class="bg-white shadow-md">
+    <nav class="relative container mx-auto max-w-screen-xl flex items-center justify-between py-4 px-6">
         <!-- Logo -->
-        <div class="flex flex-row justify-center items-center font-roboto text-3xl font-semibold tracking-wide">
-            <img class="h-auto max-h-16 max-w-16 object-contain"
-                src="{{ url_for('static', filename='img/pizzas/logo.png') }}" alt="Logo Benedetto Pizza">
-            <span class="ml-2 text-zinc-700">Benedetto Pizza</span>
+        <div class="flex-1 flex items-center space-x-2">
+            <img class="max-h-16 w-auto object-contain" 
+                src="{{ url_for('static', filename='img/pizzas/logo.png') }}" 
+                alt="Logo Benedetto Pizza">
+            <span class="text-3xl font-semibold text-zinc-700">Benedetto Pizza</span>
         </div>
 
         <!-- Menú hamburguesa (móvil) -->
-        <button id="menu-toggle" class="md:hidden text-2xl text-gray-700 absolute right-6 top-3 focus:outline-none">
-            &#9776;
+        <button id="menu-toggle" 
+                class="md:hidden text-2xl text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-500 rounded"
+                aria-expanded="false" 
+                aria-controls="menu">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <span class="sr-only">Abrir menú</span>
         </button>
 
-        <!-- Navbar en pantallas grandes -->
-        <nav class="hidden md:flex font-roboto text-gray-600 drop-shadow-md">
-            <ul class="flex space-x-8 ">
-                <li><a href="#"
-                        class="border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Home</a>
-                </li>
-                <li><a href="#nosotros"
-                        class="border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">About</a>
-                </li>
-                <li><a href="#menu-pizza"
-                        class="border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Menú</a>
-                </li>
-                <li><a href="#"
-                        class="border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Events</a>
-                </li>
-                <li><a href="#"
-                        class="border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Chefs</a>
-                </li>
-                <li><a href="#"
-                        class="border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Gallery</a>
-                </li>
-                <li><a href="#"
-                        class="border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Dropdown</a>
-                </li>
-                <li><a href="#"
-                        class="border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Contact</a>
-                </li>
+        <!-- Contenedor de navegación y botones -->
+        <div class="hidden md:flex items-center space-x-8">
+            <!-- Links de navegación -->
+            <ul class="flex space-x-6 font-roboto text-gray-600">
+                <li><a href="#home" class="border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Inicio</a></li>
+                <li><a href="#nosotros" class="border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Nosotros</a></li>
+                <li><a href="#menu-pizza" class="border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Menú</a></li>
+                <li><a href="#testimonios" class="border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Testimonios</a></li>
             </ul>
-        </nav>
 
-        <!-- Botón de Inicio de sesión -->
-        <div class="hidden md:flex">
-            <a href="{{ url_for('auth_bp.login') }}" class="button">
+            <!-- Botones de registro e inicio de sesión -->
+            <div class="flex space-x-2">
+                <a href="{{ url_for('auth_bp.registrarse') }}" class="px-4 py-2 button">Registrarse</a>
+                <a href="{{ url_for('auth_bp.login') }}" class="px-4 py-2 button">Iniciar sesión</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Navbar en móviles -->
+    <div id="menu" class="hidden md:hidden fixed top-24 left-0 w-full bg-white shadow-md z-10 p-6">
+        <ul class="flex flex-col space-y-4 text-center">
+            <li>
+                <a 
+                    href="#home" 
+                    class="block py-2 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">
+                    Inicio
+                </a>
+            </li>
+            <li>
+                <a 
+                    href="#nosotros" 
+                    class="block py-2 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">
+                    Nosotros
+                </a>
+            </li>
+            <li>
+                <a 
+                    href="#menu-pizza" 
+                    class="block py-2 hover:bg-red-50 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">
+                    Menú
+                </a>
+            </li>
+            <li>
+                <a 
+                    href="#testimonios" 
+                    class="block py-2 hover:bg-red-50 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">
+                    Testimonios
+                </a>
+            </li>
+        </ul>
+        
+        <!-- Botón de Inicio de sesión (móvil) -->
+        <div class="flex flex-col justify-center gap-2 mt-4">
+            <a href="{{ url_for('auth_bp.login') }}" class="button inline-block">
                 Iniciar sesión
+            </a>
+            <a href="{{ url_for('auth_bp.registrarse') }}" class="button inline-block">
+                Registrarse
             </a>
         </div>
     </div>
-
-
-
-    <!-- Navbar en móviles -->
-    <nav id="menu" class="hidden md:hidden fixed top-16 left-0 w-full bg-white shadow-md z-50 p-6">
-        <ul class="flex flex-col space-y-4 text-center">
-            <li><a href="#" class="block py-2 hover:text-red-600">Home</a></li>
-            <li><a href="#" class="block py-2 hover:text-red-600">About</a></li>
-            <li><a href="#" class="block py-2 hover:text-red-600">Menú</a></li>
-            <li><a href="#" class="block py-2 hover:text-red-600">Events</a></li>
-            <li><a href="#" class="block py-2 hover:text-red-600">Chefs</a></li>
-            <li><a href="#" class="block py-2 hover:text-red-600">Gallery</a></li>
-            <li><a href="#" class="block py-2 hover:text-red-600">Dropdown</a></li>
-            <li><a href="#" class="block py-2 hover:text-red-600">Contact</a></li>
-        </ul>
-    </nav>
 </header>
