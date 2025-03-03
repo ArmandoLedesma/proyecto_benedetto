@@ -1,8 +1,12 @@
 from database.db import db
+# Importar modelos para las tablas base de datos
 from modules.employees.model import Empleado
 from modules.clients.model import Cliente
 from modules.sucursales.model import Sucursal
+from modules.users.model import Usuario
+
 from decimal import Decimal
+from werkzeug.security import generate_password_hash
 # from app import create_app
 #app = create_app()
 
@@ -83,6 +87,16 @@ def db_create(app):
         db.session.commit()
 
 
-        # Mensaje de confirmacion
-        print("Tablas creadas y datos insertados correctamente.")
+        admin = Usuario(
+            nombre="Admin",
+            email="admin@empresa.com",
+            password=generate_password_hash("123456"),
+            rol="empleado",
+            estado="Activo"
+            )
+        db.session.add(admin)
+        db.session.commit()
+
+    # Mensaje de confirmacion
+    print("Tablas creadas y datos insertados correctamente.")
 
