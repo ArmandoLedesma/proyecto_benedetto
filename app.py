@@ -3,6 +3,8 @@ from flask import Flask, render_template
 from data import items, items_categorias, items_empleados, items_clientes, items_sucursales
 from config import Config
 from database.db import db
+# Importar script para las tablas
+from create_tables import db_create
 
 # Importar blueprint de api
 from modules.employees.routes import empleados_bp
@@ -50,4 +52,6 @@ def create_app():
 
 if __name__ == "__main__":
     app = create_app()
+    # db.create_all()  # Crear tablas en la base de datos cuando se ejecuta el script principal  # Este codigo se puede descomentar para crear las tablas en la base de datos al iniciar el app
+    db_create(app)    
     app.run(debug=True)
