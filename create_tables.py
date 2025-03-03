@@ -1,6 +1,7 @@
 from database.db import db
 from modules.employees.model import Empleado
 from modules.clients.model import Cliente
+from modules.sucursales.model import Sucursal
 from app import create_app
 from decimal import Decimal
 app = create_app()
@@ -65,6 +66,20 @@ with app.app_context():
         clientes.append(cliente)
     db.session.add_all(clientes)
     db.session.commit()
+
+    # Insertar datos de prueba
+    sucursales_data = [
+        {"nombre_sucursal": "Sucursal Centro", "numero_sucursal": "SC-001", "capacidad": 100, "direccion": "Calle 1 #10-20", "telefono": "3001112233"},
+        {"nombre_sucursal": "Sucursal Norte", "numero_sucursal": "SC-002", "capacidad": 80, "direccion": "Carrera 7 #45-67", "telefono": "3102233445"},
+        {"nombre_sucursal": "Sucursal Sur", "numero_sucursal": "SC-003", "capacidad": 120, "direccion": "Avenida 68 #12-34", "telefono": "3203344556"},
+    ]
+
+    for data in sucursales_data:
+        sucursal = Sucursal(**data)
+        db.session.add(sucursal)
+
+    db.session.commit()
+
 
     # Mensaje de confirmacion
     print("Tablas creadas y datos insertados correctamente.")
