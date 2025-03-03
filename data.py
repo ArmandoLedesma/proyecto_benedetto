@@ -352,7 +352,7 @@ items_empleados = [
 
 items_clientes = [
     {
-        "id": "10001",
+        "id": "1",
         "nombre": "Daniel 3",
         "telefono": "5613513613",
         "email": "micorreo@gmail.com",
@@ -361,7 +361,7 @@ items_clientes = [
         "categoria": "Hamburguesa"
     },
     {
-        "id": "10001",
+        "id": "2",
         "nombre": "Daniel 3",
         "telefono": "5613513613",
         "email": "micorreo@gmail.com",
@@ -370,7 +370,7 @@ items_clientes = [
         "categoria": "Hamburguesa"
     },
     {
-        "id": "10001",
+        "id": "3",
         "nombre": "Daniel 3",
         "telefono": "5613513613",
         "email": "micorreo@gmail.com",
@@ -379,7 +379,7 @@ items_clientes = [
         "categoria": "Hamburguesa"
     },
     {
-        "id": "10001",
+        "id": "4",
         "nombre": "Daniel 3",
         "telefono": "5613513613",
         "email": "micorreo@gmail.com",
@@ -388,7 +388,7 @@ items_clientes = [
         "categoria": "Hamburguesa"
     },
     {
-        "id": "10001",
+        "id": "5",
         "nombre": "Daniel 3",
         "telefono": "5613513613",
         "email": "micorreo@gmail.com",
@@ -397,11 +397,12 @@ items_clientes = [
         "categoria": "Hamburguesa"
     },
     {
-        "id": "10001",
+        "id": "6",
         "nombre": "Daniel 3",
         "telefono": "5613513613",
         "email": "micorreo@gmail.com",
         "estado": "Activo",
+        
         "empleado": "Daniel",
         "categoria": "Hamburguesa"
     },
