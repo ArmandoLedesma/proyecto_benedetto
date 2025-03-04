@@ -5,10 +5,10 @@
 {% include 'headerd.html' %}
 
 <!-- Contenido -->
-<main>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8 font-roboto">
+<main class="relative">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8 font-roboto card-hover-effect">
         {% for item in items %}
-        <div class="max-w-xs mx-auto h-[400px] rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col">
+        <div class="card max-w-xs mx-auto h-[400px] rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col">
             <div class="relative w-full h-48">
                 <img class="w-full h-full object-cover" src="{{ url_for('static', filename=item.image) }}" alt="{{ item.nombre }}">
             </div>
@@ -17,14 +17,13 @@
                 <p class="text-gray-600 text-sm line-clamp-3">{{ item.descripcion }}</p>
                 <div class="flex items-center justify-between mt-3">
                     <span class="text-lg font-bold text-red-600">${{ item.precio }}</span>
-                    <button class="button">
-                        Comprar ahora
-                    </button>
+                    <button class="button">Comprar ahora</button>
                 </div>
             </div>
         </div>
         {% endfor %}
     </div>    
 </main>
+
 {% include 'footer.html' %}
 {% endblock %}
