@@ -130,3 +130,134 @@
     width: 100vw !important;
     height: 100vh !important;
 }
+
+
+/*Efecto para las card del dashboard (card-pizza)*/
+.card-hover-effect {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+  }
+  
+  .card-hover-effect .card {
+    transition: transform 400ms, filter 400ms;
+  }
+  
+  .card-hover-effect:hover > .card:not(:hover) {
+    filter: blur(5px);
+    transform: scale(0.9, 0.9);
+  }
+  
+  .card-hover-effect .card:hover {
+    transform: scale(1.05, 1.05);
+  }
+  
+  .card{
+    z-index: 0;
+  }
+
+/*Fin del efecto para las card del dashboard (card-pizza)*/
+
+.user-btn {
+    width: 38px; 
+    height:38px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 2px solid transparent; /* Borde invisible por defecto */
+    position: relative;
+    overflow: hidden;
+    transition: border 0.5s ease-in-out;
+}
+
+.user-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: var(--color-secundary); /* Color verde */
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.5s ease-in-out;
+    z-index: 0;
+}
+
+.user-btn:hover {
+    border-color: var(--color-secundary); /* Aparece el borde */
+}
+
+.user-btn:hover::before {
+    transform: scaleY(1); /* Efecto de llenado de abajo hacia arriba */
+    
+}
+
+.user-btn i {
+    position: relative;
+    z-index: 1;
+    font-size: 22px;
+    color: #616161; /* Color del icono */
+}
+
+.user-btn:hover i {
+    color: white;
+}
+/* Fin */
+
+
+/* Modal de confirmación */
+.card {
+    max-width: 320px;
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.image {
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    height: 48px;
+    background-color: #fee2e2;
+    border-radius: 50%;
+}
+
+.image svg {
+    width: 24px;
+    height: 24px;
+    color: #dc2626;
+}
+
+.desactivate {
+    background-color: #dc2626;
+    color: white;
+    border-radius: 4px;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.cancel {
+    background-color: #ffffff;
+    border: 1px solid #d1d5db;
+    color: #374151;
+    border-radius: 4px;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+/* Fin del modal de confirmación */
+
+
+
+
+
+
+  

@@ -1,0 +1,26 @@
+<!-- Confirm Dialog -->
+<div id="confirmDialog" class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+    <div class="card relative p-6 bg-white rounded-lg shadow-lg w-80">
+        <!-- Ícono de advertencia -->
+        <div class="image">
+            <svg aria-hidden="true" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" fill="none">
+                <path d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
+                    stroke-linejoin="round" stroke-linecap="round"></path>
+            </svg>
+        </div>
+        
+        <!-- Mensaje -->
+        <div class="content text-center">
+            <span class="title text-lg font-semibold">Desactivar cuenta</span>
+            <p class="message text-gray-600 mt-2 text-sm">
+                ¿Estás seguro de que deseas eliminar este registro? Esta acción no se puede deshacer.
+            </p>
+        </div>
+
+        <!-- Botones de acción -->
+        <div class="actions mt-4">
+            <button class="desactivate w-full py-2 bg-red-600 text-white rounded-md">Eliminar</button>
+            <button class="cancel w-full py-2 mt-2 bg-gray-100 text-gray-700 rounded-md border">Cancelar</button>
+        </div>
+    </div>
+</div>

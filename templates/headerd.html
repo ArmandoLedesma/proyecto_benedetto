@@ -1,4 +1,4 @@
-<header>
+<header class="relative z-50">
     <!-- Navbar Responsive -->
     <div class="relative flex items-center justify-between py-4 px-6 bg-white">
 
@@ -10,13 +10,16 @@
         </div>
 
         <!-- Menú hamburguesa (móvil) -->
-        <button id="menu-toggle" class="md:hidden text-2xl text-gray-700 absolute right-6 top-3 focus:outline-none">
-            &#9776;
-        </button>
+        <div class="flex fle">
+            <button id="menu-toggle" class="md:hidden text-2xl text-gray-700 absolute right-8 top-8 focus:outline-none">
+                &#9776;
+            </button>
+        </div>
+        
 
         <!-- Navbar en pantallas grandes -->
         <nav class="hidden md:flex font-roboto text-gray-600 drop-shadow-md">
-            <ul class="flex space-x-8 ">
+            <ul class="flex flex-row justify-center items-center space-x-8 ">
                 <li><a href="/dashboard/"
                         class="border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Dashboard</a>
                 </li>
@@ -33,42 +36,61 @@
                         class="border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Sucursales</a>
                 </li>
                 <li><a href="/dashboard/carta_pizza"
-                        class="border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Carta
-                        Pizzas</a>
+                        class="border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Pizzas</a>
                 </li>
-                <li><a href="#"
-                        class="border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Dropdown</a>
-                </li>
-                <li><a href="#"
-                        class="border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Contact</a>
+                <!-- Navbar en pantallas grandes -->
+
+                <!-- Dropdown de Usuario con estilos personalizados -->
+                <li class="relative popup">
+                    <!-- Botón para abrir el dropdown -->
+                    <button id="user-menu-button" class="user-btn">
+                        <i class="fa-regular fa-user"></i>
+                    </button>
+
+                    <!-- Contenido del Dropdown -->
+                    <div id="user-menu" class="hidden popup-window absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg font-roboto">
+                        <ul class="py-2 text-gray-700 ">
+                            <li class="hover:bg-gray-200">
+                                <button onclick="location.href='/perfil'" class="block w-full text-left px-4 py-2">Perfil</button>
+                            </li>
+                            <li class="hover:bg-gray-200">
+                                <button onclick="location.href='/configuracion'" class="block w-full text-left px-4 py-2">Configuración</button>
+                            </li>
+                            <hr class="text-gray-300">
+                            <li class="hover:bg-gray-200">
+                                <button onclick="location.href='/logout'" class="block w-full text-left px-4 py-2 text-red-600">Cerrar sesión</button>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
             </ul>
         </nav>
-
-        <!-- Botón de Inicio de sesión -->
-        <!-- 
-        <div class="hidden md:flex">
-            <a href="{{ url_for('auth_bp.login') }}"
-                class="button">
-                Iniciar sesión
-            </a>
-        </div>
-        -->
     </div>
 
-
+    
+    
 
     <!-- Navbar en móviles -->
-    <nav id="menu" class="hidden md:hidden fixed top-16 left-0 w-full bg-white shadow-md z-50 p-6">
+    <nav id="menu" class="hidden md:hidden fixed top-20 left-0 w-full bg-white shadow-md z-50 p-6">
         <ul class="flex flex-col space-y-4 text-center">
-            <li><a href="#" class="block py-2 hover:text-red-600">Home</a></li>
-            <li><a href="#" class="block py-2 hover:text-red-600">About</a></li>
-            <li><a href="#" class="block py-2 hover:text-red-600">Menú</a></li>
-            <li><a href="#" class="block py-2 hover:text-red-600">Events</a></li>
-            <li><a href="#" class="block py-2 hover:text-red-600">Chefs</a></li>
-            <li><a href="#" class="block py-2 hover:text-red-600">Gallery</a></li>
-            <li><a href="#" class="block py-2 hover:text-red-600">Dropdown</a></li>
-            <li><a href="#" class="block py-2 hover:text-red-600">Contact</a></li>
+            <li>
+                <a href="/dashboard/" class="block py-2 hover:text-red-600">Dashboard</a>
+            </li>
+            <li>
+                <a href="/dashboard/categorias" class="block py-2 hover:text-red-600">Categorias</a>
+            </li>
+            <li>
+                <a href="/dashboard/empleados" class="block py-2 hover:text-red-600">Empleados</a>
+            </li>
+            <li>
+                <a href="/dashboard/clientes" class="block py-2 hover:text-red-600">Clientes</a>
+            </li>
+            <li>
+                <a href="/dashboard/sucursales" class="block py-2 hover:text-red-600">Sucursales</a>
+            </li>
+            <li>
+                <a href="/dashboard/carta_pizza" class="block py-2 hover:text-red-600">Pizzas</a>
+            </li>
         </ul>
     </nav>
 </header>
