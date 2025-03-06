@@ -1,59 +1,127 @@
-<!DOCTYPE html>
-<html lang="es">
+{% extends 'base.html' %}
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}">
-  <title>Registro</title>
-</head>
+{% block content %}
 
-<body class="bg-gray-100 flex items-center justify-center min-h-screen p-6">
+<div class="flex flex-col items-center w-full  rounded-lg  p-8 font-roboto">
+    <!-- Contenedor principal -->
+    <div class="flex bg-white rounded-lg  overflow-hidden mx-auto sm:min-w-[600px] lg:max-w-4xl my-auto">
+        <div class="w-full p-8 flex flex-col shadow-xl">
 
-  <div class="max-w-md w-full font-roboto bg-white rounded-xl shadow-lg p-8 border border-gray-200">
-    <h2 class="text-3xl font-semibold text-gray-900 mb-6 text-center">Registrarse</h2>
+            <div class="container flex flex-col">
+                <!-- Volver -->
+                <a href="{{ url_for('auth_bp.login') }}" class="flex items-center text-gray-900 group">
+                    <svg 
+                        xmlns="http://www.w3.org/2000/svg" 
+                        class="w-5 h-5 mr-1 transition-transform transform group-hover:-translate-x-1" 
+                        viewBox="0 0 24 24" 
+                        fill="none"
+                        stroke="currentColor" 
+                        stroke-width="2" 
+                        stroke-linecap="round" 
+                        stroke-linejoin="round">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 5 5 12 12 19"></polyline>
+                    </svg>
+                    <span class="transition-all group-hover:font-semibold">Login</span>
+                </a>
+                <h2 class="text-2xl font-semibold text-zinc-800 text-center">Benedetto Pizza</h2>
+                <div class="flex justify-center m-2">
+                    <img src="{{ url_for('static', filename='img/pizzas/logo.png') }}" alt="Logo" class="w-16 h-16">
+                </div>
+                <p class="text-xl text-gray-800 text-center">Crea tu cuenta</p>
 
-    <form class="space-y-6">
-      <div>
-        <label class="block text-sm font-medium text-gray-700 mb-2">Nombre completo</label>
-        <input type="text" required
-          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lime-600 focus:border-lime-600 outline-none bg-gray-50 text-gray-900 placeholder-gray-500 transition-all"
-          placeholder="Juan Pérez" />
-      </div>
+                <!-- Inicio del formulario -->
+                <form id="registerForm" method="POST" action="{{ url_for('auth_bp.registrarse') }}">
+                  <div class="mt-4">
+                    <label class="block text-negro text-sm font-bold mb-2">Nombres:</label>
+                      <input
+                        class="bg-gray-200 text-negro focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
+                        type="text" 
+                        placeholder="Ingresa tus nombres" />
+                  </div>
+                  <div class="mt-4">
+                    <label class="block text-negro text-sm font-bold mb-2">
+                      Apellidos:
+                    </label>
+                    <input
+                      class="bg-gray-200 text-negro focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
+                      type="text" placeholder="Ingresa tus apellidos" />
+                  </div>
+                  <div class="mt-4">
+                    <label class="block font-medium text-sm mb-2">
+                      Correo electrónico
+                    </label>
+                      <input
+                        id="email"
+                        class="bg-gray-200 text-negro focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
+                        type="email" 
+                        placeholder="Email" />
+                        <!-- Mensaje de error -->
+                        <p id="email-error" class="text-sm text-red-500 hidden">Ingrese un email válido.</p>
+                  </div>
 
-      <div>
-        <label class="block text-sm font-medium text-gray-700 mb-2">Correo electrónico</label>
-        <input type="email" required
-          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lime-600 focus:border-lime-600 outline-none bg-gray-50 text-gray-900 placeholder-gray-500 transition-all"
-          placeholder="ejemplo@correo.com" />
-      </div>
+                  <!-- Input para la contraseña -->
+                  <div class="relative mt-4">
+                    <div class="flex justify-between">
+                      <label class="block text-negro text-sm font-bold mb-2">
+                        Contraseña
+                      </label>
+                    </div>
+                    <input
+                      id="password"
+                      class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
+                      type="password" 
+                      placeholder="Password"/>
 
-      <div>
-        <label class="block text-sm font-medium text-gray-700 mb-2">Contraseña</label>
-        <input type="password" required
-          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lime-600 focus:border-lime-600 outline-none bg-gray-50 text-gray-900 placeholder-gray-500 transition-all"
-          placeholder="••••••••" />
-      </div>
+                    <!-- Mensaje de advertencia en caso de que las contraseñas no coincidan  -->
+                    <span id="passwordError" class="text-red-600 text-sm mt-1 hidden">
+                      Las contraseñas no coinciden
+                      <i class="fa-solid fa-xmark"></i>
+                    </span>
 
-      <div>
-        <label class="block text-sm font-medium text-gray-700 mb-2">Confirmar contraseña</label>
-        <input type="password" required
-          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lime-600 focus:border-lime-600 outline-none bg-gray-50 text-gray-900 placeholder-gray-500 transition-all"
-          placeholder="••••••••" />
-      </div>
+                    <!-- Mensaje de exito en caso de que las contraseñas coincidan -->
+                    <span id="passwordSuccess" class="text-primary text-sm mt-1 hidden">
+                      Las contraseñas coinciden 
+                      <i class="fa-solid fa-check"></i>
+                    </span>
 
-      <button aria-label="Registrarse" class="w-full button">
-        Registrarse
-      </button>
-    </form>
+                    <!-- Icono para mostrar y ocultar la contraseña escrita -->
+                    <span id="toggle-password" class="absolute inset-y-0 top-7 right-3 flex items-center cursor-pointer text-gray-500">
+                      <i class="fas fa-eye"></i>
+                    </span>
+                </div>
 
-    <div class="mt-6 text-center text-sm text-gray-700">
-      ¿Ya tienes una cuenta?
-      <a href="{{ url_for('auth_bp.login') }}" class="text-gray-800 hover:text-red-600 font-medium transition">Iniciar
-        sesión</a>
+                <!-- Input para la confirmación de la contraseña ingresada -->
+                <div class="relative mt-4">
+                    <div class="flex justify-between">
+                        <label class="block text-negro text-sm font-bold mb-2">Confirmar Contraseña</label>
+                    </div>
+                    <input
+                        id="confirmPassword"
+                        class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
+                        type="password" 
+                        placeholder="Password" />
+                      
+                      
+
+                      <!-- Icono para mostrar y ocultar la confirmación de la contraseña escrita -->
+                      <span id="toggle-confirmPassword" class="absolute inset-y-0 top-7 right-3 flex items-center cursor-pointer text-gray-500">
+                        <i class="fas fa-eye"></i>
+                      </span>
+                </div>
+
+                <!-- Boton para crear la cuenta -->
+                <div class="mt-8">
+                  <button type="submit" id="submitButton" class="button w-full" disabled>
+                    Crear cuenta
+                  </button>
+                </div>
+              </form>
+
+            </div>
+
+        </div>
     </div>
-  </div>
-
-</body>
-
-</html>
+</div>
+{% include 'footer.html'   %}
+{% endblock %}
