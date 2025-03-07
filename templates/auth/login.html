@@ -15,15 +15,9 @@
         <form class="container flex flex-col font-roboto" method="POST">
             <!-- Volver -->
             <a href="{{ url_for('main_bp.home') }}" class="flex items-center text-gray-900 group">
-                <svg 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    class="w-5 h-5 mr-1 transition-transform transform group-hover:-translate-x-1" 
-                    viewBox="0 0 24 24" 
-                    fill="none"
-                    stroke="currentColor" 
-                    stroke-width="2" 
-                    stroke-linecap="round" 
-                    stroke-linejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                    class="w-5 h-5 mr-1 transition-transform transform group-hover:-translate-x-1" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="19" y1="12" x2="5" y2="12"></line>
                     <polyline points="12 5 5 12 12 19"></polyline>
                 </svg>
@@ -44,7 +38,7 @@
                 <label class="block text-sm font-semibold mb-2">Correo electrónico</label>
                 <input
                     class="bg-gray-200  focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
-                    type="email" name="email" placeholder="Email" autocomplete="email"/>
+                    type="email" name="email" placeholder="Email" autocomplete="email" />
             </div>
             <div class="mt-4">
                 <div class="flex justify-between">
@@ -55,20 +49,26 @@
                 </div>
                 <input
                     class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
-                    type="password" name="password" placeholder="Password" autocomplete="current-password"/>
+                    type="password" name="password" placeholder="Password" autocomplete="current-password" />
             </div>
-            <div class="mt-8">
+            <!--  <div class="mt-8">
                 <button class="button w-full" type="submit">
                     Iniciar sesión
                 </button>
+            </div> -->
+            <div class="mt-8">
+                <a class="button w-full" href="{{url_for('dashboard_bp.show_dashboard') }}">
+                    Iniciar sesión
+                </a>
             </div>
             <div class="mt-4 flex items-center justify-between">
                 <span class="border-b border-gray-500 w-1/5 md:w-1/4"></span>
                 <div class="flex flex-row gap-1">
                     <span class="text-xs text-gray-500 text-center uppercase">
-                        ¿No tienes cuenta? 
+                        ¿No tienes cuenta?
                     </span>
-                    <a href="{{url_for('auth_bp.registrarse') }}" class="text-xs text-gray-500 hover:text-red-600 uppercase text-center">
+                    <a href="{{url_for('auth_bp.registrarse') }}"
+                        class="text-xs text-gray-500 hover:text-red-600 uppercase text-center">
                         registrate
                     </a>
                 </div>
@@ -77,7 +77,7 @@
         </form>
     </div>
 </div>
-{% include 'footer.html'   %}
+{% include 'footer.html' %}
 
 
 
