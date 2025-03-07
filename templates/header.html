@@ -1,16 +1,16 @@
 <header class="bg-white shadow-md">
-    <nav class="relative container mx-auto max-w-screen-xl flex items-center justify-between py-4 px-6">
-        <!-- Logo -->
-        <div class="flex-1 flex items-center space-x-2">
-            <img class="max-h-16 w-auto object-contain" 
+    <nav class="relative container mx-auto max-w-screen-xl flex flex-wrap items-center justify-between py-4 px-4 sm:px-6">
+        <!-- Logo con ajustes responsivos -->
+        <div class="flex items-center space-x-2 flex-shrink-0">
+            <img class="h-10 sm:h-12 md:h-16 w-auto object-contain" 
                 src="{{ url_for('static', filename='img/pizzas/logo.png') }}" 
                 alt="Logo Benedetto Pizza">
-            <span class="text-3xl font-semibold text-zinc-700">Benedetto Pizza</span>
+            <span class="text-xl sm:text-2xl md:text-3xl font-semibold text-zinc-700 whitespace-nowrap">Benedetto</span>
         </div>
 
-        <!-- Menú hamburguesa (móvil) -->
+        <!-- Menú hamburguesa (móvil) con mejor posicionamiento y accesibilidad -->
         <button id="menu-toggle" 
-                class="md:hidden text-2xl text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-500 rounded"
+                class="md:hidden p-2 rounded-md text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
                 aria-expanded="false" 
                 aria-controls="menu">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -19,65 +19,68 @@
             <span class="sr-only">Abrir menú</span>
         </button>
 
-        <!-- Contenedor de navegación y botones -->
-        <div class="hidden md:flex items-center space-x-8">
-            <!-- Links de navegación -->
-            <ul class="flex space-x-6 font-roboto text-gray-600">
-                <li><a href="#home" class="border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Inicio</a></li>
-                <li><a href="#nosotros" class="border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Nosotros</a></li>
-                <li><a href="#menu-pizza" class="border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Menú</a></li>
-                <li><a href="#testimonios" class="border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Testimonios</a></li>
+        <!-- Contenedor de navegación y botones - ajustado para mejor espaciado -->
+        <div class="hidden md:flex items-center justify-end space-x-4 lg:space-x-8 flex-1">
+            <!-- Links de navegación con mejor espaciado -->
+            <ul class="flex flex-wrap space-x-3 lg:space-x-6 font-roboto text-gray-600">
+                <li><a href="#home" class="block py-2 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Inicio</a></li>
+                <li><a href="#nosotros" class="block py-2 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Nosotros</a></li>
+                <li><a href="#menu-pizza" class="block py-2 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Menú</a></li>
+                <li><a href="#testimonios" class="block py-2 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Testimonios</a></li>
             </ul>
 
-            <!-- Botones de registro e inicio de sesión -->
-            <div class="flex space-x-2">
-                <a href="{{ url_for('auth_bp.registrarse') }}" class="px-4 py-2 button">Registrarse</a>
-                <a href="{{ url_for('auth_bp.login') }}" class="px-4 py-2 button">Iniciar sesión</a>
+            <!-- Botones de registro e inicio de sesión con mejor espaciado -->
+            <div class="flex space-x-2 flex-shrink-0">
+                <a href="{{ url_for('auth_bp.registrarse') }}" class="px-3 py-2 lg:px-4 lg:py-2 button text-sm lg:text-base whitespace-nowrap">Registrarse</a>
+                <a href="{{ url_for('auth_bp.login') }}" class="px-3 py-2 lg:px-4 lg:py-2 button text-sm lg:text-base whitespace-nowrap">Iniciar sesión</a>
             </div>
         </div>
     </nav>
 
-    <!-- Navbar en móviles -->
-    <div id="menu" class="hidden md:hidden fixed top-24 left-0 w-full bg-white shadow-md z-10 p-6">
-        <ul class="flex flex-col space-y-4 text-center">
-            <li>
-                <a 
-                    href="#home" 
-                    class="block py-2 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">
-                    Inicio
+    <!-- Navbar en móviles - adaptado para usar las mismas clases de animación que tu JS -->
+    <div id="menu" class="hidden md:hidden w-full bg-white shadow-md z-10 opacity-0 -translate-y-5 transition-all duration-300 ease-in-out">
+        <div class="px-4 py-6 sm:px-6">
+            <ul class="flex flex-col space-y-4">
+                <li>
+                    <a 
+                        href="#home" 
+                        class="block py-2 px-4 rounded-md border-b-2 border-transparent hover:bg-red-50 hover:border-red-600 transition-all duration-300 ease-in-out">
+                        Inicio
+                    </a>
+                </li>
+                <li>
+                    <a 
+                        href="#nosotros" 
+                        class="block py-2 px-4 rounded-md border-b-2 border-transparent hover:bg-red-50 hover:border-red-600 transition-all duration-300 ease-in-out">
+                        Nosotros
+                    </a>
+                </li>
+                <li>
+                    <a 
+                        href="#menu-pizza" 
+                        class="block py-2 px-4 rounded-md border-b-2 border-transparent hover:bg-red-50 hover:border-red-600 transition-all duration-300 ease-in-out">
+                        Menú
+                    </a>
+                </li>
+                <li>
+                    <a 
+                        href="#testimonios" 
+                        class="block py-2 px-4 rounded-md border-b-2 border-transparent hover:bg-red-50 hover:border-red-600 transition-all duration-300 ease-in-out">
+                        Testimonios
+                    </a>
+                </li>
+            </ul>
+            
+            <!-- Botones de autenticación en móvil - mejorados para adaptarse mejor -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6">
+                <a href="{{ url_for('auth_bp.registrarse') }}" class="button py-3 text-center">
+                    Registrarse
                 </a>
-            </li>
-            <li>
-                <a 
-                    href="#nosotros" 
-                    class="block py-2 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">
-                    Nosotros
+                <a href="{{ url_for('auth_bp.login') }}" class="button py-3 text-center">
+                    Iniciar sesión
                 </a>
-            </li>
-            <li>
-                <a 
-                    href="#menu-pizza" 
-                    class="block py-2 hover:bg-red-50 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">
-                    Menú
-                </a>
-            </li>
-            <li>
-                <a 
-                    href="#testimonios" 
-                    class="block py-2 hover:bg-red-50 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">
-                    Testimonios
-                </a>
-            </li>
-        </ul>
-        
-        <!-- Botón de Inicio de sesión (móvil) -->
-        <div class="flex flex-col justify-center gap-2 mt-4">
-            <a href="{{ url_for('auth_bp.login') }}" class="button inline-block">
-                Iniciar sesión
-            </a>
-            <a href="{{ url_for('auth_bp.registrarse') }}" class="button inline-block">
-                Registrarse
-            </a>
+            </div>
         </div>
     </div>
 </header>
+

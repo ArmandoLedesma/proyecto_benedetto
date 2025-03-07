@@ -4,74 +4,72 @@
 
 {% include 'header.html' %}
 
-
 <!-- Contenido -->
 <main>
-    <!-- Sección Principal -->
-    <section id="home" class="flex justify-center items-center min-h-screen px-6">
+    <!-- Sección Principal - Mejorada para responsividad -->
+    <section id="home" class="flex justify-center items-center min-h-screen px-4 sm:px-6 py-16 md:py-0">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center max-w-6xl mx-auto">
-            <!-- Columna de texto -->
-            <div class="flex flex-col space-y-4 text-center md:text-left">
-                <h1 class="text-4xl md:text-6xl text-gray-900 font-amatic">
+            <!-- Columna de texto - Mejorada para pantallas pequeñas -->
+            <div class="flex flex-col space-y-6 text-center md:text-left">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-gray-900 font-amatic">
                     ¡Bienvenido a Benedetto Pizza!
                 </h1>
-                <p class="font-roboto text-lg text-gray-700">
+                <p class="font-roboto text-base sm:text-lg text-gray-700 max-w-xl mx-auto md:mx-0">
                     Disfruta de las mejores pizzas con ingredientes frescos y el mejor sabor.
                 </p>
-                <div
-                    class="flex flex-col md:flex-row justify-center md:justify-start space-y-4 md:space-y-0 md:space-x-4">
-                    <a href="#" class="px-6 py-2 button">Ver
-                        Menú</a>
+                <div class="flex flex-col sm:flex-row justify-center md:justify-start space-y-3 sm:space-y-0 sm:space-x-4">
+                    <a href="#menu-pizza" class="px-6 py-2 button">Ver Menú</a>
                     <a href="#" class="px-6 py-2 border-2 button">Contáctanos</a>
                 </div>
             </div>
             <!--Fin de la columna de texto -->
 
-            <!-- Columna de Imagen -->
-            <div class="flex justify-center">
-                <img src="{{ url_for('static', filename='img/pizzas/pizza_menu_2_optimizada.png') }}" alt="Pizza"
-                    class="w-full max-w-xs md:max-w-md mx-auto levitate">
+            <!-- Columna de Imagen - Mejorada para responsividad -->
+            <div class="flex justify-center mt-6 md:mt-0">
+                <img src="{{ url_for('static', filename='img/pizzas/pizza_menu_2_optimizada.png') }}" 
+                     alt="Pizza" 
+                     class="w-full max-w-xs md:max-w-md mx-auto levitate object-contain">
             </div>
             <!--Fin de la columna de imagen -->
         </div>
     </section>
 
-
-    <!-- Sección aparte -->
+    <!-- Sección Nosotros - Mejorada para responsividad -->
     <section id="nosotros" class="py-12 bg-white">
-        <!-- Inicio del titulo (Sobre nosotros) -->
-        <div class="grid grid-rows-2 grid-cols-1 text-center">
+        <!-- Inicio del titulo (Sobre nosotros) - Mejorado para pantallas pequeñas -->
+        <div class="text-center px-4 sm:px-6">
             <h4 class="font-roboto text-xs text-gray-500">SOBRE NOSOTROS</h4>
-            <div class="font-amatic flex flex-row justify-center items-center gap-3">
-                <p class="text-5xl ">Conozca más</p>
-                <span class="font-semibold text-5xl text-red-600">sobre nosotros</span>
+            <div class="font-amatic flex flex-col sm:flex-row justify-center items-center gap-1 sm:gap-3">
+                <p class="text-4xl sm:text-5xl">Conozca más</p>
+                <span class="font-semibold text-4xl sm:text-5xl text-red-600">sobre nosotros</span>
             </div>
         </div>
         <!-- Fin del titulo (Sobre nosotros) -->
 
-        <!-- Contenedor -->
-        <div class="max-w-6xl mx-auto mt-12 px-6">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <!-- Columna izquierda (Image + Book a table) -->
+        <!-- Contenedor - Mejorado para responsividad -->
+        <div class="max-w-6xl mx-auto mt-8 sm:mt-12 px-4 sm:px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+                <!-- Columna izquierda (Image + Book a table) - Mejorada para responsividad -->
                 <div class="flex flex-col items-center lg:items-start">
-                    <!-- contenedor de la imagen -->
-                    <div class="mb-6">
-                        <img src="{{ url_for('static', filename='img/repartidor.jpg') }}" alt="About Us"
-                            class="w-full h-auto shadow-lg">
+                    <!-- contenedor de la imagen - Mejorado para responsividad -->
+                    <div class="mb-6 w-full">
+                        <img src="{{ url_for('static', filename='img/repartidor.jpg') }}" 
+                             alt="About Us"
+                             class="w-full h-auto rounded-lg shadow-lg object-cover">
                     </div>
                     <!--Fin del contenedor de la imagen -->
 
-                    <!-- Información para reservar una mesa -->
-                    <div class="font-roboto flex flex-col items-center py-4 px-8 border-3 border-gray-900 w-full">
+                    <!-- Información para reservar una mesa - Mejorada para responsividad -->
+                    <div class="font-roboto flex flex-col items-center py-4 px-6 sm:px-8 border-3 border-gray-900 w-full max-w-md mx-auto lg:mx-0">
                         <h4 class="text-xl font-semibold text-gray-900">Reservar una mesa</h4>
                         <p class="text-2xl text-red-600 mt-2">+57 301 5531937</p>
                     </div>
                     <!--Fin de la información para reservar una mesa -->
                 </div>
 
-                <!-- Columna derecha (Informative text + icons) -->
+                <!-- Columna derecha (Informative text + icons) - Mejorada para responsividad -->
                 <div class="font-roboto flex flex-col space-y-6">
-                    <p class="text-gray-800">
+                    <p class="text-gray-800 text-base sm:text-lg">
                         En nuestra pizzería, cada bocado es una experiencia única. Ofrecemos una amplia variedad de
                         pizzas, elaboradas con ingredientes frescos y una masa artesanal que garantiza el equilibrio
                         perfecto entre sabor y textura. Desde las clásicas hasta nuestras recetas especiales, cada pizza
@@ -80,25 +78,25 @@
                         ideal. ¡Ven y descubre por qué nuestra pizza es la favorita de tantos!
                     </p>
 
-                    <!-- Contenedor del texto con sus respectivos iconos -->
-                    <ul class=" font-roboto space-y-4">
+                    <!-- Contenedor del texto con sus respectivos iconos - Mejorado para responsividad -->
+                    <ul class="font-roboto space-y-4 mt-4">
                         <!-- Primer elemento de texto -->
                         <li class="flex items-center gap-4">
-                            <i class="fa-solid fa-headset text-xl text-red-600 hover:text-gray-800"></i>
+                            <i class="fa-solid fa-headset text-xl text-red-600 hover:text-gray-800 flex-shrink-0"></i>
                             <span class="text-gray-900">Atención al cliente 24/7</span>
                         </li>
                         <!--Fin del primer elemento de texto -->
 
                         <!-- Segundo elemento de texto -->
                         <li class="flex items-center gap-4">
-                            <i class="fa-solid fa-pizza-slice text-xl text-red-600 hover:text-gray-800"></i>
+                            <i class="fa-solid fa-pizza-slice text-xl text-red-600 hover:text-gray-800 flex-shrink-0"></i>
                             <span class="text-gray-900">Las mejores pizzas de la ciudad</span>
                         </li>
                         <!--Fin del segundo elemento de texto -->
 
                         <!-- Tercer elemento de texto -->
                         <li class="flex items-center gap-4">
-                            <i class="fa-solid fa-truck text-xl text-red-600 hover:text-gray-800"></i>
+                            <i class="fa-solid fa-truck text-xl text-red-600 hover:text-gray-800 flex-shrink-0"></i>
                             <span class="text-gray-900">Servicio de entrega rápida</span>
                         </li>
                         <!--Fin del tercer elemento de texto -->
@@ -108,188 +106,130 @@
         </div>
     </section>
 
-    <!-- Menu section -->
+    <!-- Menu section - Mejorada para responsividad -->
     <section id="menu-pizza" class="py-12 bg-gray-100">
-        <!-- Section title -->
-        <div class="text-center mb-14">
+        <!-- Section title - Mejorado para pantallas pequeñas -->
+        <div class="text-center mb-8 sm:mb-14 px-4 sm:px-6">
             <h4 class="font-roboto text-xs text-gray-500">NUESTRO MENÚ</h4>
-            <p class="font-amatic text-4xl flex flex-row justify-center gap-2 mt-4 text-gray-600">
+            <div class="font-amatic text-4xl flex flex-col sm:flex-row justify-center gap-1 sm:gap-2 mt-4 text-gray-600">
                 <span class="block">CONSULTA NUESTRO</span>
                 <span class="font-semibold text-red-600">DELICIOSO MENÚ</span>
-            </p>
+            </div>
         </div>
         <!-- End section title -->
 
-        <!-- Menu container -->
-        <div class="flex flex-col items-center">
-            <!-- Pizza options -->
-            <ul class="flex font-roboto space-x-6 p-4">
-                <li>
-                    <a href="#" data-category="Sencillas"
-                        class="category-link px-6 py-3 text-lg text-gray-700 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">
-                        Sencillas
-                    </a>
-                </li>
-                <li>
-                    <a href="#" data-category="Especiales"
-                        class="category-link px-6 py-3 text-lg text-gray-700 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">
-                        Especiales
-                    </a>
-                </li>
-                <li>
-                    <a href="#" data-category="Mexicanas"
-                        class="category-link px-6 py-3 text-lg text-gray-700 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">
-                        Mexicanas
-                    </a>
-                </li>
-                <li>
-                    <a href="#" data-category="Sorpresa"
-                        class="category-link px-6 py-3 text-lg text-gray-700 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">
-                        Sorpresa
-                    </a>
-                </li>
-            </ul>
-
+        <!-- Menu container - Mejorado para responsividad -->
+        <div class="flex flex-col items-center px-4 sm:px-6">
+            <!-- Pizza options - Mejorado para scroll horizontal en móvil -->
+            <div class="w-full overflow-x-auto pb-2">
+                <ul class="flex font-roboto space-x-4 sm:space-x-6 p-4 min-w-max mx-auto justify-center">
+                    <li>
+                        <a href="#" data-category="Pizzas"
+                            class="category-link px-4 sm:px-6 py-3 text-base sm:text-lg text-gray-700 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">
+                            Pizzas
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-category="Hamburguesas"
+                            class="category-link px-4 sm:px-6 py-3 text-base sm:text-lg text-gray-700 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">
+                            Hamburguesas
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-category="Lazanas"
+                            class="category-link px-4 sm:px-6 py-3 text-base sm:text-lg text-gray-700 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">
+                            Lazañas
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-category="Hotdog"
+                            class="category-link px-4 sm:px-6 py-3 text-base sm:text-lg text-gray-700 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">
+                            Hotdog
+                        </a>
+                    </li>
+                </ul>
+            </div>
             <!-- End pizza options -->
 
-            <!-- Contenedor principal -->
-            <div class="max-w-6xl w-full mx-auto px-6 mt-6">
+            <!-- Contenedor principal - Mejorado para responsividad -->
+            <div class="max-w-6xl w-full mx-auto mt-6">
                 <!-- Contenedor del título -->
                 <div class="text-center mb-8">
-                    <h4 class="text-xs font-roboto text-gray-500">MENÚ</h4>
-                    <span id="categoria-seleccionada" class="font-amatic text-5xl text-red-600">Sencillas</span>
+                    <h4 class="text-xs font-roboto text-gray-500">MÁS POPULARES</h4>
+                    <span id="categoria-seleccionada" class="font-amatic text-4xl sm:text-5xl text-red-600">Populares</span>
                 </div>
 
-                <!-- Contenedor de pizzas con Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-3 grid-rows-2 gap-8">
-                    <!-- Tarjeta de Pizza 1 -->
-                    <div class="bg-gray-100 p-4 rounded-lg shadow-lg text-center">
-                        <a href="#">
-                            <img src="{{ url_for('static', filename='img/pizzas/pizza_menu_1_optimizada.png') }}"
-                                alt="Pizza 1" class="pizza-image w-[400px] h-[300px] object-cover rounded-md">
-                        </a>
-                        <h4 class="text-xl font-bold text-gray-900 mt-4">Pizza 1</h4>
-                        <p class="text-gray-600 text-sm">Lorem, deren, trataro, filede, nerad</p>
-                        <p class="text-red-600 text-lg font-semibold mt-2">$5.99</p>
-                    </div>
+                <!-- Contenedor de pizzas con Grid - Mejorado para responsividad -->
+                <div id="contenedor-productos" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
 
-                    <!-- Tarjeta de Pizza 2 -->
-                    <div class="bg-gray-100 p-4 rounded-lg shadow-lg text-center">
-                        <a href="#">
-                            <img src="{{ url_for('static', filename='img/pizzas/pizza_menu_2_optimizada.png') }}"
-                                alt="Pizza 2" class="pizza-image w-[400px] h-[300px] object-cover rounded-md">
-                        </a>
-                        <h4 class="text-xl font-bold text-gray-900 mt-4">Pizza 2</h4>
-                        <p class="text-gray-600 text-sm">Lorem, deren, trataro, filede, nerad</p>
-                        <p class="text-red-600 text-lg font-semibold mt-2">$6.99</p>
-                    </div>
-
-                    <!-- Tarjeta de Pizza 3 -->
-                    <div class="bg-gray-100 p-4 rounded-lg shadow-lg text-center">
-                        <a href="#">
-                            <img src="{{ url_for('static', filename='img/pizzas/pizza_menu_3_optimizada.png') }}"
-                                alt="Pizza 3" class="pizza-image w-[400px] h-[300px] object-cover rounded-md">
-                        </a>
-                        <h4 class="text-xl font-bold text-gray-900 mt-4">Pizza 3</h4>
-                        <p class="text-gray-600 text-sm">Lorem, deren, trataro, filede, nerad</p>
-                        <p class="text-red-600 text-lg font-semibold mt-2">$7.99</p>
-                    </div>
-
-                    <!-- Tarjeta de Pizza 4 -->
-                    <div class="bg-gray-100 p-4 rounded-lg shadow-lg text-center">
-                        <a href="#">
-                            <img src="{{ url_for('static', filename='img/pizzas/pizza_menu_4_optimizada.png') }}"
-                                alt="Pizza 4" class="pizza-image w-[400px] h-[300px] object-cover rounded-md">
-                        </a>
-                        <h4 class="text-xl font-bold text-gray-900 mt-4">Pizza 4</h4>
-                        <p class="text-gray-600 text-sm">Lorem, deren, trataro, filede, nerad</p>
-                        <p class="text-red-600 text-lg font-semibold mt-2">$8.99</p>
-                    </div>
-
-                    <!-- Tarjeta de Pizza 5 -->
-                    <div class="bg-gray-100 p-4 rounded-lg shadow-lg text-center">
-                        <a href="#">
-                            <img src="{{ url_for('static', filename='img/pizzas/pizza_menu_5_optimizada.png') }}"
-                                alt="Pizza 5" class="pizza-image w-[400px] h-[300px] object-cover rounded-md">
-                        </a>
-                        <h4 class="text-xl font-bold text-gray-900 mt-4">Pizza 5</h4>
-                        <p class="text-gray-600 text-sm">Lorem, deren, trataro, filede, nerad</p>
-                        <p class="text-red-600 text-lg font-semibold mt-2">$9.99</p>
-                    </div>
-
-                    <!-- Tarjeta de Pizza 6 -->
-                    <div class="bg-gray-100 p-4 rounded-lg shadow-lg text-center">
-                        <a href="#">
-                            <img src="{{ url_for('static', filename='img/pizzas/pizza_menu_6_optimizada.png') }}"
-                                alt="Pizza 6" class="pizza-image w-[400px] h-[300px] object-cover rounded-md">
-                        </a>
-                        <h4 class="text-xl font-bold text-gray-900 mt-4">Pizza 6</h4>
-                        <p class="text-gray-600 text-sm">Lorem, deren, trataro, filede, nerad</p>
-                        <p class="text-red-600 text-lg font-semibold mt-2">$10.99</p>
-                    </div>
+                    <!-- Aquí se insertarán las pizzas dinámicamente con JavaScript -->
+                    
                 </div>
             </div>
         </div>
     </section>
 
-
-    <!-- Sección de Testimonios -->
+    <!-- Sección de Testimonios - Mejorada para responsividad -->
     <section id="testimonios" class="py-12 bg-white">
-        <div class="flex flex-col justify-center items-center gap-4 mb-12">
+        <div class="flex flex-col justify-center items-center gap-2 sm:gap-4 mb-8 sm:mb-12 px-4 sm:px-6">
             <h4 class="text-xs font-roboto text-gray-500">TESTIMONIOS</h4>
-            <p class="text-4xl text-center gap-1.5 font-amatic">
+            <div class="text-3xl sm:text-4xl text-center font-amatic">
                 <span class="text-gray-800">¿QUÉ DICEN</span>
                 <span class="text-red-600">DE NOSOTROS?</span>
-            </p>
+            </div>
         </div>
 
-        <div class="relative max-w-4xl mx-auto">
-            <!-- Carrusel -->
+        <div class="relative max-w-4xl mx-auto px-4 sm:px-6">
+            <!-- Carrusel - Mejorado para responsividad -->
             <div id="testimonial-carousel" class="overflow-hidden relative">
-                <div class="flex transition-transform duration-700 ease-out"> <!-- Transición más fluida -->
-                    <!-- Testimonio 1 -->
-                    <div class="w-full flex-shrink-0 text-center p-6 font-roboto">
-                        <img src="{{ url_for('static', filename='img/carrusel/customer1.jpg') }}" alt="Cliente 1"
-                            class="mx-auto w-24 h-24 md:w-28 md:h-28 rounded-full shadow-md object-cover transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl">
-                        <p class="mt-4 text-gray-700 italic">“Las pizzas son espectaculares, ingredientes frescos y una
-                            masa increíble.”</p>
+                <div class="flex transition-transform duration-700 ease-out"> 
+                    <!-- Testimonio 1 - Mejorado para responsividad -->
+                    <div class="w-full flex-shrink-0 text-center p-4 sm:p-6 font-roboto">
+                        <img src="{{ url_for('static', filename='img/carrusel/customer1.png') }}" 
+                             alt="Cliente 1"
+                             class="mx-auto w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full shadow-md object-cover transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl">
+                        <p class="mt-4 text-gray-700 italic text-sm sm:text-base">"Las pizzas son espectaculares, ingredientes frescos y una
+                            masa increíble."</p>
                         <h4 class="mt-2 font-medium text-gray-800">Carlos Ramírez</h4>
                     </div>
 
-                    <!-- Testimonio 2 -->
-                    <div class="w-full flex-shrink-0 text-center p-6 font-roboto">
-                        <img src="{{ url_for('static', filename='img/carrusel/customer2.jpg') }}" alt="Cliente 2"
-                            class="mx-auto w-24 h-24 md:w-28 md:h-28 rounded-full shadow-md object-cover transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl">
-                        <p class="mt-4 text-gray-700 italic">“El mejor lugar para disfrutar de una pizza en familia.”
+                    <!-- Testimonio 2 - Mejorado para responsividad -->
+                    <div class="w-full flex-shrink-0 text-center p-4 sm:p-6 font-roboto">
+                        <img src="{{ url_for('static', filename='img/carrusel/customer2.png') }}" 
+                             alt="Cliente 2"
+                             class="mx-auto w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full shadow-md object-cover transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl">
+                        <p class="mt-4 text-gray-700 italic text-sm sm:text-base">"El mejor lugar para disfrutar de una pizza en familia."
                         </p>
                         <h4 class="mt-2 font-medium text-gray-800">Ana Torres</h4>
                     </div>
 
-                    <!-- Testimonio 3 -->
-                    <div class="w-full flex-shrink-0 text-center p-6 font-roboto">
-                        <img src="{{ url_for('static', filename='img/carrusel/customer3.jpg') }}" alt="Cliente 3"
-                            class="mx-auto w-24 h-24 md:w-28 md:h-28 rounded-full shadow-md object-cover transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl">
-                        <p class="mt-4 text-gray-700 italic">“El servicio es excelente y las pizzas son de otro nivel.”
+                    <!-- Testimonio 3 - Mejorado para responsividad -->
+                    <div class="w-full flex-shrink-0 text-center p-4 sm:p-6 font-roboto">
+                        <img src="{{ url_for('static', filename='img/carrusel/customer3.png') }}" 
+                             alt="Cliente 3"
+                             class="mx-auto w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full shadow-md object-cover transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl">
+                        <p class="mt-4 text-gray-700 italic text-sm sm:text-base">"El servicio es excelente y las pizzas son de otro nivel."
                         </p>
                         <h4 class="mt-2 font-medium text-gray-800">Alejandro Suarez</h4>
                     </div>
 
-                    <!-- Testimonio 4 -->
-                    <div class="w-full flex-shrink-0 text-center p-6 font-roboto">
-                        <img src="{{ url_for('static', filename='img/carrusel/customer4.jpg') }}" alt="Cliente 4"
-                            class="mx-auto w-24 h-24 md:w-28 md:h-28 rounded-full shadow-md object-cover transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl">
-                        <p class="mt-4 text-gray-700 italic">“El servicio es excelente y las pizzas son de otro nivel.”
+                    <!-- Testimonio 4 - Mejorado para responsividad -->
+                    <div class="w-full flex-shrink-0 text-center p-4 sm:p-6 font-roboto">
+                        <img src="{{ url_for('static', filename='img/carrusel/customer4.png') }}" 
+                             alt="Cliente 4"
+                             class="mx-auto w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full shadow-md object-cover transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl">
+                        <p class="mt-4 text-gray-700 italic text-sm sm:text-base">"El servicio es excelente y las pizzas son de otro nivel."
                         </p>
                         <h4 class="mt-2 font-medium text-gray-800">Sofía Méndez</h4>
                     </div>
                 </div>
             </div>
 
-            <!-- Controles -->
+            <!-- Controles - Mejorados para responsividad -->
             <button id="prev-testimonial"
-                class="absolute left-0 top-1/2 transform -translate-y-1/2 px-4 py-2 bg-red-600 text-white rounded-full shadow-md transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl">&#10094;</button>
+                class="absolute left-0 top-1/2 transform -translate-y-1/2 px-2 sm:px-4 py-1 sm:py-2 bg-red-600 text-white rounded-full shadow-md transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl z-10">&#10094;</button>
             <button id="next-testimonial"
-                class="absolute right-0 top-1/2 transform -translate-y-1/2 px-4 py-2 bg-red-600 text-white rounded-full shadow-md transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl">&#10095;</button>
+                class="absolute right-0 top-1/2 transform -translate-y-1/2 px-2 sm:px-4 py-1 sm:py-2 bg-red-600 text-white rounded-full shadow-md transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl z-10">&#10095;</button>
         </div>
     </section>
 
@@ -297,3 +237,4 @@
 
 </main>
 {% endblock %}
+
