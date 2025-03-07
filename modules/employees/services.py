@@ -31,6 +31,7 @@ class EmpleadoService:
         return self.repository.update(empleado)
     
     """// Logica espeficia no funciona para ser generio
+    
     def create_empleado(self, data):
         empleado = Empleado(
             nombre=data["nombre"],

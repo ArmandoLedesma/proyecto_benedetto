@@ -11,48 +11,71 @@
 <body class="bg-gray-100 flex items-center justify-center min-h-screen p-6">
 
   <div class="max-w-md w-full font-roboto bg-white rounded-xl shadow-lg p-8 border border-gray-200">
+
+    <!--! Ventana lateral -->
+    <!--! Colocar el logo -->
+    <!-- Formulario de login -->
     <h2 class="text-3xl font-semibold text-gray-900 mb-6 text-center">Iniciar sesión</h2>
 
-    <form class="space-y-6">
-      <div>
-        <label class="block text-sm font-medium text-gray-700 mb-2">Correo electrónico</label>
-        <input type="email" required
-          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lime-600 focus:border-lime-600 outline-none bg-gray-50 text-gray-900 placeholder-gray-500 transition-all"
-          placeholder="ejemplo@correo.com" />
+    <!-- Bloque de mensajes de flash flask -->
+    <!-- Aquí se muestran los mensajes flash -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="mb-4">
+      {% for category, message in messages %}
+      <div
+        class="p-3 rounded-lg text-sm
+                          {% if category == 'success' %}bg-green-100 text-green-800{% elif category == 'error' %}bg-red-100 text-red-800{% else %}bg-blue-100 text-blue-800{% endif %}">
+        {{ message }}
       </div>
-
-      <div>
-        <label class="block text-sm font-medium text-gray-700 mb-2">Contraseña</label>
-        <input type="password" required
-          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lime-600 focus:border-lime-600 outline-none bg-gray-50 text-gray-900 placeholder-gray-500 transition-all"
-          placeholder="••••••••" />
-      </div>
-
-      <div class="flex items-center justify-between">
-        <label class="flex items-center cursor-pointer">
-          <input type="checkbox" class="rounded border-gray-400 text-lime-600 focus:ring-lime-600" />
-          <span class="ml-2  text-sm text-gray-700">No cerrar sesión</span>
-        </label>
-        <a href="{{ url_for('auth_bp.recuperar') }}"
-          class="text-sm text-gray-800 hover:text-red-600 transition">¿Olvidaste tu contraseña?</a>
-      </div>
-
-      <!--! Cambiar a  un botoon con submit  -->
-      <!-- <button aria-label="Iniciar sesión" class="w-full button">
-        Iniciar sesión
-      </button> -->
-
-      <a href="{{ url_for('dashboard_bp.show_dashboard') }}" aria-label="Iniciar sesión" class="w-full button">
-        Iniciar sesión
-      </a>
-
-    </form>
-
-    <div class="mt-6 text-center text-sm text-gray-700">
-      ¿Aún no tienes cuenta?
-      <a href="{{ url_for('auth_bp.registrarse') }}"
-        class="text-gray-800 hover:text-red-600 font-medium transition">Registrarse</a>
+      {% endfor %}
     </div>
+    {% endif %}
+    {% endwith %}
+
+    <!--! Aqui empieza el formulario de login  -->
+    <form class="space-y-6" method="POST" action="{{ url_for('auth_bp.login') }}"">
+    
+        <div>
+              <label class=" block text-sm font-medium text-gray-700 mb-2">Correo electrónico</label>
+      <input name="email" id="email" type="email" required
+        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lime-600 focus:border-lime-600 outline-none bg-gray-50 text-gray-900 placeholder-gray-500 transition-all"
+        placeholder="ejemplo@correo.com" />
+  </div>
+
+  <div>
+    <label class="block text-sm font-medium text-gray-700 mb-2">Contraseña</label>
+    <input name="password" id="password" type="password" required
+      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lime-600 focus:border-lime-600 outline-none bg-gray-50 text-gray-900 placeholder-gray-500 transition-all"
+      placeholder="••••••••" />
+  </div>
+
+  <div class="flex items-center justify-between">
+    <!--! Esto no tiene funcionalidad  -->
+    <!--     
+    <label class="flex items-center cursor-pointer">
+      <input type="checkbox" class="rounded border-gray-400 text-lime-600 focus:ring-lime-600" />
+      <span class="ml-2  text-sm text-gray-700">No cerrar sesión</span>
+    </label>
+-->
+    <a href="{{ url_for('auth_bp.recuperar') }}" class="text-sm text-gray-800 hover:text-red-600 transition">¿Olvidaste
+      tu contraseña?
+    </a>
+  </div>
+
+  <!-- Botón de inicio de sesión --> -->
+  <button type="submit" aria-label="Iniciar sesión" class="w-full button">
+    Iniciar sesión
+  </button>
+
+  </form>
+
+  <div class="mt-6 text-center text-sm text-gray-700">
+    ¿Aún no tienes cuenta?
+    <a href="{{ url_for('auth_bp.registrarse') }}"
+      class="text-gray-800 hover:text-red-600 font-medium transition">Registrarse</a>
+  </div>
+
   </div>
 
 </body>

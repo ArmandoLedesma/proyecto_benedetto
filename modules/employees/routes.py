@@ -5,6 +5,7 @@ from modules.employees.services import EmpleadoService
 empleados_bp = Blueprint('empleados', __name__)
 empleados_services = EmpleadoService()
 
+# Ruta para listar empleados
 @empleados_bp.route('/empleados', methods=['GET'])
 def get_empleados():
     empleados = empleados_services.get_all_empleados()
@@ -13,6 +14,7 @@ def get_empleados():
     return response
     # return render_template('listar_empleados.html', empleados=empleados)
 
+# Ruta para obtener un empleado por id
 @empleados_bp.route('/empleados/<int:id>', methods=['GET'])
 def get_empleado(id):
     empleado = empleados_services.get_empleado(id)
@@ -23,6 +25,7 @@ def get_empleado(id):
         response = jsonify({"error": "Empleado no encontrado"}), 404
         return response
 
+# Ruta para agregar un nuevo empleado
 @empleados_bp.route('/empleados', methods=['POST'])
 def add_empleado():
     data = request.form.to_dict()
