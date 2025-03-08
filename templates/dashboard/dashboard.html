@@ -4,21 +4,21 @@
 
 {% include 'headerd.html' %}
 
-
-
 <!-- Contenido -->
-<main>
+<main class="min-h-screen bg-gray-50">
 
-    <!--! Bloque de mensajes de flash flask -->
-    <!-- Aquí se muestran los mensajes flash -->
+    <!--! Bloque de mensajes de flash flask - versión mejorada -->
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
-    <div class="fixed top-20 right-6 z-50 space-y-2">
+    <div class="fixed top-16 sm:top-20 right-2 sm:right-6 z-50 space-y-2 w-auto max-w-xs sm:max-w-sm md:max-w-md">
         {% for category, message in messages %}
         <div id="flash-message-{{ loop.index }}"
-            class="p-3 rounded-lg shadow-lg text-sm transition-opacity duration-500
+            class="p-3 rounded-lg shadow-lg text-sm transition-all duration-500 flex justify-between items-start
             {% if category == 'success' %}bg-green-100 text-green-800{% elif category == 'error' %}bg-red-100 text-red-800{% else %}bg-blue-100 text-blue-800{% endif %}">
-            {{ message }}
+            <span>{{ message }}</span>
+            <button onclick="document.getElementById('flash-message-{{ loop.index }}').remove()" class="ml-2 text-gray-600 hover:text-gray-800 focus:outline-none" aria-label="Cerrar notificación">
+                &times;
+            </button>
         </div>
         {% endfor %}
     </div>
@@ -28,8 +28,9 @@
         setTimeout(function () {
             const messages = document.querySelectorAll('[id^="flash-message-"]');
             messages.forEach((msg) => {
-                msg.style.transition = "opacity 0.5s ease-out";
+                msg.style.transition = "opacity 0.5s ease-out, transform 0.5s ease-out";
                 msg.style.opacity = '0';
+                msg.style.transform = 'translateX(10px)';
                 setTimeout(() => msg.remove(), 500); // Espera que la transición termine (0.5s)
             });
         }, 3000);
@@ -37,21 +38,26 @@
     {% endif %}
     {% endwith %}
 
-    <!-- Tarjeta -->
-    <div class="container mx-auto">
-        <div class="flex flex-wrap m-4">
+    <!-- Tarjetas - versión mejorada -->
+    <div class="container mx-auto px-4 py-6 sm:py-8">
+        <h1 class="text-2xl sm:text-3xl font-roboto font-bold text-zinc-800 mb-6 text-center sm:text-left">Dashboard</h1>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {% for item in items %}
-            <div class="w-full lg:w-1/2 p-4 {% if loop.last %}mx-auto{% endif %}">
-                <div
-                    class="rounded-lg overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow duration-300">
-                    <img class="w-full min-w-md h-auto object-contain"
-                        src="{{ url_for('static', filename=item.image) }}" alt="{{ item.title }}">
-                    <div class="px-6 py-4 font-roboto">
-                        <h2 class="text-xl mb-2 text-zinc-800">{{ item.title }}</h2>
-                        <p class="text-gray-700 text-balance">{{ item.description }}</p>
+            <div class="flex">
+                <div class="rounded-lg overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow duration-300 flex flex-col w-full h-full">
+                    <div class="relative pt-[56.25%] w-full bg-gray-100">
+                        <img class="absolute top-0 left-0 w-full h-full object-cover"
+                            src="{{ url_for('static', filename=item.image) }}" 
+                            alt="{{ item.title }}"
+                            loading="lazy">
                     </div>
-                    <div class="px-6 py-4">
-                        <button class="button">
+                    <div class="px-4 sm:px-6 py-4 font-roboto flex-grow">
+                        <h2 class="text-lg sm:text-xl mb-2 text-zinc-800 font-semibold">{{ item.title }}</h2>
+                        <p class="text-gray-700 text-sm sm:text-base">{{ item.description }}</p>
+                    </div>
+                    <div class="px-4 sm:px-6 py-4 flex justify-center sm:justify-start">
+                        <button class="button bg-red-600 hover:bg-red-700 text-white py-2 px-4 sm:px-6 rounded-lg transition-colors duration-300 text-sm sm:text-base w-full sm:w-auto">
                             {{ item.button_text|default('Ver más') }}
                         </button>
                     </div>
@@ -61,7 +67,18 @@
         </div>
     </div>
 
-    <!-- Tarjeta Fin -->
+    <!-- Responsivo para cuando no hay items o hay pocos -->
+    {% if items|length == 0 %}
+    <div class="container mx-auto px-4 py-16 text-center">
+        <div class="bg-white rounded-lg shadow-lg p-8 max-w-md mx-auto">
+            <h2 class="text-xl text-zinc-800 mb-4">No hay elementos disponibles</h2>
+            <p class="text-gray-600 mb-6">Aún no se han agregado elementos a este dashboard.</p>
+            <button class="button bg-red-600 hover:bg-red-700 text-white py-2 px-6 rounded-lg transition-colors duration-300">
+                Agregar nuevo
+            </button>
+        </div>
+    </div>
+    {% endif %}
 
     {% include 'footer.html' %}
 

@@ -40,67 +40,76 @@
                     <!--! Aquí se renderizarán los datos de la tabla desde el fetch-->
                 </tbody>
             </table>
+            
+            <!-- Paginación -->
+            <div id="paginationContainer" class="bg-white px-6 py-4 border-t border-gray-300 flex items-center justify-between">
+                <div class="flex items-center">
+                    <span class="text-sm text-gray-700">
+                        Mostrando <span id="startRecord" class="font-medium">1</span> a 
+                        <span id="endRecord" class="font-medium">10</span> de 
+                        <span id="totalRecords" class="font-medium">0</span> registros
+                    </span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button id="prevPageBtn" class="px-3 py-1 rounded border border-gray-300 bg-white text-gray-700 text-sm hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed">
+                        Anterior
+                    </button>
+                    <div id="pageNumbers" class="flex items-center space-x-1">
+                        <!-- Números de página serán generados aquí -->
+                    </div>
+                    <button id="nextPageBtn" class="px-3 py-1 rounded border border-gray-300 bg-white text-gray-700 text-sm hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed">
+                        Siguiente
+                    </button>
+                </div>
+            </div>
+            <!-- Fin de Paginación -->
         </div>
     </div>
 
+    <!-- Importar script de paginación -->
+    <script src="{{ url_for('static', filename='js/pagination.js') }}"></script>
+    
     <script>
-        // Función para renderizar la tabla de empleados
-        function renderEmployeeTable() {
-            fetch('/api/v1/empleados')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Error al obtener la lista de empleados');
-                    }
-                    return response.json();
-                })
-                .then(
-                    data => {
-                        const tbody = document.getElementById('usuariosTablebody');
-                        tbody.innerHTML = ''; // Limpiar contenido previo
-                        data.empleados.forEach(empleado => {
-                            const row = document.createElement('tr');
-                            row.className = 'border-b border-gray-300 hover:bg-gray-300 transition duration-200 ease-in-out';
-                            row.innerHTML = `
-                            <td class="py-4 px-6 bg-white">${empleado.id}</td>
-                            <td class="py-4 px-6 bg-white">${empleado.nombre}</td>
-                            <td class="py-4 px-6 bg-white">${empleado.cargo}</td>
-                            <td class="py-4 px-6 bg-white">${empleado.salario}</td>
-                            <td class="py-4 px-6 bg-white">${empleado.telefono}</td>
-                            <td class="py-4 px-6 bg-white">${empleado.email}</td>
-                            <td class="py-4 px-6 text-center bg-white">
-                            <div class="flex items-center justify-center space-x-3">
-                                <!--!Boton de Editar registro  -->
-                                    <button  
-                                        class="p-2 text-blue-500 hover:text-blue-700 transition transform hover:scale-110"
-                                        data-employee='${JSON.stringify(empleado)}'
-                                        onclick="handleEditBtn(this)">
-                                        
-                                        
-                                        <!-- Icono editar -->
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                                        </svg>
-                                    </button>
+        // Función para renderizar una fila de empleado
+        function renderEmployeeRow(empleado) {
+            const row = document.createElement('tr');
+            row.className = 'border-b border-gray-300 hover:bg-gray-300 transition duration-200 ease-in-out';
+            row.innerHTML = `
+                <td class="py-4 px-6 bg-white">${empleado.id}</td>
+                <td class="py-4 px-6 bg-white">${empleado.nombre}</td>
+                <td class="py-4 px-6 bg-white">${empleado.cargo}</td>
+                <td class="py-4 px-6 bg-white">${empleado.salario}</td>
+                <td class="py-4 px-6 bg-white">${empleado.telefono}</td>
+                <td class="py-4 px-6 bg-white">${empleado.email}</td>
+                <td class="py-4 px-6 text-center bg-white">
+                <div class="flex items-center justify-center space-x-3">
+                    <!--!Boton de Editar registro  -->
+                        <button  
+                            class="p-2 text-blue-500 hover:text-blue-700 transition transform hover:scale-110"
+                            data-employee='${JSON.stringify(empleado)}'
+                            onclick="handleEditBtn(this)">
+                            
+                            
+                            <!-- Icono editar -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                            </svg>
+                        </button>
 
-                                <!--!Boton de eliminarRegistro  -->
-                                <button class="p-2 text-red-500 hover:text-red-700 transition transform hover:scale-110" onclick="deleteRegistro(${empleado.id})">
-                                    <!-- Icono eliminar -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                    </svg>
-                                </button>
+                    <!--!Boton de eliminarRegistro  -->
+                    <button class="p-2 text-red-500 hover:text-red-700 transition transform hover:scale-110" onclick="deleteRegistro(${empleado.id})">
+                        <!-- Icono eliminar -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                    </button>
 
-                            </div>
-                    </td>
-                `;
-                            tbody.appendChild(row);
-                        });
-                    })
-                .catch(error => {
-                    console.error('Error al renderizar la tabla:', error);
-                });
+                </div>
+            </td>
+            `;
+            return row;
         }
 
         // Función para abrir el en modo edicion con los datos del registro
@@ -159,31 +168,39 @@
 
         }
 
-        // Llamar a la función cuando se carga la página
-        document.addEventListener('DOMContentLoaded', renderEmployeeTable);
+        function deleteRegistro(id) {
+            uri = '/api/v1/empleados/';
+            //Funcion que elimina cualquier entidad en la base de datos dado el id y el endpoint
+            deleteEntity(id, uri, () => {
+                // Refrescar la paginación después de eliminar
+                window.paginationController.refresh();
+            }, "Empleado");
+            console.log("Empleado eliminado desde funcion deleteRegistro generica");
+        }
+
+        // Inicializar la paginación cuando se carga la página
+        document.addEventListener('DOMContentLoaded', () => {
+            // Configurar e inicializar la paginación
+            window.paginationController.init({
+                fetchUrl: '/api/v1/empleados',
+                renderCallback: renderEmployeeRow,
+                recordsKey: 'empleados',
+                tableBodyId: 'usuariosTablebody',
+                recordsPerPage: 10
+            });
+        });
 
         // Escuchar el evento personalizado que se despacha desde el modal
         document.addEventListener('empleadoGuardado', function (e) {
             console.log('Empleado guardado, actualizando tabla...', e.detail);
-            renderEmployeeTable();
+            // Refrescar la paginación después de guardar un empleado
+            window.paginationController.refresh();
             showToast(e.detail);
         });
 
-        function deleteRegistro(id) {
-            uri = '/api/v1/empleados/';
-            //Funcion que elimina cualquier entidad en la base de datos dado el id y el endpoint
-            deleteEntity(id, uri, renderEmployeeTable, "Empleado");
-            console.log("Empleado eliminado desde funcion deleteRegistro generica");
-        }
-
     </script>
 
-
-
 </main>
-
-
-
 
 {% include 'footer.html' %}
 
