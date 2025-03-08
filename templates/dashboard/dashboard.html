@@ -8,6 +8,35 @@
 
 <!-- Contenido -->
 <main>
+
+    <!--! Bloque de mensajes de flash flask -->
+    <!-- Aquí se muestran los mensajes flash -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="fixed top-20 right-6 z-50 space-y-2">
+        {% for category, message in messages %}
+        <div id="flash-message-{{ loop.index }}"
+            class="p-3 rounded-lg shadow-lg text-sm transition-opacity duration-500
+            {% if category == 'success' %}bg-green-100 text-green-800{% elif category == 'error' %}bg-red-100 text-red-800{% else %}bg-blue-100 text-blue-800{% endif %}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        // Oculta los mensajes flash después de 3 segundos (3000 ms)
+        setTimeout(function () {
+            const messages = document.querySelectorAll('[id^="flash-message-"]');
+            messages.forEach((msg) => {
+                msg.style.transition = "opacity 0.5s ease-out";
+                msg.style.opacity = '0';
+                setTimeout(() => msg.remove(), 500); // Espera que la transición termine (0.5s)
+            });
+        }, 3000);
+    </script>
+    {% endif %}
+    {% endwith %}
+
     <!-- Tarjeta -->
     <div class="container mx-auto">
         <div class="flex flex-wrap m-4">

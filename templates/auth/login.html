@@ -23,6 +23,35 @@
                 </svg>
                 <span class="transition-all group-hover:font-semibold">Volver</span>
             </a>
+
+            <!--! Bloque de mensajes de flash flask -->
+            <!-- Aquí se muestran los mensajes flash -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <div class="flash-container fixed top-4 right-4 z-50">
+                {% for category, message in messages %}
+                <div id="flash-message-{{ loop.index }}"
+                    class="flash-message p-3 rounded-lg shadow-lg text-sm
+        {% if category == 'success' %}bg-green-100 text-green-800{% elif category == 'error' %}bg-red-100 text-red-800{% else %}bg-blue-100 text-blue-800{% endif %}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+
+            <script>
+                // Oculta automáticamente los mensajes flash después de 3 segundos (3000 ms)
+                setTimeout(() => {
+                    const flashContainer = document.querySelector('.flash-container');
+                    if (flashContainer) {
+                        flashContainer.style.transition = 'opacity 0.5s ease-out';
+                        flashContainer.style.opacity = '0';
+                        setTimeout(() => flashContainer.remove(), 500);
+                    }
+                }, 3000);
+            </script>
+            {% endif %}
+            {% endwith %}
+
             <!-- Titulo y logo -->
             <h2 class="text-2xl font-semibold text-gray-700 text-center">Benedetto Pizza</h2>
             <div class="flex justify-center m-2">
@@ -34,12 +63,14 @@
                 <a href="#" class="text-xs text-center text-gray-500 uppercase">Ingresa con tu correo</a>
                 <span class="border-b border-gray-500 w-1/5 lg:w-1/4"></span>
             </div>
+
             <div class="mt-4">
                 <label class="block text-sm font-semibold mb-2">Correo electrónico</label>
                 <input
                     class="bg-gray-200  focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
                     type="email" name="email" placeholder="Email" autocomplete="email" />
             </div>
+
             <div class="mt-4">
                 <div class="flex justify-between">
                     <label class="block text-sm font-bold mb-2">Contraseña</label>
@@ -56,11 +87,18 @@
                     Iniciar sesión
                 </button>
             </div> -->
-            <div class="mt-8">
+
+            <!-- <div class="mt-8">
                 <a class="button w-full" href="{{url_for('dashboard_bp.show_dashboard') }}">
                     Iniciar sesión
                 </a>
-            </div>
+            </div> -->
+            <!--! Botón de inicio de sesión -->
+            <button type="submit" aria-label="Iniciar sesión" class="w-full button mt-8">
+                Iniciar sesión
+            </button>
+
+
             <div class="mt-4 flex items-center justify-between">
                 <span class="border-b border-gray-500 w-1/5 md:w-1/4"></span>
                 <div class="flex flex-row gap-1">

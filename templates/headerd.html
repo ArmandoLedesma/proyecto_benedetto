@@ -15,7 +15,7 @@
                 &#9776;
             </button>
         </div>
-        
+
 
         <!-- Navbar en pantallas grandes -->
         <nav class="hidden md:flex font-roboto text-gray-600 drop-shadow-md">
@@ -48,17 +48,23 @@
                     </button>
 
                     <!-- Contenido del Dropdown -->
-                    <div id="user-menu" class="hidden popup-window absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg font-roboto">
+                    <div id="user-menu"
+                        class="hidden popup-window absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg font-roboto">
                         <ul class="py-2 text-gray-700 ">
                             <li class="hover:bg-gray-200">
-                                <button onclick="location.href='/perfil'" class="block w-full text-left px-4 py-2">Perfil</button>
+                                <button onclick="location.href='/perfil'"
+                                    class="block w-full text-left px-4 py-2">Perfil</button>
                             </li>
                             <li class="hover:bg-gray-200">
-                                <button onclick="location.href='/configuracion'" class="block w-full text-left px-4 py-2">Configuración</button>
+                                <button onclick="location.href='/configuracion'"
+                                    class="block w-full text-left px-4 py-2">Configuración</button>
                             </li>
                             <hr class="text-gray-300">
                             <li class="hover:bg-gray-200">
-                                <button onclick="location.href='/logout'" class="block w-full text-left px-4 py-2 text-red-600">Cerrar sesión</button>
+                                <!-- <button onclick="location.href='/logout'"
+                                    class="block w-full text-left px-4 py-2 text-red-600">Cerrar sesión</button> -->
+                                <a href="{{ url_for('auth_bp.logout' ) }}"
+                                    class="block w-full text-left px-4 py-2 text-red-600">Cerrar sesión</a>
                             </li>
                         </ul>
                     </div>
@@ -67,8 +73,8 @@
         </nav>
     </div>
 
-    
-    
+
+
 
     <!-- Navbar en móviles -->
     <nav id="menu" class="hidden md:hidden fixed top-20 left-0 w-full bg-white shadow-md z-50 p-6">
