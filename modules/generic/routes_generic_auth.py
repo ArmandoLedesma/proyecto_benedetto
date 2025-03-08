@@ -12,11 +12,11 @@ def create_generic_bp(service: BaseService, entity_name):
     
     bp = Blueprint(entity_name, __name__)
 
-    #! Decorador para requerir autenticación Verficicar implementacion de login_required
+    #! Decorador para requerir autenticación 
     @bp.before_request
     @login_required
     def protect():
-        pass  # todas las rutas de este bp requiere auth Aquí se puede agregar código para verificar el estado de la sesión y restringir las acciones
+        pass  # todas las rutas de este bp requiere auth
 
     @bp.route(f'/{entity_name}', methods=['GET'])
     def get_all():

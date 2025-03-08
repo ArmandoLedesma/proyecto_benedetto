@@ -11,6 +11,11 @@ class Usuario(db.Model, UserMixin):
     rol = db.Column(db.String(20), nullable=False, default='cliente')  # cliente o empleado
     estado = db.Column(db.String(20), nullable=False, default='Activo')
 
+    # Relación con Cliente y Empleado (opcional)
+    # cliente = db.relationship('Cliente', backref='usuario', uselist=False)
+    # empleado = db.relationship('Empleado', backref='usuario', uselist=False)
+    # cliente = db.relationship('Cliente', backref='usuario', uselist=False)  
+    
     def to_dict(self):
         return {
             "id": self.id,

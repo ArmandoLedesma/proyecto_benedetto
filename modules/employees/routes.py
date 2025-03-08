@@ -1,9 +1,16 @@
 from flask import Flask, request, jsonify,render_template, Blueprint
 # Importo el servicio de empleados
 from modules.employees.services import EmpleadoService
+from flask_login import login_required
 
 empleados_bp = Blueprint('empleados', __name__)
 empleados_services = EmpleadoService()
+
+#! Decorador para requerir autenticación 
+@empleados_bp.before_request
+@login_required
+def protect():
+    pass  # todas las rutas de este bp requiere auth
 
 @empleados_bp.route('/empleados', methods=['GET'])
 def get_empleados():

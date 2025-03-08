@@ -1,12 +1,19 @@
 from data import items, items_categorias, items_clientes, items_empleados, items_sucursales, items_tradicionales
 from modules.employees.services import EmpleadoService
 from flask import Blueprint,render_template 
+from flask_login import login_required
 
 
 #dashboard_bp = Blueprint('dashboard_bp', __name__)
 dashboard_bp = Blueprint('dashboard_bp', __name__, template_folder="dashboard")
 empleados_services = EmpleadoService()
 
+
+# Protege todas las rutas del dashboard
+@dashboard_bp.before_request
+@login_required
+def require_login():
+    pass  # Esto hace que todas las rutas dentro del blueprint requieran login
 
 
 
