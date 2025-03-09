@@ -3,34 +3,38 @@ items = [
     {
 
         "image": "img/img_dashboard/categoria/categorias.jpg",
-
         "title": "Categorias",
         "description": "Esta es la descripción de la primera tarjeta.",
-        "button_text": "Gestionar Categorias"
+        "button_text": "Gestionar Categorias",
+        "url":"/dashboard/categorias"
     },
     {
         "image": "img/img_dashboard/empleados/empleados.jpg",
         "title": "Empleados",
         "description": "Esta es la descripción de la segunda tarjeta.",
-        "button_text": "Gestionar Empleados"
+        "button_text": "Gestionar Empleados",
+        "url":"/dashboard/empleados"
     },
     {
         "image": "img/img_dashboard/cliente/clientes.jpg",
         "title": "Clientes",
         "description": "Esta es la descripción de la primera tarjeta.",
-        "button_text": "Gestionar Clientes"
+        "button_text": "Gestionar Clientes",
+        "url":"/dashboard/clientes"
     },
     {
         "image": "img/img_dashboard/l_productos/productos.jpg",
         "title": "Linea de productos",
         "description": "Esta es la descripción de la primera tarjeta.",
-        "button_text": "Gestionar Linea de productos"
+        "button_text": "Gestionar Linea de productos",
+        "url":"#"
     },
     {
         "image": "img/img_dashboard/sucursal/sucursales.jpg",
         "title": "Sucursales",
         "description": "Esta es la descripción de la segunda tarjeta.",
-        "button_text": "Gestionar Sucursales"
+        "button_text": "Gestionar Sucursales",
+        "url":"/dashboard/sucursales"
     }
 ]
 
