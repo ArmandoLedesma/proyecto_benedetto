@@ -1,8 +1,18 @@
 from database.db import db
 from modules.employees.model import Empleado
 from modules.employees.repositories import EmpleadoRepository
+from modules.users.services import UsuarioService
+from modules.users.model import Usuario
+from modules.users.repositories import UsuarioRepository
+from werkzeug.security import generate_password_hash
 
-from modules.employees.schemas import EmpleadoCreateSchema, EmpleadoUpdateSchema
+from modules.employees.schemas import EmpleadoCreateSchema,EmpleadoUpdateSchema
+from modules.users.schemas import UsuarioCreateSchema,UsuarioUpdateSchema
+
+
+
+usuario_services = UsuarioService()
+
 
 # Servicio para logica de empleados patron fachada
 class EmpleadoService:
@@ -17,8 +27,27 @@ class EmpleadoService:
     
     # Se utiliza el schema para validar los datos de entrada y deserializarlos y pasarlos validados al repositorio
     def create_empleado(self, data):
+        print (data)
         empleado_data = EmpleadoCreateSchema(**data).model_dump()
+        print ("Empleado data:",empleado_data)
         empleado = Empleado(**empleado_data)
+
+        print (empleado)
+        usuario_data = UsuarioCreateSchema(**empleado_data, password=empleado_data["id"], rol="cliente").model_dump()
+
+        """
+        usuario_data = {
+        "id": empleado.id,  # Se usa el ID generado por la base de datos
+        "nombre": empleado.nombre,
+        "email": empleado.email,
+        "password": generate_password_hash(str(empleado.id)),  # Se convierte el ID en string antes de hashearlo
+        "rol": "cliente",
+        "estado": "Activo"
+        }
+        """
+
+        print ("Print usuario data:", usuario_data)
+        usuario_services.create(usuario_data)
         return self.repository.create(empleado)
 
     def update_empleado(self, empleado_id, data):
@@ -30,6 +59,15 @@ class EmpleadoService:
             setattr(empleado, key, value)
         return self.repository.update(empleado)
     
+
+def delete_empleado(self, empleado_id):
+    empleado = self.repository.get_by_id(empleado_id)
+    if not empleado:
+        return None
+    self.repository.delete(empleado)
+    return empleado
+    
+
     """// Logica espeficia no funciona para ser generio
     def create_empleado(self, data):
         empleado = Empleado(
@@ -54,12 +92,5 @@ class EmpleadoService:
     
     """
     
-    def delete_empleado(self, empleado_id):
-        empleado = self.repository.get_by_id(empleado_id)
-        if not empleado:
-            return None
-        self.repository.delete(empleado)
-        return empleado
-    
-
+   
         

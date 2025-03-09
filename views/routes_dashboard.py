@@ -27,15 +27,22 @@ def show_dashboard():
 
 @dashboard_bp.route("/categorias")
 def show_categorias():
-    return render_template("dashboard/categorias.html", items= items_categorias)
+    # Obtenemos la lista de categorias a través del servicio
+    categorias = categotias_services.get_all()
+    # Convertimos cada objeto categoria a diccionario
+    categorias_list = [categoria.to_dict() for categoria in categorias]
+    # Renderizamos la vista pasando los categorias obtenidos
+    return render_template("dashboard/categorias.html", items= categorias_list)
+    # return render_template("dashboard/categorias.html", items= items_categorias)
+
 
 @dashboard_bp.route("/empleados")
 def show_empleados():
     
     # Obtenemos la lista de empleados a través del servicio
-    empleados = empleados_services.get_all_empleados()
+    #empleados = empleados_services.get_all_empleados()
     # Convertimos cada objeto empleado a diccionario
-    empleados_list = [empleado.to_dict() for empleado in empleados]
+    #empleados_list = [empleado.to_dict() for empleado in empleados]
     # Renderizamos la vista pasando los empleados obtenidos
     return render_template("dashboard/empleados.html")
     #return render_template("dashboard/empleados.html", items= items_empleados)

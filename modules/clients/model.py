@@ -10,9 +10,9 @@ class Cliente(db.Model):
     estado = db.Column(db.String(20), nullable=False, default="Activo")
     
     
-    usuario_id = db.Column(db.Integer, db.ForeignKey('usuarios.id'), nullable=False, unique=True)  # Clave foránea a Usuario
+    #usuario_id = db.Column(db.Integer, db.ForeignKey('usuarios.id'), nullable=False, unique=True)  # Clave foránea a Usuario
     pedidos = db.relationship('Pedido', backref='cliente', lazy=True)
-    usuario = db.relationship('Usuario', backref=db.backref('cliente', uselist=False))
+    #usuario = db.relationship('Usuario', backref=db.backref('cliente', uselist=False))
     
     def to_dict(self):
         return {
