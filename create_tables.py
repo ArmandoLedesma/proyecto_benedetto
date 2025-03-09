@@ -24,6 +24,11 @@ def db_create(app):
         db.drop_all()
         db.create_all()
 
+
+
+
+
+
         # Crear usuario administrador
         admin = Usuario(
             nombre="Admin",
@@ -34,6 +39,68 @@ def db_create(app):
         )
         db.session.add(admin)
         db.session.commit()
+
+
+        # Insertar datos de prueba en Categorías
+        categorias_data = [
+            {
+                "title": "Pizzas",
+                "image": "img/categorias_subcategorias/pizza.jpg",
+                "description": "Pizzas irresistibles: masa artesanal, ingredientes frescos y el equilibrio perfecto de sabores. 🍕🔥 Un solo bocado y te conquista.",
+                "button_text": "Ver más",
+                "is_active": True,
+                "is_deleted": False
+            },
+            {
+                "title": "Hamburguesas",
+                "image": "img/categorias_subcategorias/hamburguesas.jpg",
+                "description": "Hamburguesas irresistibles: carne jugosa, pan esponjoso y el equilibrio perfecto de ingredientes. 🍔🔥 Un solo bocado y te enamoras.",
+                "button_text": "Ver más",
+                "is_active": True,
+                "is_deleted": False
+            },
+            {
+                "title": "Lazañas",
+                "image": "img/categorias_subcategorias/lazana.jpg",
+                "description": "Lasañas irresistibles: pasta suave, salsa cremosa y el gratinado perfecto. 🍽️🔥 Un solo bocado y te atrapa.",
+                "button_text": "Ver más",
+                "is_active": True,
+                "is_deleted": False
+            },
+            {
+                "title": "Perro caliente",
+                "image": "img/categorias_subcategorias/hotdog.jpeg",
+                "description": "Pan suave, salchicha jugosa y los toppings perfectos. 🌭🔥 Un solo bocado y se vuelve tu favorito.",
+                "button_text": "Ver más",
+                "is_active": True,
+                "is_deleted": False
+            },
+            {
+                "title": "Desgranado",
+                "image": "img/categorias_subcategorias/desgranado.jpeg",
+                "description": "Carne jugosa, maíz tierno y el mix perfecto de salsas y queso. 🌽🔥 Un solo bocado y no querrás soltarlo.",
+                "button_text": "Ver más",
+                "is_active": True,
+                "is_deleted": False
+            },
+            {
+                "title": "Bebidas",
+                "image": "img/categorias_subcategorias/bebidas.avif",
+                "description": "Bebidas irresistibles: refrescantes, intensas y el complemento perfecto para cada antojo. 🥤🔥 Un solo sorbo y lo disfrutas.",
+                "button_text": "Ver más",
+                "is_active": True,
+                "is_deleted": False
+            }
+        ]
+        
+        for categoria in categorias_data:
+            nueva_categoria = Categoria(**categoria)
+            db.session.add(nueva_categoria)
+            db.session.commit()
+        print("✅ Categorías insertadas correctamente en la base de datos.")
+
+
+
 
         # Insertar empleados vinculados a usuarios
         empleados_data = [

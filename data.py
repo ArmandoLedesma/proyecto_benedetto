@@ -1,3 +1,4 @@
+# Dashboard
 items = [
     {
 
@@ -70,7 +71,6 @@ items_categorias = [
         "description": "Bebidas irresistibles: refrescantes, intensas y el complemento perfecto para cada antojo. 🥤🔥 Un solo sorbo y lo disfrutas.",
         "button_text": "Ver más"
     },
-   
 ]
 
 items_tradicionales = [
