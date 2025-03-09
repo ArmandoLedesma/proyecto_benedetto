@@ -60,7 +60,7 @@ def create_app():
     
     
     
-    print(app.url_map)
+    #print(app.url_map)
     
     return app
 

@@ -3,6 +3,7 @@ from decimal import Decimal
 from typing import Optional
 
 class EmpleadoCreateSchema(BaseModel):
+    id : str
     nombre: str
     cargo: str
     salario: Decimal

@@ -40,24 +40,27 @@
                     <!--! Aquí se renderizarán los datos de la tabla desde el fetch-->
                 </tbody>
             </table>
-            
+
             <!-- Paginación -->
-            <div id="paginationContainer" class="bg-white px-6 py-4 border-t border-gray-300 flex items-center justify-between">
+            <div id="paginationContainer"
+                class="bg-white px-6 py-4 border-t border-gray-300 flex items-center justify-between">
                 <div class="flex items-center">
                     <span class="text-sm text-gray-700">
-                        Mostrando <span id="startRecord" class="font-medium">1</span> a 
-                        <span id="endRecord" class="font-medium">10</span> de 
+                        Mostrando <span id="startRecord" class="font-medium">1</span> a
+                        <span id="endRecord" class="font-medium">10</span> de
                         <span id="totalRecords" class="font-medium">0</span> registros
                     </span>
                 </div>
                 <div class="flex items-center space-x-2">
-                    <button id="prevPageBtn" class="px-3 py-1 rounded border border-gray-300 bg-white text-gray-700 text-sm hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed">
+                    <button id="prevPageBtn"
+                        class="px-3 py-1 rounded border border-gray-300 bg-white text-gray-700 text-sm hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed">
                         Anterior
                     </button>
                     <div id="pageNumbers" class="flex items-center space-x-1">
                         <!-- Números de página serán generados aquí -->
                     </div>
-                    <button id="nextPageBtn" class="px-3 py-1 rounded border border-gray-300 bg-white text-gray-700 text-sm hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed">
+                    <button id="nextPageBtn"
+                        class="px-3 py-1 rounded border border-gray-300 bg-white text-gray-700 text-sm hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed">
                         Siguiente
                     </button>
                 </div>
@@ -68,9 +71,10 @@
 
     <!-- Importar script de paginación -->
     <script src="{{ url_for('static', filename='js/pagination.js') }}"></script>
-    
+
     <script>
         // Función para renderizar una fila de empleado
+
         function renderEmployeeRow(empleado) {
             const row = document.createElement('tr');
             row.className = 'border-b border-gray-300 hover:bg-gray-300 transition duration-200 ease-in-out';
@@ -111,6 +115,8 @@
             `;
             return row;
         }
+
+
 
         // Función para abrir el en modo edicion con los datos del registro
         function handleEditBtn(button) {

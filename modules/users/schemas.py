@@ -2,6 +2,7 @@ from pydantic import BaseModel, EmailStr, ConfigDict
 from typing import Optional
 
 class UsuarioCreateSchema(BaseModel):
+    id: int
     nombre: str
     email: EmailStr
     password: str

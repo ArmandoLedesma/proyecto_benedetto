@@ -1,5 +1,5 @@
 ### Crear Login con PYTHON - FLASK y MYSQL
-
+contourpy==1.2.0
 Este proyecto proporciona un sistema de inicio de sesión implementado con Python Flask y MySQL.
 
 ### PASO 1: Crear entorno virtual

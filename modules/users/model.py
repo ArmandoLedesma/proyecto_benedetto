@@ -10,6 +10,7 @@ class Usuario(db.Model, UserMixin):
     password = db.Column(db.String(200), nullable=False)
     rol = db.Column(db.String(20), nullable=False, default='cliente')  # cliente o empleado
     estado = db.Column(db.String(20), nullable=False, default='Activo')
+    
 
     # Relación con Cliente y Empleado (opcional)
     # cliente = db.relationship('Cliente', backref='usuario', uselist=False)
