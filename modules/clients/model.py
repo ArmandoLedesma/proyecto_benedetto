@@ -3,12 +3,16 @@ from database.db import db
 class Cliente(db.Model):
     __tablename__ = 'clientes'
     
-    id:str = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    nombre = db.Column(db.String(100), nullable=False)
+    telefono = db.Column(db.String(20), nullable=False)
+    email = db.Column(db.String(100), nullable=False)
+    estado = db.Column(db.String(20), nullable=False, default="Activo")
     
-    nombre:str = db.Column(db.String(100), nullable=False)
-    telefono:str = db.Column(db.String(20), nullable=False)
-    email:str = db.Column(db.String(100), nullable=False)
-    estado:str = db.Column(db.String(20), nullable=False, default="Activo")
+    
+    usuario_id = db.Column(db.Integer, db.ForeignKey('usuarios.id'), nullable=False, unique=True)  # Clave foránea a Usuario
+    pedidos = db.relationship('Pedido', backref='cliente', lazy=True)
+    usuario = db.relationship('Usuario', backref=db.backref('cliente', uselist=False))
     
     def to_dict(self):
         return {

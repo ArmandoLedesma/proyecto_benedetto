@@ -6,13 +6,20 @@ from decimal import Decimal
 class Empleado(db.Model):
     __tablename__ = 'empleados'
     
-    id: str  = db.Column(db.Integer, primary_key=True)
-    nombre: str = db.Column(db.String(100), nullable=False)
-    cargo: str = db.Column(db.String(50), nullable=False)
-    # Usamos Numeric con precisión 10 y escala 2 para manejar montos decimales.
+    id = db.Column(db.Integer, primary_key=True)
+    usuario_id = db.Column(db.Integer, db.ForeignKey('usuarios.id'), nullable=False, unique=True)  # 🔥 Clave foránea correcta
+    nombre = db.Column(db.String(100), nullable=False)
+    cargo = db.Column(db.String(50), nullable=False)
     salario = db.Column(db.Numeric(10, 2), nullable=False)
-    telefono: str = db.Column(db.String(20), nullable=False)
-    email: str = db.Column(db.String(100), nullable=False)
+    telefono = db.Column(db.String(20), nullable=False)
+    email = db.Column(db.String(100), nullable=False)
+    
+    
+    # Relaciones con otras tablas verificar el servicio dado que no es generico
+    usuario = db.relationship('Usuario', backref=db.backref('empleado', uselist=False))
+    
+    # sucursal_id = db.Column(db.Integer, db.ForeignKey('sucursales.id'), nullable=True)
+    # sucursal = db.relationship('Sucursal', backref='empleados', lazy=True)
 
     def to_dict(self) -> dict[str, Any]:
         return {

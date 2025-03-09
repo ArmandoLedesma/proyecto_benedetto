@@ -1,5 +1,5 @@
 # Importo las las funcion factory de blueprints
-from modules.generic.routes_generic import create_generic_bp
+from modules.generic.routes_generic_auth import create_generic_bp
 
 # Importo la clase de servicios
 from modules.sucursales.services import SucursalService
