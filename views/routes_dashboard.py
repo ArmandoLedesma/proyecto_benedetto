@@ -1,12 +1,15 @@
-from data import items, items_categorias, items_clientes, items_empleados, items_sucursales, items_tradicionales
-from modules.employees.services import EmpleadoService
 from flask import Blueprint,render_template 
 from flask_login import login_required
 
+from data import items, items_categorias, items_clientes, items_empleados, items_sucursales, items_tradicionales
+from modules.employees.services import EmpleadoService
+from modules.categories.services import CategoriaService
 
-#dashboard_bp = Blueprint('dashboard_bp', __name__)
+# Instancia de blueprint 
 dashboard_bp = Blueprint('dashboard_bp', __name__, template_folder="dashboard")
+# Instancias de servicios
 empleados_services = EmpleadoService()
+categotias_services = CategoriaService()
 
 
 # Protege todas las rutas del dashboard
