@@ -123,153 +123,48 @@ items_tradicionales = [
         "precio": 14000
 
     },
-    {
-        "image": "img/categorias_productos/pizzas/tradicionales/pepperoni.jpg",
-        "nombre": "Pepperoni",
-        "descripcion": "Salsa de tomate, queso mozzarella y pepperoni.",
-        "categoria": "Tradicional",
-        "precio": 14500
-
-    },
-    {
-        "image": "img/categorias_productos/pizzas/tradicionales/hawaiana_pollo.webp",
-        "nombre": "Hawaiana pollo BBQ",
-        "descripcion": "Salsa de tomate, queso mozzarella, pollo en salsa BBQ, piña y jamón.",
-        "categoria": "Tradicional",
-        "precio": 14500
-
-    },
+    
+    
 ]
 
-pizza_autor = [
+
+items_hamburguesa = [
     {
-        "image": "",
-        "nombre": "Remontada",
-        "descripcion": "Pollo, maiz, tartara y papa de cabello de ángel",
-        "categoria": "De autor",
-        "precio": 14000
-    },
-    {
-        "image": "",
-        "nombre": "Especial",
-        "descripcion": "Pollo, salami, cábano, champiñón, cebolla caramelizada y pimentón",
-        "categoria": "De autor",
-        "precio": 15500
-    },
-    {
-        "image": "",
-        "nombre": "Hawaiana Plus",
-        "descripcion": "Tocineta, jamón, piña y parmesano",
-        "categoria": "De autor",
+        "image": "img/categorias_productos/hamburguesas/bacon.webp",
+        "nombre": "Bacon",
+        "descripcion": "Salsa de tomate, queso mozzarella, pollo en salsa BBQ, piña y jamón.",
         "precio": 14500
     },
     {
-        "image": "",
-        "nombre": "Pollo funghi",
-        "descripcion": " Pollo, champiñones salteados, mayotrufa y parmesano",
-        "categoria": "De autor",
-        "precio": 15500
-    },
-    {
-        "image": "",
-        "nombre": "Mexicana",
-        "descripcion": "",
-        "categoria": "De autor",
+        "image": "img/categorias_productos/hamburguesas/callejera.webp",
+        "nombre": "Callejera",
+        "descripcion": "Salsa de tomate, queso mozzarella, pollo en salsa BBQ, piña y jamón.",
         "precio": 14500
     },
     {
-        "image": "",
-        "nombre": "Benedetto",
-        "descripcion": "Pepperoni, prosciutto y cebolla caramelizada",
-        "categoria": "De autor",
-        "precio": 16000
-    },
-    {
-        "image": "",
-        "nombre": "Suprema",
-        "descripcion": "Pepperoni, aceitunas, champiñón, cebolla encurtida y pimentón",
-        "categoria": "De autor",
+        "image": "img/categorias_productos/hamburguesas/clasica.webp",
+        "nombre": "Clasica",
+        "descripcion": "Salsa de tomate, queso mozzarella, pollo en salsa BBQ, piña y jamón.",
         "precio": 14500
     },
     {
-        "image": "",
-        "nombre": "Toscana",
-        "descripcion": "Tocineta, jamón, maíz, champiñón y parmesano",
-        "categoria": "De autor",
-        "precio": 15000
+        "image": "img/categorias_productos/hamburguesas/costena.webp",
+        "nombre": "Costeña",
+        "descripcion": "Salsa de tomate, queso mozzarella, pollo en salsa BBQ, piña y jamón.",
+        "precio": 14500
     },
     {
-        "image": "",
-        "nombre": "Pollo miel mostaza",
-        "descripcion": "",
-        "categoria": "De autor",
-        "precio": 15000
+        "image": "img/categorias_productos/hamburguesas/gaucha.webp",
+        "nombre": "Gaucha",
+        "descripcion": "Salsa de tomate, queso mozzarella, pollo en salsa BBQ, piña y jamón.",
+        "precio": 14500
     },
     {
-        "image": "",
-        "nombre": "Romana",
-        "descripcion": "Pollo, tocineta, maíz y orégano",
-        "categoria": "De autor",
-        "precio": 15000
+        "image": "img/categorias_productos/hamburguesas/philadelphia.webp",
+        "nombre": "Philadelphia",
+        "descripcion": "Salsa de tomate, queso mozzarella, pollo en salsa BBQ, piña y jamón.",
+        "precio": 14500
     },
-    {
-        "image": "",
-        "nombre": "Americana",
-        "descripcion": "Panceta, jalapeños, cebolla roja, cilantro y salsa BBQ",
-        "categoria": "De autor",
-        "precio": 15500
-    },
-    {
-        "image": "",
-        "nombre": "Caramellata",
-        "descripcion": "Tocineta, manzana caramelizada, tomate, dulce, parmesano y albahaca",
-        "categoria": "De autor",
-        "precio": 15500
-    },
-    {
-        "image": "",
-        "nombre": "Carnes",
-        "descripcion": "Pepperoni, tocineta, jamón, cábano y salchicha",
-        "categoria": "De autor",
-        "precio": 15500
-    },
-    {
-        "image": "",
-        "nombre": "Diletto",
-        "descripcion": "Pepperoni, pollo, tocineta y jamón",
-        "categoria": "De autor",
-        "precio": 16500
-    },
-    {
-        "image": "",
-        "nombre": "Mistura",
-        "descripcion": "Reducción de panela, pepperoni, chorizo español, queso crema y albahaca",
-        "categoria": "De autor",
-        "precio": 18500
-    },
-    {
-        "image": "",
-        "nombre": "Stracciatella",
-        "descripcion": "Tomates caramelizados, stracciatella, parmesano y albahaca",
-        "categoria": "De autor",
-        "precio": 18500
-    },
-    {
-        "image": "",
-        "nombre": "Genovesa ",
-        "descripcion": " Prosciutto, salsa pesto, tomates confitados, stracciatella y parmesano",
-        "categoria": "De autor",
-        "precio": 20000
-    },
-    {
-        "image": "",
-        "nombre": "Miel al tartufo",
-        "descripcion": "Pepperoni, prosciutto, stracciatella, miel de trufas y parmesano",
-        "categoria": "De autor",
-        "precio": 19000
-    },
-    
-    
 ]
 
 
