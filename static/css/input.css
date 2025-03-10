@@ -132,33 +132,6 @@
 }
 
 
-/*Efecto para las card del dashboard (card-pizza)*/
-.card-hover-effect {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: center;
-  }
-  
-  .card-hover-effect .card {
-    transition: transform 400ms, filter 400ms;
-  }
-  
-  .card-hover-effect:hover > .card:not(:hover) {
-    filter: blur(5px);
-    transform: scale(0.9, 0.9);
-  }
-  
-  .card-hover-effect .card:hover {
-    transform: scale(1.05, 1.05);
-  }
-  
-  .card{
-    z-index: 0;
-  }
-
-/*Fin del efecto para las card del dashboard (card-pizza)*/
-
 .user-btn {
     width: 38px; 
     height:38px; 
@@ -256,7 +229,97 @@ button:hover {
 /* Fin del modal de confirmación */
 
 
+/* Animación para Cards de Pizza - Reveal & Float */
 
+/* Configuración base para la animación de entrada */
+@keyframes card-reveal {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Configuración para el efecto flotante en hover */
+  @keyframes subtle-float {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  
+  /* Clase principal para las cards animadas */
+  .card-animated {
+    opacity: 0;
+    animation: card-reveal 0.5s ease-out forwards;
+    transition: all 0.3s ease;
+    will-change: transform, box-shadow;
+  }
+  
+  /* Aplicar retraso escalonado basado en la posición de la card */
+  .card-animated:nth-child(1) { animation-delay: 0.1s; }
+  .card-animated:nth-child(2) { animation-delay: 0.2s; }
+  .card-animated:nth-child(3) { animation-delay: 0.3s; }
+  .card-animated:nth-child(4) { animation-delay: 0.4s; }
+  .card-animated:nth-child(5) { animation-delay: 0.5s; }
+  .card-animated:nth-child(6) { animation-delay: 0.6s; }
+  .card-animated:nth-child(7) { animation-delay: 0.7s; }
+  .card-animated:nth-child(8) { animation-delay: 0.8s; }
+  /* Continuar si tienes más cards */
+  
+  /* Efectos al hacer hover */
+  .card-animated:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  /* Efecto sutil en la imagen al hacer hover */
+  .card-animated:hover .card-image img {
+    transform: scale(1.05);
+  }
+  
+  /* Efecto en el botón al hacer hover en la card */
+  .card-animated:hover .button {
+    background-color: #e53e3e; /* Un tono más intenso de rojo */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+  
+  /* Transición suave para la imagen */
+  .card-image {
+    overflow: hidden;
+  }
+  
+  .card-image img {
+    transition: transform 0.5s ease;
+  }
+  
+  /* Efecto para el precio */
+  .card-animated:hover .card-price {
+    transform: scale(1.1);
+  }
+  
+  .card-price {
+    transition: transform 0.3s ease;
+  }
+  
+  /* Efecto para el título */
+  .card-animated:hover .card-title {
+    color: #e53e3e; /* Cambio sutil de color al hacer hover */
+  }
+  
+  .card-title {
+    transition: color 0.3s ease;
+  }
 
 
 
