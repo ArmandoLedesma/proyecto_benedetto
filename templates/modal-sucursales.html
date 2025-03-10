@@ -1,13 +1,15 @@
 <!-- modal-sucursales.html -->
-<!-- Botón para abrir el modal de sucursales -->
+<!-- Botón para abrir el modal en modo crear -->
 <div class="container mx-auto mt-1">
     <button onclick="openCrearModalSucursal()" class="button">
         Abrir Modal Sucursal
     </button>
 </div>
+
 <!-- Modal cerrado inicialmente -->
 <div id="sucursalModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-gray-900/85">
     <div class="bg-white rounded-lg shadow p-6 w-full max-w-md relative">
+
         <!-- Botón de cierre -->
         <button id="closeSucursalModalBtn" class="absolute top-2 right-2 text-gray-500 text-2xl">&times;</button>
 
@@ -15,34 +17,42 @@
         <h3 id="sucursalModalTitle" class="text-lg font-semibold mb-4">Crear Sucursal</h3>
         <hr class="mb-4 border-gray-500">
 
-        <!-- Formulario con campo oculto para el id de sucursal -->
+        <!-- Formulario -->
         <form id="sucursalForm" class="grid gap-4">
-            <!-- Campo oculto para el id (para edición) -->
-            <input type="hidden" id="numero_sucursal" name="numero_sucursal">
+            <!-- Campo ID visible para el usuario -->
+            <div>
+                <label for="numero_sucursal" class="block text-sm font-medium text-gray-900">ID Sucursal</label>
+                <input type="text" id="numero_sucursal" name="numero_sucursal" required
+                    placeholder="Ingrese número de sucursal"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+            </div>
 
-            <!-- Campos del formulario -->
             <div>
                 <label for="nombre_sucursal" class="block text-sm font-medium text-gray-900">Nombre Sucursal</label>
                 <input type="text" id="nombre_sucursal" name="nombre_sucursal" required
-                    placeholder="Ingresa nombre sucursal"
+                    placeholder="Ingrese nombre sucursal"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
             </div>
+
             <div>
-                <label for="direccion" class="block text-sm font-medium text-gray-900">Dirección de la Sucursal</label>
-                <input type="text" id="direccion" name="direccion" required
-                    placeholder="Ingresa dirección de la sucursal"
+                <label for="direccion" class="block text-sm font-medium text-gray-900">Dirección</label>
+                <input type="text" id="direccion" name="direccion" required placeholder="Ingrese dirección"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
             </div>
+
             <div>
-                <label for="capacidad" class="block text-sm font-medium text-gray-900">Capacidad de la Sucursal</label>
+                <label for="capacidad" class="block text-sm font-medium text-gray-900">Capacidad</label>
                 <input type="number" id="capacidad" name="capacidad" required placeholder="Ej. 100"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
             </div>
+
             <div>
                 <label for="telefono" class="block text-sm font-medium text-gray-900">Teléfono</label>
                 <input type="text" id="telefono" name="telefono" required placeholder="Ej. 3001234567"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
             </div>
+
+            <!-- Botón para guardar (crear/actualizar) -->
             <button type="submit" id="submitSucursalBtn" class="button">
                 Guardar Sucursal
             </button>
@@ -54,37 +64,49 @@
     const sucursalModal = document.getElementById('sucursalModal');
     const closeSucursalModalBtn = document.getElementById('closeSucursalModalBtn');
     const sucursalForm = document.getElementById('sucursalForm');
+
     const sucursalModalTitle = document.getElementById('sucursalModalTitle');
     const submitSucursalBtn = document.getElementById('submitSucursalBtn');
-    const numeroSucursalInput = document.getElementById('numero_sucursal');
+    const idSucursalInput = document.getElementById('numero_sucursal'); // Campo visible para el ID
 
-    // Función para abrir el modal en modo creación
+    // Función para abrir el modal en modo CREAR
     function openCrearModalSucursal() {
         sucursalModalTitle.textContent = 'Crear Sucursal';
         submitSucursalBtn.textContent = 'Guardar Sucursal';
-        numeroSucursalInput.value = ''; // Limpiar el campo id para creación
+
+        // Limpiar el formulario y asegurarse de que el campo 'numero_sucursal' sea editable
         sucursalForm.reset();
+        idSucursalInput.readOnly = false;
+
         sucursalModal.classList.remove('hidden');
     }
 
-    // Función para abrir el modal en modo edición
+    // Función para abrir el modal en modo EDITAR
     function openEditarModalSucursal(sucursal) {
         console.log('Abriendo modal de edición para:', sucursal);
+
         sucursalModalTitle.textContent = 'Editar Sucursal';
         submitSucursalBtn.textContent = 'Actualizar Sucursal';
-        numeroSucursalInput.value = sucursal.numero_sucursal;
+
+        // Rellenar el campo 'numero_sucursal' con el valor de la BD y hacerlo de solo lectura
+        idSucursalInput.value = sucursal.numero_sucursal;
+        idSucursalInput.readOnly = true;
+
+        // Rellenar el resto de los campos
         document.getElementById('nombre_sucursal').value = sucursal.nombre_sucursal;
         document.getElementById('direccion').value = sucursal.direccion;
         document.getElementById('capacidad').value = sucursal.capacidad;
         document.getElementById('telefono').value = sucursal.telefono;
+
         sucursalModal.classList.remove('hidden');
     }
 
-    // Cerrar el modal al hacer clic en el botón de cierre
+    // Cerrar el modal al hacer clic en la X
     closeSucursalModalBtn.addEventListener('click', () => {
         sucursalModal.classList.add('hidden');
         sucursalForm.reset();
     });
+
     // Cerrar el modal al hacer clic fuera del contenido
     window.addEventListener('click', (e) => {
         if (e.target === sucursalModal) {
@@ -97,10 +119,14 @@
     sucursalForm.addEventListener('submit', function (e) {
         e.preventDefault(); // Evitar comportamiento por defecto
 
+        // Crear objeto FormData con los datos del formulario
         const formData = new FormData(sucursalForm);
-        const isEditing = numeroSucursalInput.value !== '';
-        const url = isEditing ? `/api/v1/sucursales/${numeroSucursalInput.value}` : '/api/v1/sucursales';
+
+        // Determinar si es edición o creación basado en el readOnly del campo 'numero_sucursal'
+        const isEditing = idSucursalInput.readOnly;
+        const url = isEditing ? `/api/v1/sucursales/${idSucursalInput.value}` : '/api/v1/sucursales';
         const method = isEditing ? 'PUT' : 'POST';
+        const mode = isEditing ? 'update' : 'create';
 
         fetch(url, {
             method: method,
@@ -113,13 +139,15 @@
                 return response.json();
             })
             .then(data => {
-                // Despachar evento para actualizar la tabla y mostrar notificación
-                document.dispatchEvent(new CustomEvent('sucursalGuardada', { detail: data }));
+                // Despachar evento para actualizar la tabla (puedes agregar toast si lo requieres)
+                document.dispatchEvent(new CustomEvent('sucursalGuardada', { detail: { sucursal: data, mode: mode } }));
+
                 sucursalModal.classList.add('hidden');
                 sucursalForm.reset();
             })
             .catch(error => {
                 console.error('Error:', error);
+                // Manejo de errores
             });
     });
 </script>
