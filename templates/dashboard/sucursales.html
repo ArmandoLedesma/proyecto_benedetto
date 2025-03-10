@@ -65,7 +65,7 @@
     </div>
 
     <script>
-        // Función para renderizar una fila en la tabla de sucursales
+        // Función para renderizar una fila de sucursal en la tabla
         function renderSucursalRow(sucursal) {
             const row = document.createElement('tr');
             row.className = 'border-b border-gray-300 hover:bg-gray-300 transition duration-200 ease-in-out';
@@ -108,7 +108,7 @@
             openEditarModalSucursal(sucursalData);
         }
 
-        // Función para eliminar una sucursal (se asume que tienes una función genérica deleteEntity)
+        // Función para eliminar una sucursal (se asume función genérica deleteEntity)
         function deleteSucursal(id) {
             const uri = '/api/v1/sucursales/';
             deleteEntity(id, uri, () => {
@@ -128,7 +128,7 @@
             });
         });
 
-        // Escuchar el evento personalizado tras guardar una sucursal
+        // Escuchar el evento personalizado 'sucursalGuardada'
         document.addEventListener('sucursalGuardada', function (e) {
             console.log('Sucursal guardada, actualizando tabla...', e.detail);
             window.paginationController.refresh();
