@@ -7,7 +7,6 @@ class Empleado(db.Model):
     __tablename__ = 'empleados'
     
     id = db.Column(db.Integer, primary_key=True)
-    #usuario_id = db.Column(db.Integer, db.ForeignKey('usuarios.id'), nullable=False, unique=True)  # 🔥 Clave foránea correcta
     nombre = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), nullable=False)
     
@@ -19,7 +18,6 @@ class Empleado(db.Model):
     
     
     # Relaciones con otras tablas verificar el servicio dado que no es generico
-    #usuario = db.relationship('Usuario', backref=db.backref('empleado', uselist=False))
     
     # sucursal_id = db.Column(db.Integer, db.ForeignKey('sucursales.id'), nullable=True)
     # sucursal = db.relationship('Sucursal', backref='empleados', lazy=True)

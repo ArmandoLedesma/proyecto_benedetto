@@ -2,7 +2,7 @@
 <!-- Botón para abrir el modal en modo crear -->
 <div class="container mx-auto mt-1">
     <button onclick="openCrearModalSucursal()" class="button">
-        Abrir Modal Sucursal
+        Crear Sucursal
     </button>
 </div>
 
@@ -19,13 +19,8 @@
 
         <!-- Formulario -->
         <form id="sucursalForm" class="grid gap-4">
-            <!-- Campo ID visible para el usuario -->
-            <div>
-                <label for="numero_sucursal" class="block text-sm font-medium text-gray-900">ID Sucursal</label>
-                <input type="text" id="numero_sucursal" name="numero_sucursal" required
-                    placeholder="Ingrese número de sucursal"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
-            </div>
+            <!-- Input oculto para el id en modo edición -->
+            <input type="hidden" id="sucursalId" name="id">
 
             <div>
                 <label for="nombre_sucursal" class="block text-sm font-medium text-gray-900">Nombre Sucursal</label>
@@ -67,16 +62,16 @@
 
     const sucursalModalTitle = document.getElementById('sucursalModalTitle');
     const submitSucursalBtn = document.getElementById('submitSucursalBtn');
-    const idSucursalInput = document.getElementById('numero_sucursal'); // Campo visible para el ID
+    const sucursalIdInput = document.getElementById('sucursalId'); // Input oculto para el id
 
     // Función para abrir el modal en modo CREAR
     function openCrearModalSucursal() {
         sucursalModalTitle.textContent = 'Crear Sucursal';
         submitSucursalBtn.textContent = 'Guardar Sucursal';
 
-        // Limpiar el formulario y asegurarse de que el campo 'numero_sucursal' sea editable
+        // Limpiar el formulario y asegurarse de que el input oculto esté vacío
         sucursalForm.reset();
-        idSucursalInput.readOnly = false;
+        sucursalIdInput.value = "";
 
         sucursalModal.classList.remove('hidden');
     }
@@ -88,9 +83,8 @@
         sucursalModalTitle.textContent = 'Editar Sucursal';
         submitSucursalBtn.textContent = 'Actualizar Sucursal';
 
-        // Rellenar el campo 'numero_sucursal' con el valor de la BD y hacerlo de solo lectura
-        idSucursalInput.value = sucursal.numero_sucursal;
-        idSucursalInput.readOnly = true;
+        // Asignar el id de la sucursal en el input oculto
+        sucursalIdInput.value = sucursal.id;
 
         // Rellenar el resto de los campos
         document.getElementById('nombre_sucursal').value = sucursal.nombre_sucursal;
@@ -117,16 +111,12 @@
 
     // Manejo del submit del formulario
     sucursalForm.addEventListener('submit', function (e) {
-        e.preventDefault(); // Evitar comportamiento por defecto
+        e.preventDefault();
 
-        // Crear objeto FormData con los datos del formulario
         const formData = new FormData(sucursalForm);
-
-        // Determinar si es edición o creación basado en el readOnly del campo 'numero_sucursal'
-        const isEditing = idSucursalInput.readOnly;
-        const url = isEditing ? `/api/v1/sucursales/${idSucursalInput.value}` : '/api/v1/sucursales';
+        const isEditing = sucursalIdInput.value !== "";
+        const url = isEditing ? `/api/v1/sucursales/${sucursalIdInput.value}` : '/api/v1/sucursales';
         const method = isEditing ? 'PUT' : 'POST';
-        const mode = isEditing ? 'update' : 'create';
 
         fetch(url, {
             method: method,
@@ -139,15 +129,13 @@
                 return response.json();
             })
             .then(data => {
-                // Despachar evento para actualizar la tabla (puedes agregar toast si lo requieres)
-                document.dispatchEvent(new CustomEvent('sucursalGuardada', { detail: { sucursal: data, mode: mode } }));
-
+                // Despachar evento para actualizar la tabla
+                document.dispatchEvent(new CustomEvent('sucursalGuardada', { detail: { sucursal: data, mode: isEditing ? 'update' : 'create' } }));
                 sucursalModal.classList.add('hidden');
                 sucursalForm.reset();
             })
             .catch(error => {
                 console.error('Error:', error);
-                // Manejo de errores
             });
     });
 </script>

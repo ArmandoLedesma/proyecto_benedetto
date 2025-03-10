@@ -9,7 +9,7 @@ from modules.categories.services import CategoriaService
 dashboard_bp = Blueprint('dashboard_bp', __name__, template_folder="dashboard")
 # Instancias de servicios
 empleados_services = EmpleadoService()
-categotias_services = CategoriaService()
+categorias_services = CategoriaService()
 
 
 # Protege todas las rutas del dashboard
@@ -28,7 +28,7 @@ def show_dashboard():
 @dashboard_bp.route("/categorias")
 def show_categorias():
     # Obtenemos la lista de categorias a través del servicio
-    categorias = categotias_services.get_all()
+    categorias = categorias_services.get_all()
     # Convertimos cada objeto categoria a diccionario
     categorias_list = [categoria.to_dict() for categoria in categorias]
     # Renderizamos la vista pasando los categorias obtenidos
@@ -38,13 +38,12 @@ def show_categorias():
 
 @dashboard_bp.route("/empleados")
 def show_empleados():
-    
+    return render_template("dashboard/empleados.html")
     # Obtenemos la lista de empleados a través del servicio
     #empleados = empleados_services.get_all_empleados()
     # Convertimos cada objeto empleado a diccionario
     #empleados_list = [empleado.to_dict() for empleado in empleados]
     # Renderizamos la vista pasando los empleados obtenidos
-    return render_template("dashboard/empleados.html")
     #return render_template("dashboard/empleados.html", items= items_empleados)
 
 @dashboard_bp.route("/clientes")
@@ -53,7 +52,7 @@ def show_clientes():
 
 @dashboard_bp.route("/sucursales")
 def show_sucursales():
-    return render_template("dashboard/sucursales.html", items= items_sucursales)
+    return render_template("dashboard/sucursales.html")
 
 
 @dashboard_bp.route("/carta_pizza")

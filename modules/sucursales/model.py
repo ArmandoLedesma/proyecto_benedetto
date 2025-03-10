@@ -5,7 +5,6 @@ class Sucursal(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
     nombre_sucursal = db.Column(db.String(100), nullable=False)
-    numero_sucursal = db.Column(db.String(50), unique=True, nullable=False)
     capacidad = db.Column(db.Integer, nullable=False)
     direccion = db.Column(db.String(255), nullable=False)
     telefono = db.Column(db.String(20), nullable=False)
@@ -14,7 +13,6 @@ class Sucursal(db.Model):
         return {
             "id": self.id,
             "nombre_sucursal": self.nombre_sucursal,
-            "numero_sucursal": self.numero_sucursal,
             "capacidad": self.capacidad,
             "direccion": self.direccion,
             "telefono": self.telefono
