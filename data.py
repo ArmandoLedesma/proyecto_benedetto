@@ -43,37 +43,54 @@ items_categorias = [
         "title": "Pizzas",
         "image": "img/categorias_subcategorias/pizza.jpg",
         "description": "Pizzas irresistibles: masa artesanal, ingredientes frescos y el equilibrio perfecto de sabores. 🍕🔥 Un solo bocado y te conquista.",
-        "button_text": "Ver más"
+        "button_text": "Ver más",
+        "url":"/dashboard/carta_pizza"
+        
     },
+
     {
         "title": "Hamburguesas",
         "image": "img/categorias_subcategorias/hamburguesas.jpg",
         "description": "Hamburguesas irresistibles: carne jugosa, pan esponjoso y el equilibrio perfecto de ingredientes. 🍔🔥 Un solo bocado y te enamoras.",
-        "button_text": "Ver más"
+        "button_text": "Ver más",
+        "url":"/dashboard/carta_hamburguesa"
+        
     },
+
     {
         "title": "Lazañas",
         "image": "img/categorias_subcategorias/lazana.jpg",
         "description": "Lasañas irresistibles: pasta suave, salsa cremosa y el gratinado perfecto. 🍽️🔥 Un solo bocado y te atrapa.",
-        "button_text": "Ver más"
+        "button_text": "Ver más",
+        "url":""
+        
     },
+
     {
         "title": "Perro caliente",
         "image": "img/categorias_subcategorias/hotdog.jpeg",
         "description": "Pan suave, salchicha jugosa y los toppings perfectos. 🌭🔥 Un solo bocado y se vuelve tu favorito.",
-        "button_text": "Ver más"
+        "button_text": "Ver más",
+        "url":""
+        
     },
+
     {
         "image": "img/categorias_subcategorias/desgranado.jpeg",
         "title": "Desgranado",
         "description": "Carne jugosa, maíz tierno y el mix perfecto de salsas y queso. 🌽🔥 Un solo bocado y no querrás soltarlo.",
-        "button_text": "Ver más"
+        "button_text": "Ver más",
+        "url":""
+        
     },
+
     {
         "title": "Bebidas",
         "image": "img/categorias_subcategorias/bebidas.avif",
         "description": "Bebidas irresistibles: refrescantes, intensas y el complemento perfecto para cada antojo. 🥤🔥 Un solo sorbo y lo disfrutas.",
-        "button_text": "Ver más"
+        "button_text": "Ver más",
+        "url":""
+        
     },
 ]
 
@@ -171,6 +188,129 @@ items_hamburguesa = [
     },
 ]
 
+
+items_lazana = [
+
+    {
+        "image": "img/categorias_productos/lazanas/lazana_carne.jpg",
+        "nombre": "Carne",
+        "descripcion": "Salsa de tomate, queso mozzarella, pollo en salsa BBQ, piña y jamón.",
+        "precio": 14500
+    },
+    {
+        "image": "img/categorias_productos/lazanas/lazana_espinaca_queso.jpg",
+        "nombre": "Espinaca con queso",
+        "descripcion": "Salsa de tomate, queso mozzarella, pollo en salsa BBQ, piña y jamón.",
+        "precio": 14500
+    },
+    {
+        "image": "img/categorias_productos/lazanas/lazana_mixta.jpg",
+        "nombre": "Mixta",
+        "descripcion": "Salsa de tomate, queso mozzarella, pollo en salsa BBQ, piña y jamón.",
+        "precio": 14500
+    },
+    {
+        "image": "img/categorias_productos/lazanas/lazana_pollo_champinon.jpeg",
+        "nombre": "Pollo champiñón",
+        "descripcion": "Salsa de tomate, queso mozzarella, pollo en salsa BBQ, piña y jamón.",
+        "precio": 14500
+    },
+    {
+        "image": "img/categorias_productos/lazanas/lazana_pollo.jpg",
+        "nombre": "Pollo",
+        "descripcion": "Salsa de tomate, queso mozzarella, pollo en salsa BBQ, piña y jamón.",
+        "precio": 14500
+    },
+    {
+        "image": "img/categorias_productos/lazanas/lazana_tres_queso.jpg",
+        "nombre": "Tres quesos",
+        "descripcion": "Salsa de tomate, queso mozzarella, pollo en salsa BBQ, piña y jamón.",
+        "precio": 14500
+    }
+
+]
+
+
+items_perro_caliente = [
+
+    {
+        "image": "img/categorias_productos/hotdog/americano.jpg",
+        "nombre": "Americano",
+        "descripcion": "Salsa de tomate, queso mozzarella, pollo en salsa BBQ, piña y jamón.",
+        "precio": 14500
+    },
+    {
+        "image": "img/categorias_productos/hotdog/callejero.jpg",
+        "nombre": "Callejero",
+        "descripcion": "Salsa de tomate, queso mozzarella, pollo en salsa BBQ, piña y jamón.",
+        "precio": 14500
+    },
+    {
+        "image": "img/categorias_productos/hotdog/choripan_argentino.jpg",
+        "nombre": "Choripan argentino",
+        "descripcion": "Salsa de tomate, queso mozzarella, pollo en salsa BBQ, piña y jamón.",
+        "precio": 14500
+    },
+    {
+        "image": "img/categorias_productos/hotdog/costeno.jpeg",
+        "nombre": "Costeño",
+        "descripcion": "Salsa de tomate, queso mozzarella, pollo en salsa BBQ, piña y jamón.",
+        "precio": 14500
+    },
+    {
+        "image": "img/categorias_productos/hotdog/de_la_casa.jpg",
+        "nombre": "De la casa",
+        "descripcion": "Salsa de tomate, queso mozzarella, pollo en salsa BBQ, piña y jamón.",
+        "precio": 14500
+    },
+    {
+        "image": "img/categorias_productos/hotdog/escoces.jpeg",
+        "nombre": "Escoces",
+        "descripcion": "Salsa de tomate, queso mozzarella, pollo en salsa BBQ, piña y jamón.",
+        "precio": 14500
+    },
+]
+
+
+items_bebidas = [
+
+    {
+        "image": "img/categorias_productos/bebidas/agua.jpg",
+        "nombre": "Agua",
+        "descripcion": "Salsa de tomate, queso mozzarella, pollo en salsa BBQ, piña y jamón.",
+        "precio": 14500
+    },
+    {
+        "image": "img/categorias_productos/bebidas/gaseosa_15_ml.webp",
+        "nombre": "Gaseosa 1.5ml",
+        "descripcion": "Salsa de tomate, queso mozzarella, pollo en salsa BBQ, piña y jamón.",
+        "precio": 14500
+    },
+    {
+        "image": "img/categorias_productos/bebidas/gaseosa_400_ml.jpg",
+        "nombre": "Gaseosa 400ml",
+        "descripcion": "Salsa de tomate, queso mozzarella, pollo en salsa BBQ, piña y jamón.",
+        "precio": 14500
+    },
+    {
+        "image": "img/categorias_productos/bebidas/pony_15l.jpg",
+        "nombre": "Pony malta 11.5L",
+        "descripcion": "Salsa de tomate, queso mozzarella, pollo en salsa BBQ, piña y jamón.",
+        "precio": 14500
+    },
+    {
+        "image": "img/categorias_productos/bebidas/postobon_manzana_400ml.webp",
+        "nombre": "Postobon manzana 400ml",
+        "descripcion": "Salsa de tomate, queso mozzarella, pollo en salsa BBQ, piña y jamón.",
+        "precio": 14500
+    },
+    {
+        "image": "img/categorias_productos/bebidas/postobon_manzana_25ml.webp",
+        "nombre": "Postobon manzana 400ml",
+        "descripcion": "Salsa de tomate, queso mozzarella, pollo en salsa BBQ, piña y jamón.",
+        "precio": 14500
+    },
+]
 
 
 items_empleados = [

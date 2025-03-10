@@ -1,7 +1,7 @@
 from flask import Blueprint,render_template 
 from flask_login import login_required
 
-from data import items, items_categorias, items_clientes, items_empleados, items_sucursales, items_tradicionales, items_hamburguesa
+from data import items, items_categorias, items_clientes, items_empleados, items_sucursales, items_tradicionales, items_hamburguesa, items_lazana, items_perro_caliente, items_bebidas
 from modules.employees.services import EmpleadoService
 from modules.categories.services import CategoriaService
 
@@ -64,3 +64,14 @@ def show_carta_pizza():
 def show_carta_hamburguesa():
     return render_template("dashboard/carta_hamburguesa.html", items= items_hamburguesa)
 
+@dashboard_bp.route("/carta_lazana")
+def show_carta_lazana():
+    return render_template("dashboard/carta_lazana.html", items= items_lazana)
+
+@dashboard_bp.route("/carta_perro_caliente")
+def show_carta_perro_caliente():
+    return render_template("dashboard/carta_perro_caliente.html", items= items_perro_caliente)
+
+@dashboard_bp.route("/carta_bebidas")
+def show_carta_bebidas():
+    return render_template("dashboard/carta_bebidas.html", items= items_bebidas)
