@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% include 'headerd.html' %}
+
+<!-- Contenido -->
+<main class="relative px-3 sm:px-4 md:px-6 lg:px-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-6 sm:mt-8 font-roboto card-hover-effect">
+        {% for item in items %}
+        <div class="card w-full rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col h-[380px]">
+            <div class="relative w-full h-44">
+                <img class="w-full h-full object-cover" src="{{ url_for('static', filename=item.image) }}" alt="{{ item.nombre }}">
+            </div>
+            <div class="p-4 flex-1 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-800">{{ item.nombre }}</h3>
+                    <p class="text-gray-600 text-sm line-clamp-3 mt-1">{{ item.descripcion }}</p>
+                </div>
+                <div class="flex items-center justify-between mt-3">
+                    <span class="text-lg font-bold text-red-600">${{ item.precio }}</span>
+                    <button class="button py-2 px-4">Comprar ahora</button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>    
+</main>
+
+{% include 'footer.html' %}
+{% endblock %}
+
