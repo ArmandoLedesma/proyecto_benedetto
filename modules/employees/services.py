@@ -60,12 +60,12 @@ class EmpleadoService:
         return self.repository.update(empleado)
     
 
-def delete_empleado(self, empleado_id):
-    empleado = self.repository.get_by_id(empleado_id)
-    if not empleado:
-        return None
-    self.repository.delete(empleado)
-    return empleado
+    def delete_empleado(self, empleado_id):
+        empleado = self.repository.get_by_id(empleado_id)
+        if not empleado:
+            return None
+        self.repository.delete(empleado)
+        return empleado
     
 
     """// Logica espeficia no funciona para ser generio
@@ -92,5 +92,4 @@ def delete_empleado(self, empleado_id):
     
     """
     
-   
         
