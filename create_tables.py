@@ -93,42 +93,52 @@ def db_create(app):
 
         # Insertar empleados (datos de prueba)
         empleados_data = [
-            {"id": 132354, "nombre": "Daniel 3", "cargo": "mesero", "salario": Decimal("2000000.00"), "telefono": "5613513613", "email": "micorreo@gmail.com"},
-            {"id": 132355, "nombre": "Juan Perez", "cargo": "cocinero", "salario": Decimal("3000000.00"), "telefono": "3123456789", "email": "juan.perez@gmail.com"},
-            {"id": 32356,  "nombre": "Maria Lopez", "cargo": "cajera", "salario": Decimal("2500000.00"), "telefono": "9876543210", "email": "maria.lopez@gmail.com"},
-            {"id": 1323535, "nombre": "Juan Perez", "cargo": "cocinero", "salario": Decimal("3000000.00"), "telefono": "3123456789", "email": "juan.perez@gmail.com"},
-            {"id": 132356, "nombre": "Maria Lopez", "cargo": "cajera", "salario": Decimal("2500000.00"), "telefono": "9876543210", "email": "maria.lopez@gmail.com"},
-            {"id": 32355,  "nombre": "Juan Perez", "cargo": "cocinero", "salario": Decimal("3000000.00"), "telefono": "3123456789", "email": "juan.perez@gmail.com"},
-            {"id": 12356,  "nombre": "Maria Lopez", "cargo": "cajera", "salario": Decimal("2500000.00"), "telefono": "9876543210", "email": "maria.lopez@gmail.com"},
-            {"id": 821323855, "nombre": "Juan Perez", "cargo": "cocinero", "salario": Decimal("3000000.00"), "telefono": "3123456789", "email": "juan.perez@gmail.com"},
-            {"id": 721323855, "nombre": "Juan Perez", "cargo": "cocinero", "salario": Decimal("3000000.00"), "telefono": "3123456789", "email": "juan.perez@gmail.com"},
-            {"id": 621323855, "nombre": "Juan Perez", "cargo": "cocinero", "salario": Decimal("3000000.00"), "telefono": "3123456789", "email": "juan.perez@gmail.com"},
-            {"id": 521323855, "nombre": "Juan Perez", "cargo": "cocinero", "salario": Decimal("3000000.00"), "telefono": "3123456789", "email": "juan.perez@gmail.com"},
-            {"id": 4323855, "nombre": "Juan Perez", "cargo": "cocinero", "salario": Decimal("3000000.00"), "telefono": "3123456789", "email": "juan.perez@gmail.com"},
+            {"id": 1001, "nombre": "Empleado Uno", "cargo": "cocinero", "salario": Decimal("2500000.00"), "telefono": "3001111111", "email": "empleado1@example.com"},
+            {"id": 1002, "nombre": "Empleado Dos", "cargo": "mesero", "salario": Decimal("2000000.00"), "telefono": "3002222222", "email": "empleado2@example.com"},
+            {"id": 1003, "nombre": "Empleado Tres", "cargo": "cajero", "salario": Decimal("2200000.00"), "telefono": "3003333333", "email": "empleado3@example.com"},
+            {"id": 1004, "nombre": "Empleado Cuatro", "cargo": "gerente", "salario": Decimal("3500000.00"), "telefono": "3004444444", "email": "empleado4@example.com"},
+            {"id": 1005, "nombre": "Empleado Cinco", "cargo": "cocinero", "salario": Decimal("2500000.00"), "telefono": "3005555555", "email": "empleado5@example.com"},
         ]
 
         for empleado_data in empleados_data:
-            from modules.employees.model import Empleado  # Importar el modelo
+            # Crear el empleado y agregarlo a la sesión
             empleado = Empleado(**empleado_data)
             db.session.add(empleado)
+            # Crear usuario asociado para el empleado
+            usuario = Usuario(
+                id=empleado_data["id"],
+                nombre=empleado_data["nombre"],
+                email=empleado_data["email"],
+                password=generate_password_hash(str(empleado_data["id"])),  # Se hashea el id como contraseña
+                rol="empleado",
+                estado="Activo"
+            )
+            db.session.add(usuario)
         db.session.commit()
-        print("✅ Empleados insertados correctamente en la base de datos.")
-        
-        
-        
-        
-        
 
-        # Insertar clientes (datos de prueba)
+        # Insertar clientes (datos de prueba) y crear usuario asociado para cada cliente
         clientes_data = [
             {"id": 11323, "nombre": "Cliente 1", "telefono": "3000000001", "email": "cliente1@example.com"},
             {"id": 21123, "nombre": "Cliente 2", "telefono": "3000000002", "email": "cliente2@example.com"},
             {"id": 31231, "nombre": "Cliente 3", "telefono": "3000000003", "email": "cliente3@example.com"},
         ]
+        
         for cliente_data in clientes_data:
-            from modules.clients.model import Cliente
+            # Crear el registro del cliente
             cliente = Cliente(**cliente_data)
             db.session.add(cliente)
+            
+            # Crear el usuario asociado para el cliente.
+            # Se utiliza el mismo id, nombre y email, y se genera la contraseña a partir del id (convertido a cadena)
+            usuario = Usuario(
+                id=cliente_data["id"],
+                nombre=cliente_data["nombre"],
+                email=cliente_data["email"],
+                password=generate_password_hash(str(cliente_data["id"])),
+                rol="cliente",
+                estado="Activo"
+            )
+            db.session.add(usuario)
         db.session.commit()
 
         # Insertar datos de prueba en Sucursales (sin 'numero_sucursal'; se usará el id autogenerado)

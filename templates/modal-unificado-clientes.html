@@ -1,0 +1,128 @@
+<!-- modal-unificado-clientes.html -->
+<!-- Botón para abrir el modal (opcional, puede ubicarse en clientes.html) -->
+<div class="container mx-auto mt-1">
+    <button onclick="openCrearModalCliente()" class="button">
+        Crear Cliente
+    </button>
+</div>
+
+<!-- Modal cerrado inicialmente -->
+<div id="clienteModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-gray-900/85">
+    <div class="bg-white rounded-lg shadow p-6 w-full max-w-md relative">
+
+        <!-- Botón de cierre -->
+        <button id="closeClienteModalBtn" class="absolute top-2 right-2 text-gray-500 text-2xl">&times;</button>
+
+        <!-- Título dinámico -->
+        <h3 id="clienteModalTitle" class="text-lg font-semibold mb-4">Crear Cliente</h3>
+        <hr class="mb-4 border-gray-500">
+
+        <!-- Formulario -->
+        <form id="clienteForm" class="grid gap-4">
+            <!-- Campo ID -->
+            <div>
+                <label for="id" class="block text-sm font-medium text-gray-900">ID</label>
+                <input type="text" id="id" name="id" required placeholder="Escribe el número de identificación"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+            </div>
+            <!-- Campo Nombre -->
+            <div>
+                <label for="nombre" class="block text-sm font-medium text-gray-900">Nombre</label>
+                <input type="text" id="nombre" name="nombre" required placeholder="Escribe el nombre"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+            </div>
+            <!-- Campo Teléfono -->
+            <div>
+                <label for="telefono" class="block text-sm font-medium text-gray-900">Teléfono</label>
+                <input type="text" id="telefono" name="telefono" required placeholder="Ej. 3001234567"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+            </div>
+            <!-- Campo Email -->
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-900">Email</label>
+                <input type="email" id="email" name="email" required placeholder="Ej. cliente@example.com"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+            </div>
+            <!-- Campo oculto para Estado -->
+            <input type="hidden" id="estado" name="estado" value="Activo">
+            <!-- Botón para guardar (crear/actualizar) -->
+            <button type="submit" id="submitClienteBtn" class="button">
+                Guardar Cliente
+            </button>
+        </form>
+    </div>
+</div>
+
+<script>
+    const clienteModal = document.getElementById('clienteModal');
+    const closeClienteModalBtn = document.getElementById('closeClienteModalBtn');
+    const clienteForm = document.getElementById('clienteForm');
+    const clienteModalTitle = document.getElementById('clienteModalTitle');
+    const submitClienteBtn = document.getElementById('submitClienteBtn');
+    const idInput = document.getElementById('id');
+
+    // Función para abrir el modal en modo CREAR
+    function openCrearModalCliente() {
+        clienteModalTitle.textContent = 'Crear Cliente';
+        submitClienteBtn.textContent = 'Guardar Cliente';
+        clienteForm.reset();
+        idInput.readOnly = false;
+        clienteModal.classList.remove('hidden');
+    }
+
+    // Función para abrir el modal en modo EDITAR
+    function openEditarModalCliente(button) {
+        const clienteData = JSON.parse(button.getAttribute('data-cliente'));
+        clienteModalTitle.textContent = 'Editar Cliente';
+        submitClienteBtn.textContent = 'Actualizar Cliente';
+        idInput.value = clienteData.id;
+        idInput.readOnly = true;
+        document.getElementById('nombre').value = clienteData.nombre;
+        document.getElementById('telefono').value = clienteData.telefono;
+        document.getElementById('email').value = clienteData.email;
+        clienteModal.classList.remove('hidden');
+    }
+
+    // Cerrar el modal al hacer clic en la X
+    closeClienteModalBtn.addEventListener('click', () => {
+        clienteModal.classList.add('hidden');
+        clienteForm.reset();
+    });
+
+    // Cerrar el modal al hacer clic fuera del contenido
+    window.addEventListener('click', (e) => {
+        if (e.target === clienteModal) {
+            clienteModal.classList.add('hidden');
+            clienteForm.reset();
+        }
+    });
+
+    // Manejo del submit del formulario unificado
+    clienteForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const formData = new FormData(clienteForm);
+        const isEditing = idInput.readOnly;
+        const url = isEditing ? `/api/v1/clientes/${idInput.value}` : '/api/v1/clientes';
+        const method = isEditing ? 'PUT' : 'POST';
+        const mode = isEditing ? 'update' : 'create';
+
+        fetch(url, {
+            method: method,
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Error en el envío");
+                }
+                return response.json();
+            })
+            .then(data => {
+                document.dispatchEvent(new CustomEvent('clienteGuardado', { detail: { cliente: data, mode: mode } }));
+                clienteModal.classList.add('hidden');
+                clienteForm.reset();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
+</script>
