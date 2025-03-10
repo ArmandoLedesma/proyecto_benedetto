@@ -13,8 +13,6 @@ from modules.sucursales.model import Sucursal
 from modules.users.model import Usuario
 from modules.ventas.model import Venta
 
-
-
 from decimal import Decimal
 from werkzeug.security import generate_password_hash
 
@@ -23,11 +21,6 @@ def db_create(app):
     with app.app_context():
         db.drop_all()
         db.create_all()
-
-
-
-
-
 
         # Crear usuario administrador
         admin = Usuario(
@@ -39,7 +32,6 @@ def db_create(app):
         )
         db.session.add(admin)
         db.session.commit()
-
 
         # Insertar datos de prueba en Categorías
         categorias_data = [
@@ -99,56 +91,55 @@ def db_create(app):
             db.session.commit()
         print("✅ Categorías insertadas correctamente en la base de datos.")
 
-
-
-
-        # Insertar empleados vinculados a usuarios
+        # Insertar empleados (datos de prueba)
         empleados_data = [
-            {"id":132354,"nombre": "Daniel 3", "cargo": "mesero", "salario": Decimal("2000000.00"), "telefono": "5613513613", "email": "micorreo@gmail.com"},
-            {"id":132355,"nombre": "Juan Perez", "cargo": "cocinero", "salario": Decimal("3000000.00"), "telefono": "3123456789", "email": "juan.perez@gmail.com"},
-            {"id":32356,"nombre": "Maria Lopez", "cargo": "cajera", "salario": Decimal("2500000.00"), "telefono": "9876543210", "email": "maria.lopez@gmail.com"},
-            {"id":1323535,"nombre": "Juan Perez", "cargo": "cocinero", "salario": Decimal("3000000.00"), "telefono": "3123456789", "email": "juan.perez@gmail.com"},
-            {"id":132356,"nombre": "Maria Lopez", "cargo": "cajera", "salario": Decimal("2500000.00"), "telefono": "9876543210", "email": "maria.lopez@gmail.com"},
-            {"id":32355,"nombre": "Juan Perez", "cargo": "cocinero", "salario": Decimal("3000000.00"), "telefono": "3123456789", "email": "juan.perez@gmail.com"},
-            {"id":12356,"nombre": "Maria Lopez", "cargo": "cajera", "salario": Decimal("2500000.00"), "telefono": "9876543210", "email": "maria.lopez@gmail.com"},
-            {"id":821323855,"nombre": "Juan Perez", "cargo": "cocinero", "salario": Decimal("3000000.00"), "telefono": "3123456789", "email": "juan.perez@gmail.com"},
-            {"id":721323855,"nombre": "Juan Perez", "cargo": "cocinero", "salario": Decimal("3000000.00"), "telefono": "3123456789", "email": "juan.perez@gmail.com"},
-            {"id":621323855,"nombre": "Juan Perez", "cargo": "cocinero", "salario": Decimal("3000000.00"), "telefono": "3123456789", "email": "juan.perez@gmail.com"},
-            {"id":521323855,"nombre": "Juan Perez", "cargo": "cocinero", "salario": Decimal("3000000.00"), "telefono": "3123456789", "email": "juan.perez@gmail.com"},
-            {"id":4323855,"nombre": "Juan Perez", "cargo": "cocinero", "salario": Decimal("3000000.00"), "telefono": "3123456789", "email": "juan.perez@gmail.com"},
-            ]
+            {"id": 132354, "nombre": "Daniel 3", "cargo": "mesero", "salario": Decimal("2000000.00"), "telefono": "5613513613", "email": "micorreo@gmail.com"},
+            {"id": 132355, "nombre": "Juan Perez", "cargo": "cocinero", "salario": Decimal("3000000.00"), "telefono": "3123456789", "email": "juan.perez@gmail.com"},
+            {"id": 32356,  "nombre": "Maria Lopez", "cargo": "cajera", "salario": Decimal("2500000.00"), "telefono": "9876543210", "email": "maria.lopez@gmail.com"},
+            {"id": 1323535, "nombre": "Juan Perez", "cargo": "cocinero", "salario": Decimal("3000000.00"), "telefono": "3123456789", "email": "juan.perez@gmail.com"},
+            {"id": 132356, "nombre": "Maria Lopez", "cargo": "cajera", "salario": Decimal("2500000.00"), "telefono": "9876543210", "email": "maria.lopez@gmail.com"},
+            {"id": 32355,  "nombre": "Juan Perez", "cargo": "cocinero", "salario": Decimal("3000000.00"), "telefono": "3123456789", "email": "juan.perez@gmail.com"},
+            {"id": 12356,  "nombre": "Maria Lopez", "cargo": "cajera", "salario": Decimal("2500000.00"), "telefono": "9876543210", "email": "maria.lopez@gmail.com"},
+            {"id": 821323855, "nombre": "Juan Perez", "cargo": "cocinero", "salario": Decimal("3000000.00"), "telefono": "3123456789", "email": "juan.perez@gmail.com"},
+            {"id": 721323855, "nombre": "Juan Perez", "cargo": "cocinero", "salario": Decimal("3000000.00"), "telefono": "3123456789", "email": "juan.perez@gmail.com"},
+            {"id": 621323855, "nombre": "Juan Perez", "cargo": "cocinero", "salario": Decimal("3000000.00"), "telefono": "3123456789", "email": "juan.perez@gmail.com"},
+            {"id": 521323855, "nombre": "Juan Perez", "cargo": "cocinero", "salario": Decimal("3000000.00"), "telefono": "3123456789", "email": "juan.perez@gmail.com"},
+            {"id": 4323855, "nombre": "Juan Perez", "cargo": "cocinero", "salario": Decimal("3000000.00"), "telefono": "3123456789", "email": "juan.perez@gmail.com"},
+        ]
 
         for empleado_data in empleados_data:
+            from modules.employees.model import Empleado  # Importar el modelo
             empleado = Empleado(**empleado_data)
             db.session.add(empleado)
-
         db.session.commit()
+        print("✅ Empleados insertados correctamente en la base de datos.")
+        
+        
+        
+        
+        
 
-        # Insertar clientes con ID
+        # Insertar clientes (datos de prueba)
         clientes_data = [
             {"id": 11323, "nombre": "Cliente 1", "telefono": "3000000001", "email": "cliente1@example.com"},
             {"id": 21123, "nombre": "Cliente 2", "telefono": "3000000002", "email": "cliente2@example.com"},
             {"id": 31231, "nombre": "Cliente 3", "telefono": "3000000003", "email": "cliente3@example.com"},
         ]
-
         for cliente_data in clientes_data:
+            from modules.clients.model import Cliente
             cliente = Cliente(**cliente_data)
             db.session.add(cliente)
-
         db.session.commit()
 
-        # Insertar datos de prueba en Sucursales
+        # Insertar datos de prueba en Sucursales (sin 'numero_sucursal'; se usará el id autogenerado)
         sucursales_data = [
-            {"nombre_sucursal": "Sucursal Centro", "numero_sucursal": "SC-001", "capacidad": 100, "direccion": "Calle 1 #10-20", "telefono": "3001112233"},
-            {"nombre_sucursal": "Sucursal Norte", "numero_sucursal": "SC-002", "capacidad": 80, "direccion": "Carrera 7 #45-67", "telefono": "3102233445"},
-            {"nombre_sucursal": "Sucursal Sur", "numero_sucursal": "SC-003", "capacidad": 120, "direccion": "Avenida 68 #12-34", "telefono": "3203344556"},
+            {"nombre_sucursal": "Sucursal Centro", "capacidad": 100, "direccion": "Calle 1 #10-20", "telefono": "3001112233"},
+            {"nombre_sucursal": "Sucursal Norte",  "capacidad": 80,  "direccion": "Carrera 7 #45-67",  "telefono": "3102233445"},
+            {"nombre_sucursal": "Sucursal Sur",    "capacidad": 120, "direccion": "Avenida 68 #12-34", "telefono": "3203344556"},
         ]
-
         for data in sucursales_data:
             sucursal = Sucursal(**data)
             db.session.add(sucursal)
-
         db.session.commit()
 
-        # Mensaje de confirmación
         print("✅ Tablas creadas y datos insertados correctamente.")

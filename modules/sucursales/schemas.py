@@ -1,9 +1,8 @@
-from pydantic import BaseModel, EmailStr, ConfigDict
+from pydantic import BaseModel, ConfigDict
 from typing import Optional
 
 class SucursalCreateSchema(BaseModel):
     nombre_sucursal: str
-    numero_sucursal: str
     capacidad: int
     direccion: str
     telefono: str
@@ -12,7 +11,6 @@ class SucursalCreateSchema(BaseModel):
 
 class SucursalUpdateSchema(BaseModel):
     nombre_sucursal: Optional[str] = None
-    numero_sucursal: Optional[str] = None
     capacidad: Optional[int] = None
     direccion: Optional[str] = None
     telefono: Optional[str] = None
