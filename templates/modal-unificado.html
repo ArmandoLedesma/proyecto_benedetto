@@ -1,11 +1,12 @@
-<!-- modal-empleados-unificado.html -->
-<!--! Boton para abri el modal -->
+<!-- modal-unificado.html -->
+<!-- Botón para abrir el modal en modo crear -->
 <div class="container mx-auto mt-1">
     <button onclick="openCrearModal()" class="button">
         Abrir Edit Modal
     </button>
 </div>
-<!--! Modal cerrado inicialmente -->
+
+<!-- Modal cerrado inicialmente -->
 <div id="empleadoModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-gray-900/85">
     <div class="bg-white rounded-lg shadow p-6 w-full max-w-md relative">
 
@@ -16,15 +17,12 @@
         <h3 id="empleadoModalTitle" class="text-lg font-semibold mb-4">Crear Empleado</h3>
         <hr class="mb-4 border-gray-500">
 
-        <!--! Formulario con campo oculto para el id -->
+        <!-- Formulario -->
         <form id="empleadoForm" class="grid gap-4">
-            <!-- Campo oculto para el id (para edición) -->
-            <input type="hidden" id="empleadoId" name="empleado_id">
-            <!--! Inputs del modal  -->
-
+            <!-- Campo ID visible para el usuario -->
             <div>
-                <label for="id" class="block text-sm font-medium text-gray-900">id</label>
-                <input type="text" id="id" name="id" required placeholder="Escribe su número de identificacion"
+                <label for="id" class="block text-sm font-medium text-gray-900">ID</label>
+                <input type="text" id="id" name="id" required placeholder="Escribe su número de identificación"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
             </div>
 
@@ -33,6 +31,7 @@
                 <input type="text" id="nombre" name="nombre" required placeholder="Escribe el nombre"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
             </div>
+
             <div>
                 <label for="cargo" class="block text-sm font-medium text-gray-900">Cargo</label>
                 <select id="cargo" name="cargo"
@@ -45,24 +44,26 @@
                     <option value="Repartidor">Repartidor</option>
                 </select>
             </div>
+
             <div>
                 <label for="salario" class="block text-sm font-medium text-gray-900">Salario</label>
                 <input type="number" id="salario" name="salario" required placeholder="Ej. 2000000"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
             </div>
+
             <div>
-                <label for="telefono" class="block text-sm font-medium text-gray-900">Telefono</label>
+                <label for="telefono" class="block text-sm font-medium text-gray-900">Teléfono</label>
                 <input type="text" id="telefono" name="telefono" required placeholder="Ej. 3001234567"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
             </div>
+
             <div>
                 <label for="email" class="block text-sm font-medium text-gray-900">Email</label>
                 <input type="email" id="email" name="email" required placeholder="Ej. daniel@gmail.com"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
             </div>
 
-            <!--! Campos para otro modal -->
-            <!-- ... otros campos ... -->
+            <!-- Botón para guardar (crear/actualizar) -->
             <button type="submit" id="submitEmpleadoBtn" class="button">
                 Guardar Empleado
             </button>
@@ -72,48 +73,52 @@
 
 <script>
     const empleadoModal = document.getElementById('empleadoModal');
-
     const closeEmpleadoModalBtn = document.getElementById('closeEmpleadoModalBtn');
     const empleadoForm = document.getElementById('empleadoForm');
 
     const empleadoModalTitle = document.getElementById('empleadoModalTitle');
     const submitEmpleadoBtn = document.getElementById('submitEmpleadoBtn');
-    const empleadoIdInput = document.getElementById('empleadoId');
+    const idInput = document.getElementById('id'); // Campo visible para el ID
 
-    // Función para abrir el modal en modo creación
+    // Función para abrir el modal en modo CREAR
     function openCrearModal() {
         empleadoModalTitle.textContent = 'Crear Empleado';
         submitEmpleadoBtn.textContent = 'Guardar Empleado';
-        empleadoIdInput.value = ''; // Asegurarse de que no hay id para creación
+
+        // Limpiar el formulario y asegurarse de que el campo 'id' sea editable
         empleadoForm.reset();
+        idInput.readOnly = false;
+
         empleadoModal.classList.remove('hidden');
     }
 
-    // Función para abrir el modal en modo edición
-    // Aquí se recibirían los datos del empleado y se precargarían los campos.
+    // Función para abrir el modal en modo EDITAR
     function openEditarModal(empleado) {
         console.log('Abriendo modal de edición para:', empleado);
-        // Cambiar el título y el texto del botón
+
         empleadoModalTitle.textContent = 'Editar Empleado';
         submitEmpleadoBtn.textContent = 'Actualizar Empleado';
-        // Rellenar los campos con la data del empleado
-        empleadoIdInput.value = empleado.id;
+
+        // Rellenar el campo 'id' con el valor de la BD y hacerlo de solo lectura
+        idInput.value = empleado.id;
+        idInput.readOnly = true;
+
+        // Rellenar el resto de los campos
         document.getElementById('nombre').value = empleado.nombre;
         document.getElementById('cargo').value = empleado.cargo;
-        // Suponiendo que tienes campos con id "salario", "telefono" y "email":
         document.getElementById('salario').value = empleado.salario;
         document.getElementById('telefono').value = empleado.telefono;
         document.getElementById('email').value = empleado.email;
 
-        // Mostrar el modal
         empleadoModal.classList.remove('hidden');
     }
 
-    // Cerrar el modal
+    // Cerrar el modal al hacer clic en la X
     closeEmpleadoModalBtn.addEventListener('click', () => {
         empleadoModal.classList.add('hidden');
         empleadoForm.reset();
     });
+
     // Cerrar el modal al hacer clic fuera del contenido
     window.addEventListener('click', (e) => {
         if (e.target === empleadoModal) {
@@ -128,10 +133,14 @@
 
         // Crear objeto FormData con los datos del formulario
         const formData = new FormData(empleadoForm);
-        // Determinar la URL y el método según si se está editando o creando
-        const isEditing = empleadoIdInput.value !== '';
-        const url = isEditing ? `/api/v1/empleados/${empleadoIdInput.value}` : '/api/v1/empleados';
+
+        // Determinar si es edición o creación basado en el readOnly del campo 'id'
+        const isEditing = idInput.readOnly;
+        const url = isEditing
+            ? `/api/v1/empleados/${idInput.value}`
+            : '/api/v1/empleados';
         const method = isEditing ? 'PUT' : 'POST';
+        const mode = isEditing ? 'update' : 'create';
 
         fetch(url, {
             method: method,
@@ -144,12 +153,12 @@
                 return response.json();
             })
             .then(data => {
-                // Despachar evento para actualizar la tabla y mostrar notificación
-                document.dispatchEvent(new CustomEvent('empleadoGuardado', { detail: data }));
+                // Despachar evento con el modo para diferenciar en el toast
+                document.dispatchEvent(new CustomEvent('empleadoGuardado', { detail: { empleado: data, mode: mode } }));
 
+                // Cerrar el modal y limpiar el formulario
                 empleadoModal.classList.add('hidden');
                 empleadoForm.reset();
-
             })
             .catch(error => {
                 console.error('Error:', error);

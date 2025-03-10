@@ -4,17 +4,16 @@
 
 {% include 'headerd.html' %}
 
-
 <!-- Contenido -->
 <main>
     <!-- Contenedor de empleados -->
     <div class="container font-roboto mt-8 mx-auto py-5">
-        <div class="flex flex-col justify-center items-center py-4 gap-1 ">
+        <div class="flex flex-col justify-center items-center py-4 gap-1">
             <h2 class="text-4xl font-medium text-zinc-800">Empleados</h2>
             <p class="font-light text-gray-800">¡Bienvenido al panel de control de Empleados!</p>
 
             <div>
-                <!--! Modal  -->
+                <!-- Incluir modal unificado -->
                 {% include 'modal-unificado.html' %}
             </div>
         </div>
@@ -37,7 +36,7 @@
                     </tr>
                 </thead>
                 <tbody id="usuariosTablebody" class="text-gray-700 text-sm font-medium">
-                    <!--! Aquí se renderizarán los datos de la tabla desde el fetch-->
+                    <!-- Aquí se renderizan las filas con JavaScript -->
                 </tbody>
             </table>
 
@@ -57,7 +56,7 @@
                         Anterior
                     </button>
                     <div id="pageNumbers" class="flex items-center space-x-1">
-                        <!-- Números de página serán generados aquí -->
+                        <!-- Números de página generados dinámicamente -->
                     </div>
                     <button id="nextPageBtn"
                         class="px-3 py-1 rounded border border-gray-300 bg-white text-gray-700 text-sm hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed">
@@ -65,7 +64,6 @@
                     </button>
                 </div>
             </div>
-            <!-- Fin de Paginación -->
         </div>
     </div>
 
@@ -73,8 +71,7 @@
     <script src="{{ url_for('static', filename='js/pagination.js') }}"></script>
 
     <script>
-        // Función para renderizar una fila de empleado
-
+        // Función para renderizar una fila de empleado en la tabla
         function renderEmployeeRow(empleado) {
             const row = document.createElement('tr');
             row.className = 'border-b border-gray-300 hover:bg-gray-300 transition duration-200 ease-in-out';
@@ -86,59 +83,51 @@
                 <td class="py-4 px-6 bg-white">${empleado.telefono}</td>
                 <td class="py-4 px-6 bg-white">${empleado.email}</td>
                 <td class="py-4 px-6 text-center bg-white">
-                <div class="flex items-center justify-center space-x-3">
-                    <!--!Boton de Editar registro  -->
+                    <div class="flex items-center justify-center space-x-3">
+                        <!-- Botón de editar -->
                         <button  
                             class="p-2 text-blue-500 hover:text-blue-700 transition transform hover:scale-110"
                             data-employee='${JSON.stringify(empleado)}'
                             onclick="handleEditBtn(this)">
-                            
-                            
-                            <!-- Icono editar -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" 
+                                viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                             </svg>
                         </button>
 
-                    <!--!Boton de eliminarRegistro  -->
-                    <button class="p-2 text-red-500 hover:text-red-700 transition transform hover:scale-110" onclick="deleteRegistro(${empleado.id})">
-                        <!-- Icono eliminar -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                        </svg>
-                    </button>
-
-                </div>
-            </td>
+                        <!-- Botón de eliminar -->
+                        <button class="p-2 text-red-500 hover:text-red-700 transition transform hover:scale-110"
+                            onclick="deleteRegistro(${empleado.id})">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" 
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                        </button>
+                    </div>
+                </td>
             `;
             return row;
         }
 
-
-
-        // Función para abrir el en modo edicion con los datos del registro
+        // Función para abrir el modal en modo edición
         function handleEditBtn(button) {
-            // Obtener la data del empleado del atributo data-employee y parsearla
             const empleadoData = JSON.parse(button.getAttribute('data-employee'));
             openEditarModal(empleadoData);
         }
 
-        // Función para mostrar un toast con la información del empleado creado
-        function showToast(empleado) {
+        // Función para mostrar un toast con la información del empleado creado o actualizado
+        function showToast(detail) {
             const toast = document.createElement('div');
-            // toast.className = 'fixed top-4 left-1/2 -translate-x-1/2 z-50 max-w-xs w-full bg-green-500 text-white shadow-lg rounded-lg p-4 flex items-center space-x-3 transition-transform transform hover:scale-105';
-
-            //! Estilos del toast
             toast.style.position = 'fixed';
-            toast.style.top = '7rem'; // equivale a top-4 (1rem)
+            toast.style.top = '7rem';
             toast.style.left = '50%';
             toast.style.transform = 'translateX(-50%)';
             toast.style.zIndex = '9999';
-            toast.style.maxWidth = '30rem'; // similar a max-w-xs
+            toast.style.maxWidth = '30rem';
             toast.style.width = 'auto';
-            toast.style.backgroundColor = '#48bb78'; // bg-green-500
+            toast.style.backgroundColor = '#48bb78';
             toast.style.color = '#fff';
             toast.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)';
             toast.style.borderRadius = '0.5rem';
@@ -147,46 +136,47 @@
             toast.style.alignItems = 'center';
             toast.style.gap = '0.75rem';
             toast.style.transition = 'transform 0.2s ease-in-out';
-            //! Estilos del toast
+
+            let mensaje;
+            if (detail.mode === 'update') {
+                mensaje = 'Actualizado Exitosamente';
+            } else {
+                mensaje = `Empleado Creado, Nombre: ${detail.empleado.nombre}`;
+            }
 
             toast.innerHTML = `
-            <div class="flex-1">
-                <p class="font-bold">Empleado Creado, Nombre: ${empleado.nombre}</p>
-            </div>
-            <button class="text-white hover:text-gray-300 focus:outline-none" id="closeToastBtn">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 011.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
-                </svg>
-            </button>
+                <div class="flex-1">
+                    <p class="font-bold">${mensaje}</p>
+                </div>
+                <button class="text-white hover:text-gray-300 focus:outline-none" id="closeToastBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" 
+                         viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" 
+                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 011.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" 
+                              clip-rule="evenodd" />
+                    </svg>
+                </button>
             `;
-            // Añadir el toast al body del documento HTML
             document.body.appendChild(toast);
 
-            // Eliminar el toast al hacer clic en el botón de cerrar
             toast.querySelector('#closeToastBtn').addEventListener('click', () => {
                 toast.remove();
             });
-            // O eliminar automáticamente después de 5 segundos
 
             setTimeout(() => {
                 toast.remove();
             }, 3000);
-
         }
 
-        function deleteRegistro(id) {
-            uri = '/api/v1/empleados/';
-            //Funcion que elimina cualquier entidad en la base de datos dado el id y el endpoint
-            deleteEntity(id, uri, () => {
-                // Refrescar la paginación después de eliminar
-                window.paginationController.refresh();
-            }, "Empleado");
-            console.log("Empleado eliminado desde funcion deleteRegistro generica");
-        }
+        // Escuchar el evento personalizado 'empleadoGuardado'
+        document.addEventListener('empleadoGuardado', function (e) {
+            console.log('Empleado guardado/actualizado, actualizando tabla...', e.detail);
+            window.paginationController.refresh();
+            showToast(e.detail);
+        });
 
-        // Inicializar la paginación cuando se carga la página
+        // Inicializar la paginación al cargar la página
         document.addEventListener('DOMContentLoaded', () => {
-            // Configurar e inicializar la paginación
             window.paginationController.init({
                 fetchUrl: '/api/v1/empleados',
                 renderCallback: renderEmployeeRow,
@@ -196,14 +186,14 @@
             });
         });
 
-        // Escuchar el evento personalizado que se despacha desde el modal
-        document.addEventListener('empleadoGuardado', function (e) {
-            console.log('Empleado guardado, actualizando tabla...', e.detail);
-            // Refrescar la paginación después de guardar un empleado
-            window.paginationController.refresh();
-            showToast(e.detail);
-        });
-
+        // Función para eliminar un empleado (se asume función genérica deleteEntity)
+        function deleteRegistro(id) {
+            const uri = '/api/v1/empleados/';
+            deleteEntity(id, uri, () => {
+                window.paginationController.refresh();
+            }, "Empleado");
+            console.log("Empleado eliminado desde funcion deleteRegistro genérica");
+        }
     </script>
 
 </main>
