@@ -1,12 +1,30 @@
 from database.db import db
-
+    
+    
 class Producto(db.Model):
     __tablename__ = 'productos'
-    
+    # Atributos
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(100), nullable=False)
-    precio = db.Column(db.Numeric(10,2), nullable=False)
-    stock = db.Column(db.Integer, nullable=False, default=0)
+    image = db.Column(db.String(255), nullable=False)  # Nuevo campo para la imagen
+    description = db.Column(db.String(255), nullable=False)
     
-    #categoria_id = db.Column(db.Integer, db.ForeignKey('categorias.id'), nullable=False)
-    #proveedor_id = db.Column(db.Integer, db.ForeignKey('proveedores.id'), nullable=False)  # 🔥 Agregamos la FK a Proveedor
+    precio = db.Column(db.Numeric(10,2), nullable=False)
+
+    # Clave foránea que relaciona Producto con Categoria
+    categoria_id = db.Column(db.Integer, db.ForeignKey('categorias.id'), nullable=False)
+    # Estados
+    is_active = db.Column(db.Boolean, nullable=False, default=True)
+    is_deleted = db.Column(db.Boolean, nullable=False, default=False)
+
+    def to_dict(self):  
+        return {
+            'id': self.id,
+            'nombre': self.nombre,
+            'image': self.image,
+            'description': self.description,
+            'precio': self.precio,
+            'categoria_id': self.categoria_id,
+            'is_active': self.is_active,
+            'is_deleted': self.is_deleted
+        }

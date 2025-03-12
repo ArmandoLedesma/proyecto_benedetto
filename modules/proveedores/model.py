@@ -9,5 +9,5 @@ class Proveedor(db.Model):
     telefono = db.Column(db.String(20), nullable=False)
     email = db.Column(db.String(100), nullable=False)
     
-    productos = db.relationship('Producto', backref='proveedor', lazy=True)
+    #productos = db.relationship('Producto', backref='proveedor', lazy=True)
 

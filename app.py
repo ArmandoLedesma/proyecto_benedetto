@@ -13,9 +13,11 @@ from create_tables import db_create
 # Importar blueprint de api
 from modules.employees.routes import empleados_bp
 from modules.clients.routes import clientes_bp
+
 # Importar blueprints con POO 
 from modules.sucursales.routes import sucursales_bp
 from modules.users.routes import usuarios_bp
+from modules.products.routes import productos_bp
 
 
 # Importar blueprint de vistas
@@ -50,6 +52,7 @@ def create_app():
     app.register_blueprint(clientes_bp, url_prefix="/api/v1")
     app.register_blueprint(sucursales_bp, url_prefix="/api/v1")
     app.register_blueprint(usuarios_bp, url_prefix="/api/v1")
+    app.register_blueprint(productos_bp, url_prefix="/api/v1")
 
 
 
