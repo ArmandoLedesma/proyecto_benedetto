@@ -62,7 +62,7 @@ items_categorias = [
         "image": "img/categorias_subcategorias/lazana.jpg",
         "description": "Lasañas irresistibles: pasta suave, salsa cremosa y el gratinado perfecto. 🍽️🔥 Un solo bocado y te atrapa.",
         "button_text": "Ver más",
-        "url":""
+        "url":"/dashboard/carta_lazañas"
         
     },
 
@@ -71,7 +71,7 @@ items_categorias = [
         "image": "img/categorias_subcategorias/hotdog.jpeg",
         "description": "Pan suave, salchicha jugosa y los toppings perfectos. 🌭🔥 Un solo bocado y se vuelve tu favorito.",
         "button_text": "Ver más",
-        "url":""
+        "url":"/dashboard/carta_perro_caliente"
         
     },
 
@@ -80,7 +80,7 @@ items_categorias = [
         "title": "Desgranado",
         "description": "Carne jugosa, maíz tierno y el mix perfecto de salsas y queso. 🌽🔥 Un solo bocado y no querrás soltarlo.",
         "button_text": "Ver más",
-        "url":""
+        "url":"/dashboard/carta_desgranado"
         
     },
 
@@ -89,7 +89,7 @@ items_categorias = [
         "image": "img/categorias_subcategorias/bebidas.avif",
         "description": "Bebidas irresistibles: refrescantes, intensas y el complemento perfecto para cada antojo. 🥤🔥 Un solo sorbo y lo disfrutas.",
         "button_text": "Ver más",
-        "url":""
+        "url":"/dashboard/carta_bebidas"
         
     },
 ]

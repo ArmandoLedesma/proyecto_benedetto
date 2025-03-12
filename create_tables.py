@@ -40,6 +40,7 @@ def db_create(app):
                 "image": "img/categorias_subcategorias/pizza.jpg",
                 "description": "Pizzas irresistibles: masa artesanal, ingredientes frescos y el equilibrio perfecto de sabores. 🍕🔥 Un solo bocado y te conquista.",
                 "button_text": "Ver más",
+                "url": "/dashboard/carta_pizza",
                 "is_active": True,
                 "is_deleted": False
             },
@@ -48,6 +49,7 @@ def db_create(app):
                 "image": "img/categorias_subcategorias/hamburguesas.jpg",
                 "description": "Hamburguesas irresistibles: carne jugosa, pan esponjoso y el equilibrio perfecto de ingredientes. 🍔🔥 Un solo bocado y te enamoras.",
                 "button_text": "Ver más",
+                "url": "/dashboard/carta_hamburguesa",
                 "is_active": True,
                 "is_deleted": False
             },
@@ -56,6 +58,7 @@ def db_create(app):
                 "image": "img/categorias_subcategorias/lazana.jpg",
                 "description": "Lasañas irresistibles: pasta suave, salsa cremosa y el gratinado perfecto. 🍽️🔥 Un solo bocado y te atrapa.",
                 "button_text": "Ver más",
+                "url": "/dashboard/carta_lazana",
                 "is_active": True,
                 "is_deleted": False
             },
@@ -64,6 +67,7 @@ def db_create(app):
                 "image": "img/categorias_subcategorias/hotdog.jpeg",
                 "description": "Pan suave, salchicha jugosa y los toppings perfectos. 🌭🔥 Un solo bocado y se vuelve tu favorito.",
                 "button_text": "Ver más",
+                "url": "/dashboard/carta_perro_caliente",
                 "is_active": True,
                 "is_deleted": False
             },
@@ -72,6 +76,7 @@ def db_create(app):
                 "image": "img/categorias_subcategorias/desgranado.jpeg",
                 "description": "Carne jugosa, maíz tierno y el mix perfecto de salsas y queso. 🌽🔥 Un solo bocado y no querrás soltarlo.",
                 "button_text": "Ver más",
+                "url": "/dashboard/carta_perro_caliente",
                 "is_active": True,
                 "is_deleted": False
             },
@@ -80,6 +85,7 @@ def db_create(app):
                 "image": "img/categorias_subcategorias/bebidas.avif",
                 "description": "Bebidas irresistibles: refrescantes, intensas y el complemento perfecto para cada antojo. 🥤🔥 Un solo sorbo y lo disfrutas.",
                 "button_text": "Ver más",
+                "url": "/dashboard/carta_bebidas",
                 "is_active": True,
                 "is_deleted": False
             }
