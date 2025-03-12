@@ -8,5 +8,5 @@ class Producto(db.Model):
     precio = db.Column(db.Numeric(10,2), nullable=False)
     stock = db.Column(db.Integer, nullable=False, default=0)
     
-    categoria_id = db.Column(db.Integer, db.ForeignKey('categorias.id'), nullable=False)
-    proveedor_id = db.Column(db.Integer, db.ForeignKey('proveedores.id'), nullable=False)  # 🔥 Agregamos la FK a Proveedor
+    #categoria_id = db.Column(db.Integer, db.ForeignKey('categorias.id'), nullable=False)
+    #proveedor_id = db.Column(db.Integer, db.ForeignKey('proveedores.id'), nullable=False)  # 🔥 Agregamos la FK a Proveedor

@@ -3,14 +3,17 @@
     <div class="relative flex items-center justify-between py-4 px-4 sm:px-6 bg-white">
 
         <!-- Logo con ajuste responsive -->
-        <div class="flex flex-row justify-center items-center font-roboto text-xl sm:text-2xl md:text-3xl font-semibold tracking-wide">
+        <div
+            class="flex flex-row justify-center items-center font-roboto text-xl sm:text-2xl md:text-3xl font-semibold tracking-wide">
             <img class="h-auto w-10 sm:w-12 md:w-16 object-contain"
                 src="{{ url_for('static', filename='img/pizzas/logo.png') }}" alt="Logo Benedetto Pizza">
             <span class="ml-2 text-zinc-700 truncate">Benedetto Pizza</span>
         </div>
 
         <!-- Menú hamburguesa (móvil) - reposicionado y mejorado -->
-        <button id="menu-toggle" class="md:hidden flex items-center justify-center w-10 h-10 text-2xl text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-200 rounded-md" aria-label="Abrir menú">
+        <button id="menu-toggle"
+            class="md:hidden flex items-center justify-center w-10 h-10 text-2xl text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-200 rounded-md"
+            aria-label="Abrir menú">
             &#9776;
         </button>
 
@@ -20,9 +23,7 @@
                 <li><a href="/dashboard/"
                         class="text-sm lg:text-base py-1 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Dashboard</a>
                 </li>
-                <li><a href="/dashboard/categorias"
-                        class="text-sm lg:text-base py-1 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Categorias</a>
-                </li>
+
                 <li><a href="/dashboard/empleados"
                         class="text-sm lg:text-base py-1 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Empleados</a>
                 </li>
@@ -32,29 +33,16 @@
                 <li><a href="/dashboard/sucursales"
                         class="text-sm lg:text-base py-1 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Sucursales</a>
                 </li>
-                <li><a href="/dashboard/carta_pizza"
-                        class="text-sm lg:text-base py-1 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Pizzas</a>
+                <li><a href="/dashboard/categorias"
+                        class="text-sm lg:text-base py-1 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Categorias</a>
                 </li>
-                <li><a href="/dashboard/carta_hamburguesa"
-                        class="text-sm lg:text-base py-1 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Hamburguesas</a>
-                </li>
-                <li><a href="/dashboard/carta_lazana"
-                    class="text-sm lg:text-base py-1 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Lazaña</a>
-                </li>
-                <li><a href="/dashboard/carta_perro_caliente"
-                    class="text-sm lg:text-base py-1 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Perro caliente</a>
-                </li>
-                <li><a href="/dashboard/carta_desgranado"
-                    class="text-sm lg:text-base py-1 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Desgranados</a>
-                </li>
-                <li><a href="/dashboard/carta_bebidas"
-                    class="text-sm lg:text-base py-1 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Bebidas</a>
-                </li>
+
 
                 <!-- Dropdown de Usuario (gestionado por dropdown.js) -->
                 <li class="relative popup">
                     <!-- Botón para abrir el dropdown -->
-                    <button id="user-menu-button" class="user-btn p-2 rounded-full hover:bg-gray-100" aria-label="Menú de usuario" aria-expanded="false" aria-haspopup="true">
+                    <button id="user-menu-button" class="user-btn p-2 rounded-full hover:bg-gray-100"
+                        aria-label="Menú de usuario" aria-expanded="false" aria-haspopup="true">
                         <i class="fa-regular fa-user"></i>
                     </button>
 
@@ -83,44 +71,57 @@
     </div>
 
     <!-- Navbar en móviles - mejorado -->
-    <nav id="menu" class="hidden md:hidden fixed top-0 left-0 w-full h-screen bg-white shadow-md z-50 transform transition-transform duration-300 ease-in-out overflow-y-auto">
+    <nav id="menu"
+        class="hidden md:hidden fixed top-0 left-0 w-full h-screen bg-white shadow-md z-50 transform transition-transform duration-300 ease-in-out overflow-y-auto">
         <div class="flex justify-between items-center p-4 border-b border-gray-200">
             <div class="flex items-center">
-                <img class="h-8 w-8 object-contain" src="{{ url_for('static', filename='img/pizzas/logo.png') }}" alt="Logo">
+                <img class="h-8 w-8 object-contain" src="{{ url_for('static', filename='img/pizzas/logo.png') }}"
+                    alt="Logo">
                 <span class="ml-2 font-roboto font-semibold">Benedetto Pizza</span>
             </div>
-            <button id="close-menu" class="text-2xl text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-200 rounded-md p-1" aria-label="Cerrar menú">
+            <button id="close-menu"
+                class="text-2xl text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-200 rounded-md p-1"
+                aria-label="Cerrar menú">
                 &times;
             </button>
         </div>
         <ul class="flex flex-col p-4 space-y-4">
             <li>
-                <a href="/dashboard/" class="block py-2 px-4 rounded-md hover:bg-red-50 hover:text-red-600 transition-colors">Dashboard</a>
+                <a href="/dashboard/"
+                    class="block py-2 px-4 rounded-md hover:bg-red-50 hover:text-red-600 transition-colors">Dashboard</a>
             </li>
             <li>
-                <a href="/dashboard/categorias" class="block py-2 px-4 rounded-md hover:bg-red-50 hover:text-red-600 transition-colors">Categorias</a>
+                <a href="/dashboard/categorias"
+                    class="block py-2 px-4 rounded-md hover:bg-red-50 hover:text-red-600 transition-colors">Categorias</a>
             </li>
             <li>
-                <a href="/dashboard/empleados" class="block py-2 px-4 rounded-md hover:bg-red-50 hover:text-red-600 transition-colors">Empleados</a>
+                <a href="/dashboard/empleados"
+                    class="block py-2 px-4 rounded-md hover:bg-red-50 hover:text-red-600 transition-colors">Empleados</a>
             </li>
             <li>
-                <a href="/dashboard/clientes" class="block py-2 px-4 rounded-md hover:bg-red-50 hover:text-red-600 transition-colors">Clientes</a>
+                <a href="/dashboard/clientes"
+                    class="block py-2 px-4 rounded-md hover:bg-red-50 hover:text-red-600 transition-colors">Clientes</a>
             </li>
             <li>
-                <a href="/dashboard/sucursales" class="block py-2 px-4 rounded-md hover:bg-red-50 hover:text-red-600 transition-colors">Sucursales</a>
+                <a href="/dashboard/sucursales"
+                    class="block py-2 px-4 rounded-md hover:bg-red-50 hover:text-red-600 transition-colors">Sucursales</a>
             </li>
             <li>
-                <a href="/dashboard/carta_pizza" class="block py-2 px-4 rounded-md hover:bg-red-50 hover:text-red-600 transition-colors">Pizzas</a>
+                <a href="/dashboard/carta_pizza"
+                    class="block py-2 px-4 rounded-md hover:bg-red-50 hover:text-red-600 transition-colors">Pizzas</a>
             </li>
             <li class="border-t border-gray-200 pt-4 mt-4">
-                <a href="/perfil" class="block py-2 px-4 rounded-md hover:bg-red-50 hover:text-red-600 transition-colors">Perfil</a>
+                <a href="/perfil"
+                    class="block py-2 px-4 rounded-md hover:bg-red-50 hover:text-red-600 transition-colors">Perfil</a>
             </li>
 
             <li>
-                <a href="/configuracion" class="block py-2 px-4 rounded-md hover:bg-red-50 hover:text-red-600 transition-colors">Configuración</a>
+                <a href="/configuracion"
+                    class="block py-2 px-4 rounded-md hover:bg-red-50 hover:text-red-600 transition-colors">Configuración</a>
             </li>
             <li>
-                <a href="{{ url_for('auth_bp.logout' ) }}" class="block py-2 px-4 rounded-md text-red-600 hover:bg-red-50 transition-colors">Cerrar sesión</a>
+                <a href="{{ url_for('auth_bp.logout' ) }}"
+                    class="block py-2 px-4 rounded-md text-red-600 hover:bg-red-50 transition-colors">Cerrar sesión</a>
             </li>
         </ul>
     </nav>
