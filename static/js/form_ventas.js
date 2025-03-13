@@ -1,7 +1,11 @@
 /**
  * Script para el formulario de ventas
+ * 
  * Maneja la interactividad y validación del formulario
  */
+
+
+
 document.addEventListener("DOMContentLoaded", () => {
   // Inicializar elementos del formulario
   initDatePicker();
