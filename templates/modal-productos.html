@@ -1,0 +1,145 @@
+<!-- Botón para abrir el modal -->
+
+<div class="fixed bottom-4 right-4 z-50">
+    <button onclick="openCrearModalProducto()" class="button w-12 h-12  transition-all duration-300">+</button>
+</div>
+
+<!-- Modal cerrado inicialmente -->
+<div id="productoModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-gray-900/85">
+    <div class="bg-white rounded-lg shadow p-6 w-full max-w-md relative">
+
+        <!-- Botón de cierre -->
+        <button id="closeProductoModalBtn" class="absolute top-2 right-2 text-gray-500 text-2xl">&times;</button>
+
+        <!-- Título dinámico -->
+        <h3 id="productoModalTitle" class="text-lg font-semibold mb-4">Crear Producto</h3>
+        <hr class="mb-4 border-gray-500">
+
+        <!-- Formulario -->
+        <form id="productoForm" class="grid gap-4" enctype="multipart/form-data">
+            <input type="hidden" id="productoId" name="id">
+
+            <div>
+                <label for="nombre" class="block text-sm font-medium text-gray-900">Nombre</label>
+                <input type="text" id="nombre" name="nombre" required placeholder="Ingrese nombre del producto"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+            </div>
+
+            <div>
+                <label for="image" class="block text-sm font-medium text-gray-900">Imagen</label>
+                <input type="file" id="image" name="image" required placeholder="URL de la imagen"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+            </div>
+
+            <div>
+                <label for="description" class="block text-sm font-medium text-gray-900">Descripción</label>
+                <textarea id="description" name="description" required placeholder="Ingrese una breve descripción"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"></textarea>
+            </div>
+
+            <div>
+                <label for="precio" class="block text-sm font-medium text-gray-900">Precio</label>
+                <input type="number" step="0.01" id="precio" name="precio" required placeholder="Ingrese precio"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+            </div>
+
+            <div>
+                <label for="categoria_id" class="block text-sm font-medium text-gray-900">Categoría</label>
+                <select id="categoria_id" name="categoria_id" required
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+                    <option value="">Seleccione una categoría</option>
+                </select>
+            </div>
+
+            <button type="submit" id="submitProductoBtn" class="button">
+                Guardar Producto
+            </button>
+        </form>
+    </div>
+</div>
+
+<script>
+    const productoModal = document.getElementById('productoModal');
+    const closeProductoModalBtn = document.getElementById('closeProductoModalBtn');
+    const productoForm = document.getElementById('productoForm');
+    const productoModalTitle = document.getElementById('productoModalTitle');
+    const submitProductoBtn = document.getElementById('submitProductoBtn');
+    const productoIdInput = document.getElementById('productoId');
+    const categoriaSelect = document.getElementById('categoria_id');
+
+    function fetchCategorias() {
+        fetch('/api/v1/categorias')
+            .then(response => response.json())
+            .then(data => {
+                categoriaSelect.innerHTML = '<option value="">Seleccione una categoría</option>';
+                data.categorias.forEach(categoria => {
+                    const option = document.createElement('option');
+                    option.value = categoria.id;
+                    option.textContent = categoria.title;
+                    categoriaSelect.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error al cargar categorías:', error));
+    }
+
+    function openCrearModalProducto() {
+        productoModalTitle.textContent = 'Crear Producto';
+        submitProductoBtn.textContent = 'Guardar Producto';
+        productoForm.reset();
+        productoIdInput.value = "";
+        fetchCategorias();
+        productoModal.classList.remove('hidden');
+    }
+
+    function openEditarModalProducto(producto) {
+        productoModalTitle.textContent = 'Editar Producto';
+        submitProductoBtn.textContent = 'Actualizar Producto';
+        productoIdInput.value = producto.id;
+        document.getElementById('nombre').value = producto.nombre;
+        document.getElementById('image').value = producto.image;
+        document.getElementById('description').value = producto.description;
+        document.getElementById('precio').value = producto.precio;
+        categoriaSelect.value = producto.categoria_id;
+        fetchCategorias();
+        productoModal.classList.remove('hidden');
+    }
+
+    closeProductoModalBtn.addEventListener('click', () => {
+        productoModal.classList.add('hidden');
+        productoForm.reset();
+    });
+
+    window.addEventListener('click', (e) => {
+        if (e.target === productoModal) {
+            productoModal.classList.add('hidden');
+            productoForm.reset();
+        }
+    });
+
+    productoForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const formData = new FormData(productoForm);
+        const isEditing = productoIdInput.value !== "";
+        const url = isEditing ? `/api/v1/productos/${productoIdInput.value}` : '/api/v1/productos';
+        const method = isEditing ? 'PUT' : 'POST';
+
+        fetch(url, {
+            method: method,
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Error en el envío");
+                }
+                return response.json();
+            })
+            .then(data => {
+                document.dispatchEvent(new CustomEvent('productoGuardado', { detail: { producto: data, mode: isEditing ? 'update' : 'create' } }));
+                productoModal.classList.add('hidden');
+                productoForm.reset();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
+</script>

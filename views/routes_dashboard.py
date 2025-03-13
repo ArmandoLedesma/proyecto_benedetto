@@ -123,3 +123,8 @@ def show_carta_bebidas():
     items_bebidas = [producto for producto in productos_list if producto['categoria_id'] == 6]
     # Renderizamos la vista pasando los productos obten
     return render_template("dashboard/carta_bebidas.html", items= items_bebidas)
+
+
+@dashboard_bp.route("/productos")
+def show_productos():
+    return render_template("dashboard/productos.html")

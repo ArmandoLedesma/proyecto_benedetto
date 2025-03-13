@@ -1,3 +1,4 @@
+import os
 # Importar modulos
 from flask import Flask
 from flask_login import LoginManager
@@ -18,6 +19,7 @@ from modules.clients.routes import clientes_bp
 from modules.sucursales.routes import sucursales_bp
 from modules.users.routes import usuarios_bp
 from modules.products.routes import productos_bp
+from modules.categories.routes import categorias_bp
 
 
 # Importar blueprint de vistas
@@ -35,6 +37,8 @@ def create_app():
 
     app = Flask(__name__)
     app.config.from_object(Config)
+    app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024
+    os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
     db.init_app(app)
 
@@ -53,6 +57,7 @@ def create_app():
     app.register_blueprint(sucursales_bp, url_prefix="/api/v1")
     app.register_blueprint(usuarios_bp, url_prefix="/api/v1")
     app.register_blueprint(productos_bp, url_prefix="/api/v1")
+    app.register_blueprint(categorias_bp, url_prefix="/api/v1")
 
 
 
