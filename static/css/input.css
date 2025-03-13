@@ -4,22 +4,22 @@
 /*npx @tailwindcss/cli -i static/css/input.css -o static/css/output.css --watch*/
 
 @theme {
-    --font-amatic: "Amatic SC", serif;
-    --font-roboto: "Roboto", serif;
+  --font-amatic: "Amatic SC", serif;
+  --font-roboto: "Roboto", serif;
 
-    /* Colores primarios */
-    --color-primary: #7CCF00;
-    --color-secundary: #E7000B;
-    --color-oscuro: #27272A;
+  /* Colores primarios */
+  --color-primary: #7CCF00;
+  --color-secundary: #E7000B;
+  --color-oscuro: #27272A;
 
-    /* Colores fondo */
-    --color-fondo-light: #FFFFFF;
-    --color-fondo-gray: #F9FAFB;
+  /* Colores fondo */
+  --color-fondo-light: #FFFFFF;
+  --color-fondo-gray: #F9FAFB;
 
-    /* Colores bordes */
-    --color-borde-gris: #ffffff4d;
-    /* Colores texto */
-    /* Colores texto */
+  /* Colores bordes */
+  --color-borde-gris: #ffffff4d;
+  /* Colores texto */
+  /* Colores texto */
 
 
 
@@ -28,204 +28,213 @@
 
 
 .levitate {
-    animation: levitate 2s infinite;
+  animation: levitate 2s infinite;
 }
 
 .shadow-3d {
-    filter: drop-shadow(10px 10px 20px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(10px 10px 20px rgba(0, 0, 0, 0.3));
 }
 
 @keyframes levitate {
 
-    0%,
-    100% {
-        transform: translateY(0);
-    }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
 
-    50% {
-        transform: translateY(-10px);
-    }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 /*Nuevos estilos para los botones*/
 .button {
-    position: relative;
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
-    padding-block: 0.5rem;
-    padding-inline: 1.25rem;
-    background-color: var(--color-primary);
-    border-radius: 9999px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #ffff;
-    gap: 10px;
-    font-weight: bold;
-    border: 3px solid var(--color-borde-gris);
-    outline: none;
-    overflow: hidden;
-    font-size: 15px;
-    cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
+  padding-block: 0.5rem;
+  padding-inline: 1.25rem;
+  background-color: var(--color-primary);
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffff;
+  gap: 10px;
+  font-weight: bold;
+  border: 3px solid var(--color-borde-gris);
+  outline: none;
+  overflow: hidden;
+  font-size: 15px;
+  cursor: pointer;
 }
 
+
+
 .icon {
-    width: 24px;
-    height: 24px;
-    transition: all 0.3s ease-in-out;
+  width: 24px;
+  height: 24px;
+  transition: all 0.3s ease-in-out;
 }
 
 /* Eliminamos el hover para el brillo */
 .button::before {
-    content: "";
-    position: absolute;
-    width: 100px;
-    height: 100%;
-    background-image: linear-gradient(120deg,
-            rgba(255, 255, 255, 0) 30%,
-            rgba(255, 255, 255, 0.99),
-            rgba(255, 255, 255, 0) 70%);
-    top: 0;
-    left: -100px;
-    opacity: 0.6;
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 100%;
+  background-image: linear-gradient(120deg,
+      rgba(255, 255, 255, 0) 30%,
+      rgba(255, 255, 255, 0.99),
+      rgba(255, 255, 255, 0) 70%);
+  top: 0;
+  left: -100px;
+  opacity: 0.6;
 
-    /* La animación ahora dura 15s, pero el brillo solo ocurre en los primeros 1.5s */
-    animation: shine 1.5s ease-out infinite;
-    animation-delay: 0s;
-    animation-duration: 15s;
-    /* Hace que el brillo solo pase cada 20 segundos */
+  /* La animación ahora dura 15s, pero el brillo solo ocurre en los primeros 1.5s */
+  animation: shine 1.5s ease-out infinite;
+  animation-delay: 0s;
+  animation-duration: 15s;
+  /* Hace que el brillo solo pase cada 20 segundos */
 }
 
 /* Definimos la animación */
 @keyframes shine {
-    0% {
-        left: -100px;
-    }
+  0% {
+    left: -100px;
+  }
 
-    5% {
-        left: 100%;
-    }
+  5% {
+    left: 100%;
+  }
 
-    /* Brillo pasa sobre el botón en los primeros 5% del tiempo */
-    6% {
-        left: 100%;
-        opacity: 0;
-    }
+  /* Brillo pasa sobre el botón en los primeros 5% del tiempo */
+  6% {
+    left: 100%;
+    opacity: 0;
+  }
 
-    /* Se oculta */
-    100% {
-        left: -100px;
-        opacity: 0;
-    }
+  /* Se oculta */
+  100% {
+    left: -100px;
+    opacity: 0;
+  }
 
-    /* Espera sin hacer nada el resto del tiempo */
+  /* Espera sin hacer nada el resto del tiempo */
 }
 
 /*Fin de los nuevos estilos para los botones*/
 
 #crud-modal {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100vw !important;
-    height: 100vh !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
 }
 
 
 .user-btn {
-    width: 38px; 
-    height:38px; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    border: 2px solid transparent; /* Borde invisible por defecto */
-    position: relative;
-    overflow: hidden;
-    transition: border 0.5s ease-in-out;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  /* Borde invisible por defecto */
+  position: relative;
+  overflow: hidden;
+  transition: border 0.5s ease-in-out;
 }
 
 .user-btn::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-color: var(--color-secundary); /* Color verde */
-    transform: scaleY(0);
-    transform-origin: bottom;
-    transition: transform 0.5s ease-in-out;
-    z-index: 0;
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-secundary);
+  /* Color verde */
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.5s ease-in-out;
+  z-index: 0;
 }
 
 .user-btn:hover {
-    border-color: var(--color-secundary); /* Aparece el borde */
+  border-color: var(--color-secundary);
+  /* Aparece el borde */
 }
 
 .user-btn:hover::before {
-    transform: scaleY(1); /* Efecto de llenado de abajo hacia arriba */
-    
+  transform: scaleY(1);
+  /* Efecto de llenado de abajo hacia arriba */
+
 }
 
 .user-btn i {
-    position: relative;
-    z-index: 1;
-    font-size: 22px;
-    color: #616161; /* Color del icono */
+  position: relative;
+  z-index: 1;
+  font-size: 22px;
+  color: #616161;
+  /* Color del icono */
 }
 
 .user-btn:hover i {
-    color: white;
+  color: white;
 }
+
 /* Fin */
 
 
 /* Modal de confirmación */
 .card {
-    max-width: 320px;
-    background-color: white;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  max-width: 320px;
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 .image {
-    display: flex;
-    margin: 0 auto;
-    justify-content: center;
-    align-items: center;
-    width: 48px;
-    height: 48px;
-    background-color: #fee2e2;
-    border-radius: 50%;
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  background-color: #fee2e2;
+  border-radius: 50%;
 }
 
 .image svg {
-    width: 24px;
-    height: 24px;
-    color: #dc2626;
+  width: 24px;
+  height: 24px;
+  color: #dc2626;
 }
 
 .desactivate {
-    background-color: #dc2626;
-    color: white;
-    border-radius: 4px;
-    text-align: center;
-    padding: 10px;
-    cursor: pointer;
+  background-color: #dc2626;
+  color: white;
+  border-radius: 4px;
+  text-align: center;
+  padding: 10px;
+  cursor: pointer;
 }
 
 .cancel {
-    background-color: #ffffff;
-    border: 1px solid #d1d5db;
-    color: #374151;
-    border-radius: 4px;
-    text-align: center;
-    padding: 10px;
-    cursor: pointer;
+  background-color: #ffffff;
+  border: 1px solid #d1d5db;
+  color: #374151;
+  border-radius: 4px;
+  text-align: center;
+  padding: 10px;
+  cursor: pointer;
 }
 
 button:hover {
-    opacity: 0.8;
+  opacity: 0.8;
 }
+
 /* Fin del modal de confirmación */
 
 
@@ -233,94 +242,119 @@ button:hover {
 
 /* Configuración base para la animación de entrada */
 @keyframes card-reveal {
-    0% {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  /* Configuración para el efecto flotante en hover */
-  @keyframes subtle-float {
-    0% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-5px);
-    }
-    100% {
-      transform: translateY(0);
-    }
-  }
-  
-  /* Clase principal para las cards animadas */
-  .card-animated {
+  0% {
     opacity: 0;
-    animation: card-reveal 0.5s ease-out forwards;
-    transition: all 0.3s ease;
-    will-change: transform, box-shadow;
-  }
-  
-  /* Aplicar retraso escalonado basado en la posición de la card */
-  .card-animated:nth-child(1) { animation-delay: 0.1s; }
-  .card-animated:nth-child(2) { animation-delay: 0.2s; }
-  .card-animated:nth-child(3) { animation-delay: 0.3s; }
-  .card-animated:nth-child(4) { animation-delay: 0.4s; }
-  .card-animated:nth-child(5) { animation-delay: 0.5s; }
-  .card-animated:nth-child(6) { animation-delay: 0.6s; }
-  .card-animated:nth-child(7) { animation-delay: 0.7s; }
-  .card-animated:nth-child(8) { animation-delay: 0.8s; }
-  /* Continuar si tienes más cards */
-  
-  /* Efectos al hacer hover */
-  .card-animated:hover {
-    transform: translateY(-7px);
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  /* Efecto sutil en la imagen al hacer hover */
-  .card-animated:hover .card-image img {
-    transform: scale(1.05);
-  }
-  
-  /* Efecto en el botón al hacer hover en la card */
-  .card-animated:hover .button {
-    background-color: #e53e3e; /* Un tono más intenso de rojo */
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  }
-  
-  /* Transición suave para la imagen */
-  .card-image {
-    overflow: hidden;
-  }
-  
-  .card-image img {
-    transition: transform 0.5s ease;
-  }
-  
-  /* Efecto para el precio */
-  .card-animated:hover .card-price {
-    transform: scale(1.1);
-  }
-  
-  .card-price {
-    transition: transform 0.3s ease;
-  }
-  
-  /* Efecto para el título */
-  .card-animated:hover .card-title {
-    color: #e53e3e; /* Cambio sutil de color al hacer hover */
-  }
-  
-  .card-title {
-    transition: color 0.3s ease;
+    transform: translateY(20px);
   }
 
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
+/* Configuración para el efecto flotante en hover */
+@keyframes subtle-float {
+  0% {
+    transform: translateY(0);
+  }
 
-  
+  50% {
+    transform: translateY(-5px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Clase principal para las cards animadas */
+.card-animated {
+  opacity: 0;
+  animation: card-reveal 0.5s ease-out forwards;
+  transition: all 0.3s ease;
+  will-change: transform, box-shadow;
+}
+
+/* Aplicar retraso escalonado basado en la posición de la card */
+.card-animated:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.card-animated:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.card-animated:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.card-animated:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.card-animated:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+.card-animated:nth-child(6) {
+  animation-delay: 0.6s;
+}
+
+.card-animated:nth-child(7) {
+  animation-delay: 0.7s;
+}
+
+.card-animated:nth-child(8) {
+  animation-delay: 0.8s;
+}
+
+/* Continuar si tienes más cards */
+
+/* Efectos al hacer hover */
+.card-animated:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efecto sutil en la imagen al hacer hover */
+.card-animated:hover .card-image img {
+  transform: scale(1.05);
+}
+
+/* Efecto en el botón al hacer hover en la card */
+.card-animated:hover .button {
+  background-color: #e53e3e;
+  /* Un tono más intenso de rojo */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Transición suave para la imagen */
+.card-image {
+  overflow: hidden;
+}
+
+.card-image img {
+  transition: transform 0.5s ease;
+}
+
+/* Efecto para el precio */
+.card-animated:hover .card-price {
+  transform: scale(1.1);
+}
+
+.card-price {
+  transition: transform 0.3s ease;
+}
+
+/* Efecto para el título */
+.card-animated:hover .card-title {
+  color: #e53e3e;
+  /* Cambio sutil de color al hacer hover */
+}
+
+.card-title {
+  transition: color 0.3s ease;
+}
