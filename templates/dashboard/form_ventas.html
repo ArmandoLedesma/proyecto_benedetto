@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+
+{% block title %}Formulario de Ventas{% endblock %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="https://unpkg.com/flatpickr/dist/flatpickr.min.css">
+<!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/sales_form.css') }}"> -->
+{% endblock %}
+
+{% include 'headerd.html' %}
+
+{% block content %}
+<div class="container mx-auto py-8 px-4">
+    <div class="w-full max-w-4xl mx-auto">
+        <div class="p-6 space-y-1 border-b">
+            <h2 class="text-2xl font-bold text-center">Registro de Venta</h2>
+            <p class="text-center text-muted-foreground">
+                Complete todos los campos para registrar una nueva venta
+            </p>
+        </div>
+        <form id="salesForm" action="" method="POST" class="p-6 grid gap-6">
+            <!-- Fecha y Número de Factura -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="space-y-2">
+                    <label for="invoice" class="text-sm font-medium">Número de Factura</label>
+                    <input type="text" id="invoice" name="invoice" placeholder="FAC-0001" class="form-input"
+                        value="{{ invoice_number }}" required>
+                </div>
+                <div class="space-y-2">
+                    <label for="sale_date" class="text-sm font-medium">Fecha de Venta</label>
+                    <input type="text" id="sale_date" name="sale_date" placeholder="Seleccionar fecha"
+                        class="form-input" required>
+                </div>
+            </div>
+
+            <!-- Empleado y Cliente -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="space-y-2">
+                    <label for="employee" class="text-sm font-medium">Empleado</label>
+                    <div class="custom-select-wrapper">
+                        <select id="employee" name="employee" class="form-select" required>
+                            <option value="" disabled selected>Seleccionar empleado</option>
+                            {% for employee in employees %}
+                            <option value="{{ employee.id }}">{{ employee.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="space-y-2">
+                    <label for="customer" class="text-sm font-medium">Cliente</label>
+                    <div class="custom-select-wrapper">
+                        <select id="customer" name="customer" class="form-select" required>
+                            <option value="" disabled selected>Seleccionar cliente</option>
+                            {% for customer in customers %}
+                            <option value="{{ customer.id }}">{{ customer.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Producto y Cantidad -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="space-y-2 md:col-span-2">
+                    <label for="product" class="text-sm font-medium">Producto</label>
+                    <div class="custom-select-wrapper">
+                        <select id="product" name="product" class="form-select" required>
+                            <option value="" disabled selected>Seleccionar producto</option>
+                            {% for product in products %}
+                            <option value="{{ product.id }}" data-price="{{ product.price }}">{{ product.name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="space-y-2">
+                    <label for="quantity" class="text-sm font-medium">Cantidad</label>
+                    <input type="number" id="quantity" name="quantity" min="1" placeholder="1" class="form-input"
+                        value="1" required>
+                </div>
+            </div>
+
+            <!-- Precio y Descuento -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="space-y-2">
+                    <label for="price" class="text-sm font-medium">Precio Unitario</label>
+                    <div class="relative">
+                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">$</span>
+                        <input type="number" id="price" name="price" step="0.01" placeholder="0.00"
+                            class="form-input pl-9" required>
+                    </div>
+                </div>
+                <div class="space-y-2">
+                    <label for="discount" class="text-sm font-medium">Descuento (%)</label>
+                    <input type="number" id="discount" name="discount" min="0" max="100" placeholder="0"
+                        class="form-input" value="0">
+                </div>
+                <div class="space-y-2">
+                    <label for="total" class="text-sm font-medium">Total</label>
+                    <div class="relative">
+                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">$</span>
+                        <input type="number" id="total" name="total" step="0.01" placeholder="0.00"
+                            class="form-input pl-9" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Método de Pago -->
+            <div class="space-y-2">
+                <label for="payment" class="text-sm font-medium">Método de Pago</label>
+                <div class="custom-select-wrapper">
+                    <select id="payment" name="payment_method" class="form-select" required>
+                        <option value="" disabled selected>Seleccionar método de pago</option>
+                        <option value="cash">Efectivo</option>
+                        <option value="credit">Tarjeta de Crédito</option>
+                        <option value="debit">Tarjeta de Débito</option>
+                        <option value="transfer">Transferencia Bancaria</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Detalles Adicionales -->
+            <div class="space-y-2">
+                <label for="details" class="text-sm font-medium">Detalles de la Venta</label>
+                <textarea id="details" name="details"
+                    placeholder="Ingrese cualquier detalle adicional sobre la venta..."
+                    class="form-textarea min-h-[100px]"></textarea>
+            </div>
+
+            <!-- Botones de acción -->
+            <div class="flex flex-col sm:flex-row gap-3 sm:justify-between pt-4 border-t">
+                <button type="button" id="cancelButton" class="btn btn-outline">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Registrar Venta</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% include 'footer.html' %}
+{% endblock %}

@@ -128,3 +128,7 @@ def show_carta_bebidas():
 @dashboard_bp.route("/productos")
 def show_productos():
     return render_template("dashboard/productos.html")
+
+@dashboard_bp.route("/form_ventas")
+def show_form_ventas():
+    return render_template("dashboard/form_ventas.html")

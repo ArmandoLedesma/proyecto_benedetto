@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Inter:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Inter:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 @import "tailwindcss";
 
 /*npx @tailwindcss/cli -i static/css/input.css -o static/css/output.css --watch*/
@@ -8,24 +8,46 @@
   --font-roboto: "Roboto", serif;
 
   /* Colores primarios */
-  --color-primary: #7CCF00;
-  --color-secundary: #E7000B;
-  --color-oscuro: #27272A;
+  --color-primary: #7ccf00;
+  --color-secundary: #e7000b;
+  --color-oscuro: #27272a;
 
   /* Colores fondo */
-  --color-fondo-light: #FFFFFF;
-  --color-fondo-gray: #F9FAFB;
+  --color-fondo-light: #ffffff;
+  --color-fondo-gray: #f9fafb;
 
   /* Colores bordes */
   --color-borde-gris: #ffffff4d;
   /* Colores texto */
   /* Colores texto */
 
+  /* --color-primary: 221.2 83.2% 53.3%; */
+  --color-secondary: 210 40% 96.1%;
+  --color-secondary-foreground: 222.2 47.4% 11.2%;
 
+  --color-foreground: 222.2 84% 4.9%;
+  --color-background: 0 0% 100%;
 
+  --color-card: 0 0% 100%;
+  --color-card-foreground: 222.2 84% 4.9%;
+
+  --color-popover: 0 0% 100%;
+  --color-popover-foreground: 222.2 84% 4.9%;
+  --color-primary-foreground: 210 40% 98%;
+
+  --color-muted: 210 40% 96.1%;
+  --color-muted-foreground: 215.4 16.3% 46.9%;
+
+  --color-accent: 210 40% 96.1%;
+  --color-accent-foreground: 222.2 47.4% 11.2%;
+
+  --color-destructive: 0 84.2% 60.2%;
+  --color-destructive-foreground: 210 40% 98%;
+  --color-border: 214.3 31.8% 91.4%;
+
+  --color-input: 214.3 31.8% 91.4%;
+  --color-ring: 221.2 83.2% 53.3%;
 }
-
-
 
 .levitate {
   animation: levitate 2s infinite;
@@ -36,7 +58,6 @@
 }
 
 @keyframes levitate {
-
   0%,
   100% {
     transform: translateY(0);
@@ -69,8 +90,6 @@
   cursor: pointer;
 }
 
-
-
 .icon {
   width: 24px;
   height: 24px;
@@ -83,10 +102,12 @@
   position: absolute;
   width: 100px;
   height: 100%;
-  background-image: linear-gradient(120deg,
-      rgba(255, 255, 255, 0) 30%,
-      rgba(255, 255, 255, 0.99),
-      rgba(255, 255, 255, 0) 70%);
+  background-image: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 30%,
+    rgba(255, 255, 255, 0.99),
+    rgba(255, 255, 255, 0) 70%
+  );
   top: 0;
   left: -100px;
   opacity: 0.6;
@@ -133,7 +154,6 @@
   height: 100vh !important;
 }
 
-
 .user-btn {
   width: 38px;
   height: 38px;
@@ -168,7 +188,6 @@
 .user-btn:hover::before {
   transform: scaleY(1);
   /* Efecto de llenado de abajo hacia arriba */
-
 }
 
 .user-btn i {
@@ -185,14 +204,14 @@
 
 /* Fin */
 
-
 /* Modal de confirmación */
 .card {
   max-width: 320px;
   background-color: white;
   border-radius: 8px;
   padding: 20px;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 .image {
@@ -236,7 +255,6 @@ button:hover {
 }
 
 /* Fin del modal de confirmación */
-
 
 /* Animación para Cards de Pizza - Reveal & Float */
 
@@ -314,7 +332,8 @@ button:hover {
 /* Efectos al hacer hover */
 .card-animated:hover {
   transform: translateY(-7px);
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1),
+    0 8px 10px -6px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -328,7 +347,8 @@ button:hover {
   background-color: #e53e3e;
   /* Un tono más intenso de rojo */
   transform: translateY(-2px);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 /* Transición suave para la imagen */
@@ -357,4 +377,141 @@ button:hover {
 
 .card-title {
   transition: color 0.3s ease;
+}
+
+/* Variables de color - Pueden ser sobrescritas por el tema global */
+/* :root {
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 84% 4.9%;
+  --primary: 221.2 83.2% 53.3%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222.2 47.4% 11.2%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222.2 47.4% 11.2%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 221.2 83.2% 53.3%;
+} */
+
+/* Estilos para el formulario */
+.card {
+  @apply rounded-lg border bg-card text-card-foreground shadow-sm;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  @apply w-full rounded-md border border-input bg-background px-3 py-2;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  @apply outline-none ring-2 ring-primary;
+}
+
+.form-input.error,
+.form-select.error,
+.form-textarea.error {
+  @apply border-destructive;
+}
+
+.form-select {
+  @apply pr-10 appearance-none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 1rem;
+}
+
+.btn {
+  @apply inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background;
+  height: 2.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.btn-primary {
+  @apply bg-primary text-primary-foreground hover:bg-primary/90;
+}
+
+.btn-outline {
+  @apply border border-input hover:bg-accent hover:text-accent-foreground;
+}
+
+/* Estilos para el calendario */
+.flatpickr-calendar {
+  @apply bg-white border border-gray-200 rounded-md shadow-lg;
+}
+
+.flatpickr-day.selected {
+  background: hsl(var(--primary)) !important;
+  border-color: hsl(var(--primary)) !important;
+}
+
+.flatpickr-day.today {
+  border-color: hsl(var(--primary)) !important;
+}
+
+.flatpickr-day:hover {
+  background: hsl(var(--accent)) !important;
+}
+
+/* Animaciones y efectos */
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  transform: translateY(-1px);
+}
+
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%, -50%);
+  transform-origin: 50% 50%;
+}
+
+.btn:focus:not(:active)::after {
+  animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: scale(20, 20);
+    opacity: 0;
+  }
+}
+
+/* Estilos responsivos */
+@media (max-width: 640px) {
+  .card {
+    @apply rounded-none border-x-0 shadow-none;
+  }
 }
