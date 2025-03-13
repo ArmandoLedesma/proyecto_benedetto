@@ -9,18 +9,26 @@
 
     <!-- Boton flotante para crear -->
 
-    <div class="fixed bottom-4 right-4 z-50">
-        <button class="button w-12 h-12  transition-all duration-300">+</button>
-    </div>
 
+
+    {% include 'modal-productos.html' %}
+
+    <!-- Cards -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-6 sm:mt-8 font-roboto">
         {% for item in items %}
         <div
             class="card card-animated w-full rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col h-[380px]">
             <div class="relative w-full h-44 card-image">
+                {% if item.image %}
                 <img class="w-full h-full object-cover" src="{{ url_for('static', filename=item.image) }}"
                     alt="{{ item.nombre }}">
+                {% else %}
+                <img class="w-full h-full object-cover" src="{{ url_for('static', filename='img/default_image.png') }}"
+                    alt="Imagen por defecto">
+                {% endif %}
             </div>
+
+
             <div class="p-4 flex-1 flex flex-col justify-between">
                 <div>
                     <h3 class="text-lg font-semibold text-gray-800 card-title">{{ item.nombre }}</h3>

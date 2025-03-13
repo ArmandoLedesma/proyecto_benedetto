@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% include 'headerd.html' %}
+
+<main>
+    <!-- Contenedor de Productos -->
+    <div class="container font-roboto mt-8 mx-auto py-5">
+        <div class="flex flex-col justify-center items-center py-4 gap-1">
+            <h2 class="text-4xl font-medium text-zinc-800">Productos</h2>
+            <p class="font-light text-gray-800">¡Bienvenido al panel de control de Productos!</p>
+            <button onclick="openCrearModalProducto()" class="button mt-4">
+                Añadir Producto
+            </button>
+        </div>
+    </div>
+
+    <!-- Tabla para el listado de productos -->
+    <div class="container mx-auto p-5">
+        <div class="overflow-x-auto bg-neutral-200 rounded-lg shadow-lg">
+            <table class="w-full table-auto border-collapse">
+                <thead>
+                    <tr class="bg-zinc-800 text-white uppercase text-sm font-medium">
+                        <th class="py-4 px-6 text-left">ID</th>
+                        <th class="py-4 px-6 text-left">Nombre</th>
+                        <th class="py-4 px-6 text-left">Descripción</th>
+                        <th class="py-4 px-6 text-left">Precio</th>
+                        <th class="py-4 px-6 text-left">Categoría</th>
+                        <th class="py-4 px-6 text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="productosTableBody" class="text-gray-700 text-sm font-medium">
+                    <!-- Los datos se renderizarán dinámicamente desde el fetch -->
+                </tbody>
+            </table>
+
+            <!-- Paginación -->
+            <div id="paginationContainer"
+                class="bg-white px-6 py-4 border-t border-gray-300 flex items-center justify-between">
+                <div class="flex items-center">
+                    <span class="text-sm text-gray-700">
+                        Mostrando <span id="startRecord" class="font-medium">1</span> a
+                        <span id="endRecord" class="font-medium">10</span> de
+                        <span id="totalRecords" class="font-medium">0</span> registros
+                    </span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button id="prevPageBtn"
+                        class="px-3 py-1 rounded border border-gray-300 bg-white text-gray-700 text-sm hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed">
+                        Anterior
+                    </button>
+                    <div id="pageNumbers" class="flex items-center space-x-1">
+                        <!-- Números de página generados dinámicamente -->
+                    </div>
+                    <button id="nextPageBtn"
+                        class="px-3 py-1 rounded border border-gray-300 bg-white text-gray-700 text-sm hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed">
+                        Siguiente
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include 'modal-productos.html' %}
+
+    <script>
+        // Función para renderizar una fila de producto en la tabla
+        function renderProductoRow(producto) {
+            const row = document.createElement('tr');
+            row.className = 'border-b border-gray-300 hover:bg-gray-300 transition duration-200 ease-in-out';
+            row.innerHTML = `
+                <td class="py-4 px-6 bg-white">${producto.id}</td>
+                <td class="py-4 px-6 bg-white">${producto.nombre}</td>
+                <td class="py-4 px-6 bg-white">${producto.description}</td>
+                <td class="py-4 px-6 bg-white">${producto.precio}</td>
+                <td class="py-4 px-6 bg-white">${producto.categoria_id}</td>
+                <td class="py-4 px-6 text-center bg-white">
+                    <div class="flex items-center justify-center space-x-3">
+                        <button class="p-2 text-blue-500 hover:text-blue-700 transition transform hover:scale-110"
+                            data-producto='${JSON.stringify(producto)}'
+                            onclick="openEditarModalProducto(this)">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                            </svg>
+                        </button>
+                        <button class="p-2 text-red-500 hover:text-red-700 transition transform hover:scale-110"
+                            onclick="deleteProducto(${producto.id})">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                        </button>
+                    </div>
+                </td>
+            `;
+            return row;
+        }
+
+        // Función para eliminar un producto (se asume función genérica deleteEntity)
+        function deleteProducto(id) {
+            const uri = '/api/v1/productos/';
+            deleteEntity(id, uri, () => {
+                window.paginationController.refresh();
+            }, "Producto");
+        }
+
+        // Función para mostrar un toast con la información del producto creado o actualizado
+        function showToast(detail) {
+            const toast = document.createElement('div');
+            toast.style.position = 'fixed';
+            toast.style.top = '7rem';
+            toast.style.left = '50%';
+            toast.style.transform = 'translateX(-50%)';
+            toast.style.zIndex = '9999';
+            toast.style.maxWidth = '30rem';
+            toast.style.width = 'auto';
+            toast.style.backgroundColor = '#48bb78';
+            toast.style.color = '#fff';
+            toast.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)';
+            toast.style.borderRadius = '0.5rem';
+            toast.style.padding = '10px';
+            toast.style.display = 'flex';
+            toast.style.alignItems = 'center';
+            toast.style.gap = '0.75rem';
+            toast.style.transition = 'transform 0.2s ease-in-out';
+
+            let mensaje;
+            if (detail.mode === 'update') {
+                mensaje = 'Producto Actualizado Exitosamente';
+            } else {
+                mensaje = `Producto Creado, Nombre: ${detail.producto.nombre}`;
+            }
+
+            toast.innerHTML = `
+                <div class="flex-1">
+                    <p class="font-bold">${mensaje}</p>
+                </div>
+                <button class="text-white hover:text-gray-300 focus:outline-none" id="closeToastBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 011.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+            `;
+            document.body.appendChild(toast);
+
+            toast.querySelector('#closeToastBtn').addEventListener('click', () => {
+                toast.remove();
+            });
+
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+
+        // Escuchar el evento personalizado 'productoGuardado'
+        document.addEventListener('productoGuardado', function (e) {
+            console.log('Producto guardado/actualizado, actualizando tabla...', e.detail);
+            window.paginationController.refresh();
+            showToast(e.detail);
+        });
+
+        // Inicializar la paginación y el fetch de productos
+        document.addEventListener('DOMContentLoaded', () => {
+            window.paginationController.init({
+                fetchUrl: '/api/v1/productos',
+                renderCallback: renderProductoRow,
+                recordsKey: 'productos',
+                tableBodyId: 'productosTableBody',
+                recordsPerPage: 10
+            });
+        });
+    </script>
+
+</main>
+
+{% include 'footer.html' %}
+{% endblock %}

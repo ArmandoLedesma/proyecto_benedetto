@@ -6,7 +6,7 @@ class Producto(db.Model):
     # Atributos
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(100), nullable=False)
-    image = db.Column(db.String(255), nullable=False)  # Nuevo campo para la imagen
+    image = db.Column(db.String(255), nullable=True)  # Nuevo campo para la imagen
     description = db.Column(db.String(255), nullable=False)
     
     precio = db.Column(db.Numeric(10,2), nullable=False)

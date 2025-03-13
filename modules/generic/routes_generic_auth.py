@@ -3,12 +3,11 @@
 # Utiliza un decorador para requerir autenticación en todas las rutas del blueprint.
 
 # Se deben instanciar nuevamente las rutas con este módulo para que estén protegidas con autenticación.
-
 from flask import Blueprint, request, jsonify
 from modules.generic.service_generic import BaseService
 from flask_login import login_required
 
-def create_generic_bp(service: BaseService, entity_name):
+def create_generic_bp(service: BaseService, entity_name, create_func=None, update_func=None):
     
     bp = Blueprint(entity_name, __name__)
 
@@ -34,18 +33,24 @@ def create_generic_bp(service: BaseService, entity_name):
     
     @bp.route(f'/{entity_name}', methods=['POST'])
     def create_entity():
-        data = request.form.to_dict() or request.get_json()
-        entity = service.create(data)
-        return jsonify(entity.to_dict()), 201
+        if create_func:
+            return create_func()  # Usa la función personalizada
+        else:
+            data = request.form.to_dict() or request.get_json()
+            entity = service.create(data)
+            return jsonify(entity.to_dict()), 201
     
     @bp.route(f'/{entity_name}/<int:id>', methods=['PUT'])
     def update_entity(id):
-        data = request.form.to_dict() or request.get_json()
-        entity = service.update(id, data)
-        if entity:
-            return jsonify(entity.to_dict()), 200
+        if update_func:
+            return update_func(id)  # Usa la función personalizada
         else:
-            return jsonify({"error": f"{entity_name.capitalize()} no encontrado"}), 404
+            data = request.form.to_dict() or request.get_json()
+            entity = service.update(id, data)
+            if entity:
+                return jsonify(entity.to_dict()), 200
+            else:
+                return jsonify({"error": f"{entity_name.capitalize()} no encontrado"}), 404
         
     @bp.route(f'/{entity_name}/<int:id>', methods=['DELETE'])
     def delete_entity(id):
@@ -55,4 +60,3 @@ def create_generic_bp(service: BaseService, entity_name):
         return jsonify(f"{entity_name.capitalize()} no encontrado"), 404
     
     return bp
-
