@@ -7,7 +7,7 @@ class Producto(db.Model):
     image = db.Column(db.String(255), nullable=True)
     description = db.Column(db.String(255), nullable=False)
     precio = db.Column(db.Numeric(10,2), nullable=False)
-    categoria_id = db.Column(db.Integer, db.ForeignKey('categorias.id'), nullable=False)
+    categoria_id = db.Column(db.Integer, db.ForeignKey('categorias.id', ondelete='CASCADE'), nullable=False) # Agrega ondelete='CASCADE'
     # Se indica que esta relación se vincula con la propiedad 'productos' de Categoria.
     categoria = db.relationship('Categoria', back_populates='productos')
     is_active = db.Column(db.Boolean, nullable=False, default=True)

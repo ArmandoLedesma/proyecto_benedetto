@@ -9,7 +9,7 @@
     <div class="bg-white rounded-lg shadow p-6 w-full max-w-md relative">
 
         <!-- Botón de cierre -->
-        <button id="closeProductoModalBtn" class="absolute top-2 right-2 text-gray-500 text-2xl">&times;</button>
+        <button id="closeProductoModalBtn" class="absolute top-2 right-2 text-gray-500 text-2xl">×</button>
 
         <!-- Título dinámico -->
         <h3 id="productoModalTitle" class="text-lg font-semibold mb-4">Crear Producto</h3>
@@ -27,7 +27,7 @@
 
             <div>
                 <label for="image" class="block text-sm font-medium text-gray-900">Imagen</label>
-                <input type="file" id="image" name="image" required placeholder="URL de la imagen"
+                <input type="file" id="image" name="image" accept="image/*"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
             </div>
 
@@ -91,16 +91,26 @@
         productoModal.classList.remove('hidden');
     }
 
-    function openEditarModalProducto(producto) {
+    function openEditarModalProducto(button) {
+        // Extraer el objeto producto desde el atributo data-producto
+        const producto = JSON.parse(button.getAttribute('data-producto'));
+
+        // Actualizar el título del modal y el texto del botón
         productoModalTitle.textContent = 'Editar Producto';
         submitProductoBtn.textContent = 'Actualizar Producto';
+
+        // Rellenar el formulario con los datos del producto
         productoIdInput.value = producto.id;
         document.getElementById('nombre').value = producto.nombre;
-        document.getElementById('image').value = producto.image;
+        // Nota: en inputs de tipo file no se puede asignar un valor por razones de seguridad
         document.getElementById('description').value = producto.description;
         document.getElementById('precio').value = producto.precio;
         categoriaSelect.value = producto.categoria_id;
+
+        // Cargar las categorías para el select
         fetchCategorias();
+
+        // Mostrar el modal
         productoModal.classList.remove('hidden');
     }
 
