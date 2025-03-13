@@ -57,3 +57,11 @@ def update_producto(id):
 
 # Crear el blueprint genérico y pasar las funciones personalizadas
 productos_bp = create_generic_bp(producto_service, "productos", create_func=create_producto, update_func=update_producto)
+
+
+# Nueva ruta para obtener productos por categoría
+@productos_bp.route('/productos/categoria/<int:categoria_id>', methods=['GET'])
+def get_productos_por_categoria(categoria_id):
+    productos = producto_service.get_by_categoria(categoria_id)
+    productos_list = [producto.to_dict() for producto in productos]
+    return jsonify(productos_list), 200
