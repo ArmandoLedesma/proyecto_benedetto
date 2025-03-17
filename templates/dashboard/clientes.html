@@ -7,30 +7,24 @@
     <!-- Contenedor de Clientes -->
     <div class="container font-roboto mt-8 mx-auto py-5">
         <div class="flex flex-col justify-center items-center py-4 gap-1">
-            <h2 class="text-4xl font-medium text-zinc-800">Clientes</h2>
-            <p class="font-light text-gray-800">¡Bienvenido al panel de control de Clientes!</p>
+            <h2 class="text-4xl font-medium text-zinc-800 sm:text-3xl">Clientes</h2>
+            <p class="font-light text-gray-800 text-center sm:text-sm">¡Bienvenido al panel de control de Clientes!</p>
             <!-- Botón para abrir el modal de creación -->
-            <!-- <button onclick="openCrearModalCliente()" class="button mt-4">
-                Añadir Cliente
-            </button> -->
             <div>{% include 'modal-unificado-clientes.html' %}</div>
         </div>
     </div>
 
-    <!-- Incluir el modal unificado para Clientes -->
-
-
     <!-- Tabla para el listado de clientes -->
-    <div class="container mx-auto p-5">
+    <div class="container mx-auto p-5 sm:p-3">
         <div class="overflow-x-auto bg-neutral-200 rounded-lg shadow-lg">
             <table class="w-full table-auto border-collapse">
                 <thead>
                     <tr class="bg-zinc-800 text-white uppercase text-sm font-medium">
-                        <th class="py-4 px-6 text-left">Numero de identificación</th>
-                        <th class="py-4 px-6 text-left">Nombre</th>
-                        <th class="py-4 px-6 text-left">Teléfono</th>
-                        <th class="py-4 px-6 text-left">Email</th>
-                        <th class="py-4 px-6 text-center">Acciones</th>
+                        <th class="py-4 px-6 text-left sm:px-3 sm:py-2">Número de identificación</th>
+                        <th class="py-4 px-6 text-left sm:px-3 sm:py-2">Nombre</th>
+                        <th class="py-4 px-6 text-left sm:px-3 sm:py-2">Teléfono</th>
+                        <th class="py-4 px-6 text-left sm:px-3 sm:py-2">Email</th>
+                        <th class="py-4 px-6 text-center sm:px-3 sm:py-2">Acciones</th>
                     </tr>
                 </thead>
                 <tbody id="clientesTableBody" class="text-gray-700 text-sm font-medium">
@@ -40,24 +34,24 @@
 
             <!-- Contenedor de Paginación -->
             <div id="paginationContainer"
-                class="bg-white px-6 py-4 border-t border-gray-300 flex items-center justify-between">
+                class="bg-white px-6 py-4 border-t border-gray-300 flex items-center justify-between sm:px-3 sm:py-2">
                 <div class="flex items-center">
-                    <span class="text-sm text-gray-700">
+                    <span class="text-sm text-gray-700 sm:text-xs">
                         Mostrando <span id="startRecord" class="font-medium">1</span> a
                         <span id="endRecord" class="font-medium">10</span> de
                         <span id="totalRecords" class="font-medium">0</span> registros
                     </span>
                 </div>
-                <div class="flex items-center space-x-2">
+                <div class="flex items-center space-x-2 sm:space-x-1">
                     <button id="prevPageBtn"
-                        class="px-3 py-1 rounded border border-gray-300 bg-white text-gray-700 text-sm hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed">
+                        class="px-3 py-1 rounded border border-gray-300 bg-white text-gray-700 text-sm hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed sm:px-2 sm:py-1 sm:text-xs">
                         Anterior
                     </button>
-                    <div id="pageNumbers" class="flex items-center space-x-1">
+                    <div id="pageNumbers" class="flex items-center space-x-1 sm:space-x-0">
                         <!-- Números de página generados dinámicamente -->
                     </div>
                     <button id="nextPageBtn"
-                        class="px-3 py-1 rounded border border-gray-300 bg-white text-gray-700 text-sm hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed">
+                        class="px-3 py-1 rounded border border-gray-300 bg-white text-gray-700 text-sm hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed sm:px-2 sm:py-1 sm:text-xs">
                         Siguiente
                     </button>
                 </div>
@@ -71,24 +65,24 @@
             const row = document.createElement('tr');
             row.className = 'border-b border-gray-300 hover:bg-gray-300 transition duration-200 ease-in-out';
             row.innerHTML = `
-                <td class="py-4 px-6 bg-white">${cliente.id}</td>
-                <td class="py-4 px-6 bg-white">${cliente.nombre}</td>
-                <td class="py-4 px-6 bg-white">${cliente.telefono}</td>
-                <td class="py-4 px-6 bg-white">${cliente.email}</td>
-                <td class="py-4 px-6 text-center bg-white">
-                    <div class="flex items-center justify-center space-x-3">
-                        <button class="p-2 text-blue-500 hover:text-blue-700 transition transform hover:scale-110"
+                <td class="py-4 px-6 bg-white sm:px-3 sm:py-2">${cliente.id}</td>
+                <td class="py-4 px-6 bg-white sm:px-3 sm:py-2">${cliente.nombre}</td>
+                <td class="py-4 px-6 bg-white sm:px-3 sm:py-2">${cliente.telefono}</td>
+                <td class="py-4 px-6 bg-white sm:px-3 sm:py-2">${cliente.email}</td>
+                <td class="py-4 px-6 text-center bg-white sm:px-3 sm:py-2">
+                    <div class="flex items-center justify-center space-x-3 sm:space-x-2">
+                        <button class="p-2 text-blue-500 hover:text-blue-700 transition transform hover:scale-110 sm:p-1"
                             data-cliente='${JSON.stringify(cliente)}'
                             onclick="openEditarModalCliente(this)">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" 
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 sm:w-4 sm:h-4" fill="none" 
                                  viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                       d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                             </svg>
                         </button>
-                        <button class="p-2 text-red-500 hover:text-red-700 transition transform hover:scale-110"
+                        <button class="p-2 text-red-500 hover:text-red-700 transition transform hover:scale-110 sm:p-1"
                             onclick="deleteCliente(${cliente.id})">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" 
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 sm:w-4 sm:h-4" fill="none" 
                                  viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                       d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -117,7 +111,7 @@
             toast.style.transform = 'translateX(-50%)';
             toast.style.zIndex = '9999';
             toast.style.maxWidth = '30rem';
-            toast.style.width = 'auto';
+            toast.style.width = '90%'; // Ajustar el ancho en pantallas pequeñas
             toast.style.backgroundColor = '#48bb78';
             toast.style.color = '#fff';
             toast.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)';
@@ -137,11 +131,10 @@
 
             toast.innerHTML = `
                 <div class="flex-1">
-                    <p class="font-bold">${mensaje}</p>
+                    <p class="font-bold sm:text-sm">${mensaje}</p> <!-- Ajustar el tamaño del texto en pantallas pequeñas -->
                 </div>
                 <button class="text-white hover:text-gray-300 focus:outline-none" id="closeToastBtn">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" 
-                         viewBox="0 0 20 20" fill="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-4 sm:w-4" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" 
                               d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 011.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" 
                               clip-rule="evenodd" />

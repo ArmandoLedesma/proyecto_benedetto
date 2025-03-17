@@ -380,7 +380,7 @@ button:hover {
 }
 
 /* Variables de color - Pueden ser sobrescritas por el tema global */
-/* :root {
+ /* :root {
   --background: 0 0% 100%;
   --foreground: 222.2 84% 4.9%;
   --card: 0 0% 100%;
@@ -400,11 +400,11 @@ button:hover {
   --border: 214.3 31.8% 91.4%;
   --input: 214.3 31.8% 91.4%;
   --ring: 221.2 83.2% 53.3%;
-} */
+}  */
 
 /* Estilos para el formulario */
 .card {
-  @apply rounded-lg border bg-card text-card-foreground shadow-sm;
+  @apply rounded-lg bg-card text-card-foreground shadow-sm;
 }
 
 .form-input,
