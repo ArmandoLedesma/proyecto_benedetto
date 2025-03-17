@@ -1,8 +1,43 @@
-<!-- Botón para abrir el modal -->
+<script>
+    // Detector de scroll para ajustar posición del botón
+    document.addEventListener('DOMContentLoaded', function() {
+        const botonFlotante = document.getElementById('botonFlotante');
+        const footer = document.querySelector('footer');
+        
+        if (!botonFlotante || !footer) return;
+        
+        // Función para ajustar la posición del botón
+        function ajustarPosicionBoton() {
+            const footerRect = footer.getBoundingClientRect();
+            const viewportHeight = window.innerHeight;
+            const botonHeight = botonFlotante.offsetHeight;
+            const margenSeguridad = 45; // Píxeles adicionales para separación
+            
+            // Si el footer está visible en la pantalla
+            if (footerRect.top < viewportHeight) {
+                const distanciaDesdeAbajo = viewportHeight - footerRect.top;
+                const nuevaPosicion = distanciaDesdeAbajo + margenSeguridad;
+                botonFlotante.style.bottom = `${nuevaPosicion}px`;
+                botonFlotante.style.transition = 'bottom 0.3s ease-out';
+            } else {
+                // Restaurar posición predeterminada (1.5rem = 24px en la mayoría de navegadores)
+                botonFlotante.style.bottom = '1.5rem';
+            }
+        }
+        
+        // Ejecutar al cargar y en cada scroll
+        ajustarPosicionBoton();
+        window.addEventListener('scroll', ajustarPosicionBoton);
+        window.addEventListener('resize', ajustarPosicionBoton);
+    });
+</script>
 
-<div class="fixed bottom-62 right-4 z-50">
-    <button onclick="openCrearModalProducto()" class="button w-12 h-12  transition-all duration-300">+</button>
+<!-- Botón para abrir el modal -->
+<div id="botonFlotante" class="fixed bottom-6 right-6 z-[1000]">
+    <button onclick="openCrearModalProducto()" class="button w-14 h-14 rounded-full shadow-lg flex items-center justify-center text-xl font-bold transition-all duration-300 hover:scale-110">+</button>
 </div>
+
+
 
 <!-- Modal cerrado inicialmente -->
 <div id="productoModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-gray-900/85">
