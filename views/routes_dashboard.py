@@ -1,5 +1,5 @@
-from flask import Blueprint,render_template 
-from flask_login import login_required
+from flask import Blueprint,render_template, request, redirect, url_for, flash 
+from flask_login import login_required, current_user
 
 from data import items, items_categorias, items_clientes, items_empleados, items_sucursales, items_tradicionales, items_hamburguesa, items_lazana, items_perro_caliente, items_bebidas, items_desgranado
 from modules.employees.services import EmpleadoService
@@ -132,3 +132,62 @@ def show_productos():
 @dashboard_bp.route("/form_ventas")
 def show_form_ventas():
     return render_template("dashboard/form_ventas.html")
+
+@dashboard_bp.route("/perfil")
+def show_perfil():
+    # Obtener el usuario actual desde flask_login
+    from flask_login import current_user
+    
+    # Obtener información adicional del usuario si es necesario
+    # Por ejemplo, si necesitas datos que no están en el objeto current_user:
+    # usuario_completo = empleados_services.get_empleado_by_id(current_user.id)
+    
+    # Para demostración, crearé un objeto de usuario ficticio
+    # En producción, usarías current_user o datos de la base de datos
+    usuario = {
+        'nombre': current_user.nombre if hasattr(current_user, 'nombre') else 'Usuario',
+        'apellido': current_user.apellido if hasattr(current_user, 'apellido') else 'Demo',
+        'email': current_user.email if hasattr(current_user, 'email') else 'usuario@benedetto.com',
+        'telefono': current_user.telefono if hasattr(current_user, 'telefono') else '123-456-7890',
+        'fecha_nacimiento': current_user.fecha_nacimiento if hasattr(current_user, 'fecha_nacimiento') else '01/01/1990',
+        'rol': current_user.rol if hasattr(current_user, 'rol') else 'Empleado',
+        'sucursal': current_user.sucursal if hasattr(current_user, 'sucursal') else 'Central',
+        'foto_perfil': current_user.foto_perfil if hasattr(current_user, 'foto_perfil') else None,
+        'habilidades': [],  # Aquí irían las habilidades del usuario
+        'ventas_mes': 45,  # Datos de ejemplo
+        'clientes_atendidos': 120,
+        'rating': 4.8
+    }
+    
+    # Datos de pedidos de ejemplo
+    pedidos = []  # En producción, obtendrías esto de la base de datos
+    
+    return render_template("dashboard/perfil.html", usuario=usuario, pedidos=pedidos)
+
+@dashboard_bp.route("/perfil/actualizar", methods=['POST'])
+def actualizar_perfil():
+    # Obtener el usuario actual
+    from flask_login import current_user
+    
+    # Obtener datos del formulario
+    nombre = request.form.get('nombre')
+    apellido = request.form.get('apellido')
+    
+    # Procesar la foto de perfil si se subió una nueva
+    if 'foto_perfil' in request.files and request.files['foto_perfil'].filename != '':
+        foto = request.files['foto_perfil']
+        # Aquí iría el código para guardar la foto
+        # Por ejemplo:
+        # filename = secure_filename(foto.filename)
+        # foto.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        # current_user.foto_perfil = filename
+    
+    # Actualizar datos del usuario
+    # En producción, actualizarías la base de datos:
+    # current_user.nombre = nombre
+    # current_user.apellido = apellido
+    # db.session.commit()
+    
+    # Redireccionar de vuelta al perfil con un mensaje
+    flash('Perfil actualizado correctamente', 'success')
+    return redirect(url_for('dashboard_bp.show_perfil'))
