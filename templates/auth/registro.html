@@ -26,11 +26,23 @@
 
         <!--! Inicio del formulario -->
         <form id="registerForm" method="POST" action="{{ url_for('auth_bp.registrarse') }}">
+          <!--! Input para la identificación -->
           <div class="mt-4">
-            <label class="block text-negro text-sm font-bold mb-2">Nombres:</label>
+            <label class="block font-medium text-sm mb-2">
+              N° de identificación
+            </label>
+            <input 
+              class="bg-gray-200 text-negro focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
+              name="identificacion" required
+              type="text" placeholder="Fecha de nacimiento"
+              pattern="[0-9]{5,15}" maxlength="15" required/>
+          </div>
+          <!--! Input para el nombre y apellido -->
+          <div class="mt-4">
+            <label class="block text-negro text-sm font-bold mb-2">Nombre y apellido:</label>
             <input
               class="bg-gray-200 text-negro focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
-              type="text" placeholder="Ingresa tus nombres" name="nombre" id="nombre" />
+              type="text" placeholder="Escribe tu nombre y apellido" name="nombre" id="nombre" />
           </div>
 
           <!-- <div class="mt-4">
@@ -51,6 +63,26 @@
               type="email" placeholder="Email" />
             <!-- Mensaje de error -->
             <p id="email-error" class="text-sm text-red-500 hidden">Ingrese un email válido.</p>
+          </div>
+          <!--! Input para la fecha de nacimiento -->
+          <div class="mt-4">
+            <label class="block font-medium text-sm mb-2">
+              Fecha de nacimiento
+            </label>
+            <input name="fecha_nacimiento" required
+              class="bg-gray-200 text-negro focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
+              type="date" placeholder="Fecha de nacimiento" />
+          </div>
+          <!--! Input para el número de telefono -->
+          <div class="mt-4">
+            <label class="block font-medium text-sm mb-2">
+              Telefono 
+            </label>
+            <input 
+              class="bg-gray-200 text-negro focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
+              name="telefono" required
+              type="text" placeholder="Ingresa tu número de telefono"
+              pattern="[0-9]{7,10}" maxlength="10" required/>
           </div>
           <!--! Input para la contraseña -->
           <div class="relative mt-4">
