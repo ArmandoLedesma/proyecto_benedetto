@@ -14,6 +14,7 @@ usuario_service = UsuarioService()
 
 @auth_bp.route("/registro")
 def registrarse():
+    
     return render_template("auth/registro.html")
 
 
@@ -30,8 +31,13 @@ def login():
         
         if usuario:
             login_user(usuario)
+            print (type(usuario))
+            print (usuario)
+            #usuario_activo = usuario.id
+            #print (f"Usuario activo: {usuario_activo}")
             print ("Inicio de sesión exitoso")
             flash("Inicio de sesión exitoso", "success")
+            
             return redirect(url_for('dashboard_bp.show_dashboard'))
         else:
             

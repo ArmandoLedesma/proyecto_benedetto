@@ -5,22 +5,24 @@
     <!-- Contenedor principal - Ajustado para mejor responsividad -->
     <div class="flex bg-white rounded-lg shadow-xl overflow-hidden mx-auto w-full max-w-md my-auto">
         <div class="w-full p-4 sm:p-6 md:p-8 flex flex-col">
-            
+
             <div class="container flex flex-col">
                 <!--! Volver - Añadido igual que en los otros formularios -->
                 <a href="{{ url_for('auth_bp.login') }}" class="flex items-center text-gray-900 group py-2">
-                  <svg xmlns="http://www.w3.org/2000/svg"
-                    class="w-5 h-5 mr-1 transition-transform transform group-hover:-translate-x-1" viewBox="0 0 24 24"
-                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="19" y1="12" x2="5" y2="12"></line>
-                    <polyline points="12 5 5 12 12 19"></polyline>
-                  </svg>
-                  <span class="transition-all group-hover:font-semibold">Login</span>
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        class="w-5 h-5 mr-1 transition-transform transform group-hover:-translate-x-1"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 5 5 12 12 19"></polyline>
+                    </svg>
+                    <span class="transition-all group-hover:font-semibold">Login</span>
                 </a>
-                
+
                 <h2 class="text-xl sm:text-2xl font-semibold text-zinc-700 text-center">Benedetto Pizza</h2>
                 <div class="flex justify-center m-2">
-                    <img src="{{url_for('static', filename='img/pizzas/logo.png')}}" alt="Logo" class="w-14 h-14 sm:w-12 sm:h-12">
+                    <img src="{{url_for('static', filename='img/pizzas/logo.png')}}" alt="Logo"
+                        class="w-14 h-14 sm:w-12 sm:h-12">
                 </div>
                 <p class="text-lg sm:text-xl text-gray-800 text-center">Recupera tu contraseña</p>
                 <div class="mt-4">
@@ -31,12 +33,11 @@
                 </div>
                 <!-- Boton de recuperación de contraseña - Ajustado para mejor área táctil -->
                 <div class="mt-6 sm:mt-8">
-                    <a href="{{ url_for('auth_bp.login') }}"
-                        class="button w-full py-2.5 sm:py-3 text-center">
+                    <a href="{{ url_for('auth_bp.login') }}" class="button w-full py-2.5 sm:py-3 text-center">
                         Recuperar Contraseña
                     </a>
                 </div>
-                
+
                 <!-- Eliminado el enlace adicional ya que ahora tenemos el botón de volver arriba -->
             </div>
 
@@ -45,4 +46,3 @@
 </div>
 {% include 'footer.html' %}
 {% endblock %}
-
