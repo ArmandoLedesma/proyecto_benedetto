@@ -64,7 +64,7 @@ def db_create(app):
             },
             {
                 "title": "Perro caliente",
-                "image": "img/categorias_subcategorias/hotdog.jpeg",
+                "image": "img/categorias_subcategorias/hotdog.jpg",
                 "description": "Pan suave, salchicha jugosa y los toppings perfectos. 🌭🔥 Un solo bocado y se vuelve tu favorito.",
                 "button_text": "Ver más",
                 "url": "/dashboard/carta_perro_caliente",
