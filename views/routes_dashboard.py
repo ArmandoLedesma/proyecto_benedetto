@@ -24,8 +24,9 @@ def require_login():
 
 @dashboard_bp.route('/')
 def show_dashboard():
-    
-    return render_template('dashboard/dashboard.html', items = items, items_categorias= items_categorias)
+    usuario_activo = current_user
+    print(f"Usuario activo en el dashboard: {usuario_activo}")
+    return render_template('dashboard/dashboard.html', items = items, items_categorias= items_categorias, usuario_activo=usuario_activo)
 
 @dashboard_bp.route("/categorias")
 def show_categorias():
@@ -144,6 +145,7 @@ def show_perfil():
     
     # Para demostración, crearé un objeto de usuario ficticio
     # En producción, usarías current_user o datos de la base de datos
+    usuario_actual = current_user
     usuario = {
         'nombre': current_user.nombre if hasattr(current_user, 'nombre') else 'Usuario',
         'apellido': current_user.apellido if hasattr(current_user, 'apellido') else 'Demo',
@@ -162,7 +164,7 @@ def show_perfil():
     # Datos de pedidos de ejemplo
     pedidos = []  # En producción, obtendrías esto de la base de datos
     
-    return render_template("dashboard/perfil.html", usuario=usuario, pedidos=pedidos)
+    return render_template("dashboard/perfil.html", usuario=usuario, pedidos=pedidos, usuario_activo = usuario_actual)
 
 @dashboard_bp.route("/perfil/actualizar", methods=['POST'])
 def actualizar_perfil():
