@@ -20,7 +20,8 @@
         </a>
         <h2 class="text-xl sm:text-2xl font-semibold text-zinc-800 text-center mt-2">Benedetto Pizza</h2>
         <div class="flex justify-center m-2">
-          <img src="{{ url_for('static', filename='img/pizzas/logo.png') }}" alt="Logo" class="w-18 h-18 sm:w-12 sm:h-12">
+          <img src="{{ url_for('static', filename='img/pizzas/logo.png') }}" alt="Logo"
+            class="w-18 h-18 sm:w-12 sm:h-12">
         </div>
         <p class="text-lg sm:text-xl text-gray-800 text-center">Crea tu cuenta</p>
 
@@ -31,11 +32,10 @@
             <label class="block font-medium text-sm mb-2">
               N° de identificación
             </label>
-            <input 
+            <input
               class="bg-gray-200 text-negro focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
-              name="identificacion" required
-              type="text" placeholder="Fecha de nacimiento"
-              pattern="[0-9]{5,15}" maxlength="15" required/>
+              name="identificacion" required type="text" placeholder="Fecha de nacimiento" pattern="[0-9]{5,15}"
+              maxlength="15" required />
           </div>
           <!--! Input para el nombre y apellido -->
           <div class="mt-4">
@@ -53,6 +53,17 @@
                       class="bg-gray-200 text-negro focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
                       type="text" placeholder="Ingresa tus apellidos" />
                   </div> -->
+
+          <!--! Input para el número de telefono -->
+          <div class="mt-4">
+            <label class="block font-medium text-sm mb-2">
+              Telefono
+            </label>
+            <input
+              class="bg-gray-200 text-negro focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
+              name="telefono" required type="text" placeholder="Ingresa tu número de telefono" pattern="[0-9]{7,10}"
+              maxlength="10" required />
+          </div>
           <!--! Input para el correo electronico -->
           <div class="mt-4">
             <label class="block font-medium text-sm mb-2">
@@ -65,25 +76,15 @@
             <p id="email-error" class="text-sm text-red-500 hidden">Ingrese un email válido.</p>
           </div>
           <!--! Input para la fecha de nacimiento -->
-          <div class="mt-4">
+          <!-- <div class="mt-4">
             <label class="block font-medium text-sm mb-2">
               Fecha de nacimiento
             </label>
             <input name="fecha_nacimiento" required
               class="bg-gray-200 text-negro focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
               type="date" placeholder="Fecha de nacimiento" />
-          </div>
-          <!--! Input para el número de telefono -->
-          <div class="mt-4">
-            <label class="block font-medium text-sm mb-2">
-              Telefono 
-            </label>
-            <input 
-              class="bg-gray-200 text-negro focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
-              name="telefono" required
-              type="text" placeholder="Ingresa tu número de telefono"
-              pattern="[0-9]{7,10}" maxlength="10" required/>
-          </div>
+          </div> -->
+
           <!--! Input para la contraseña -->
           <div class="relative mt-4">
             <div class="flex justify-between">
@@ -153,4 +154,3 @@
 </div>
 {% include 'footer.html' %}
 {% endblock %}
-
