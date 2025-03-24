@@ -2,137 +2,281 @@
 
 {% block title %}Formulario de Ventas{% endblock %}
 
-<!--{% block head %}
-{{ super() }}
-<link rel="stylesheet" href="https://unpkg.com/flatpickr/dist/flatpickr.min.css">
-{% endblock %}-->
-
 {% include 'headerd.html' %}
 
 {% block content %}
-<div class="container mx-auto py-8 px-4 ">
-    <div class="w-full max-w-4xl mx-auto">
-        <div class="p-6 space-y-1 border-b bg-white rounded-t-lg">
-            <h2 class="text-2xl font-bold text-center">Registro de Venta</h2>
-            <p class="text-center text-muted-foreground">
-                Complete todos los campos para registrar una nueva venta
-            </p>
-        </div>
-        <form id="salesForm" action="" method="POST" class="p-6 grid gap-6 bg-white rounded-b-lg">
-            <!-- Fecha y Número de Factura -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="space-y-2">
-                    <label for="invoice" class="text-sm font-medium">Número de Factura</label>
-                    <input type="text" id="invoice" name="invoice" placeholder="FAC-0001" class="form-input"
-                        value="{{ invoice_number }}" required>
-                </div>
-                <div class="space-y-2">
-                    <label for="sale_date" class="text-sm font-medium">Fecha de Venta</label>
-                    <input type="text" id="sale_date" name="sale_date" placeholder="Seleccionar fecha"
-                        class="form-input" required>
-                </div>
-            </div>
-
-            <!-- Empleado y Cliente -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="space-y-2">
-                    <label for="employee" class="text-sm font-medium">Empleado</label>
-                    <div class="custom-select-wrapper">
-                        <select id="employee" name="employee" class="form-select" required>
-                            <option value="" disabled selected>Seleccionar empleado</option>
-                            {% for employee in employees %}
-                            <option value="{{ employee.id }}">{{ employee.name }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                </div>
-                <div class="space-y-2">
-                    <label for="customer" class="text-sm font-medium">Cliente</label>
-                    <div class="custom-select-wrapper">
-                        <select id="customer" name="customer" class="form-select" required>
-                            <option value="" disabled selected>Seleccionar cliente</option>
-                            {% for customer in customers %}
-                            <option value="{{ customer.id }}">{{ customer.name }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Producto y Cantidad -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="space-y-2 md:col-span-2">
-                    <label for="product" class="text-sm font-medium">Producto</label>
-                    <div class="custom-select-wrapper">
-                        <select id="product" name="product" class="form-select" required>
-                            <option value="" disabled selected>Seleccionar producto</option>
-                            {% for product in products %}
-                            <option value="{{ product.id }}" data-price="{{ product.price }}">{{ product.name }}
-                            </option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                </div>
-                <div class="space-y-2">
-                    <label for="quantity" class="text-sm font-medium">Cantidad</label>
-                    <input type="number" id="quantity" name="quantity" min="1" placeholder="1" class="form-input"
-                        value="1" required>
-                </div>
-            </div>
-
-            <!-- Precio y Descuento -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="space-y-2">
-                    <label for="price" class="text-sm font-medium">Precio Unitario</label>
-                    <div class="relative">
-                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">$</span>
-                        <input type="number" id="price" name="price" step="0.01" 
-                            class="form-input pl-9" required>
-                    </div>
-                </div>
-                <div class="space-y-2">
-                    <label for="discount" class="text-sm font-medium">Descuento (%)</label>
-                    <input type="number" id="discount" name="discount" min="0" max="100" placeholder="0"
-                        class="form-input" value="0">
-                </div>
-                <div class="space-y-2">
-                    <label for="total" class="text-sm font-medium">Total</label>
-                    <div class="relative">
-                        <span class="absolute left-1.5 top-1/2 -translate-y-1/2 text-muted-foreground">$</span>
-                        <input type="number" id="total" name="total" step="0.01" class="form-input pl-9" readonly>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Método de Pago -->
-            <div class="space-y-2">
-                <label for="payment" class="text-sm font-medium">Método de Pago</label>
-                <div class="custom-select-wrapper">
-                    <select id="payment" name="payment_method" class="form-select" required>
-                        <option value="" disabled selected>Seleccionar método de pago</option>
-                        <option value="cash">Efectivo</option>
-                        <option value="credit">Tarjeta de Crédito</option>
-                        <option value="debit">Tarjeta de Débito</option>
-                        <option value="transfer">Transferencia Bancaria</option>
-                    </select>
-                </div>
-            </div>
-
-            <!-- Detalles Adicionales -->
-            <div class="space-y-2">
-                <label for="details" class="text-sm font-medium">Detalles de la Venta</label>
-                <textarea id="details" name="details"
-                    placeholder="Ingrese cualquier detalle adicional sobre la venta..."
-                    class="form-textarea min-h-[100px]"></textarea>
-            </div>
-
-            <!-- Botones de acción -->
-            <div class="flex flex-col sm:flex-row gap-3 sm:justify-between pt-4 border-t">
-                <button type="button" id="cancelButton" class="btn btn-outline">Cancelar</button>
-                <button type="submit" class="btn button">Registrar Venta</button>
-            </div>
-        </form>
+<div class="container mx-auto py-8 px-4">
+  <div class="w-full max-w-4xl mx-auto">
+    <!-- Card Header -->
+    <div class="bg-white rounded-t-xl shadow-sm border border-b-0 border-gray-200">
+      <div class="p-6 space-y-2">
+        <h2 class="text-2xl font-bold text-center text-gray-900">Registro de Venta</h2>
+        <p class="text-center text-gray-500">
+          Complete todos los campos para registrar una nueva venta
+        </p>
+      </div>
     </div>
+    
+    <!-- Form Card -->
+    <form id="salesForm" action="" method="POST" class="bg-white rounded-b-xl shadow-sm border border-gray-200">
+      <div class="p-6 space-y-8">
+        <!-- Sección 1: Información Básica -->
+        <div class="space-y-6">
+          <h3 class="text-lg font-medium text-gray-900 border-b pb-2">Información Básica</h3>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-2">
+              <label for="invoice" class="text-sm font-medium text-gray-700 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-receipt"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 17.5v-11"></svg>
+                Número de Factura
+              </label>
+              <div class="relative">
+                <input 
+                  type="text" 
+                  id="invoice" 
+                  name="invoice" 
+                  placeholder="FAC-0001" 
+                  class="form-input pl-10 transition-all focus:ring-2 focus:ring-primary/50" 
+                  value="{{ invoice_number }}" 
+                  required
+                >
+              </div>
+            </div>
+            
+            <div class="space-y-2">
+              <label for="sale_date" class="text-sm font-medium text-gray-700 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+                Fecha de Venta
+              </label>
+              <div class="relative">
+                <input 
+                  type="date" 
+                  id="sale_date" 
+                  name="sale_date" 
+                  class="form-input pl-10 transition-all focus:ring-2 focus:ring-primary/50" 
+                  required
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Sección 2: Cliente y Empleado -->
+        <div class="space-y-6">
+          <h3 class="text-lg font-medium text-gray-900 border-b pb-2">Cliente y Empleado</h3>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-2">
+              <label for="employee" class="text-sm font-medium text-gray-700 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Empleado
+              </label>
+              <div class="relative">
+                <select 
+                  id="employee" 
+                  name="employee" 
+                  class="form-select pl-10 transition-all focus:ring-2 focus:ring-primary/50" 
+                  required
+                >
+                  <option value="" disabled selected>Seleccionar empleado</option>
+                  {% for employee in employees %}
+                  <option value="{{ employee.id }}">{{ employee.name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            
+            <div class="space-y-2">
+              <label for="customer" class="text-sm font-medium text-gray-700 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                Cliente
+              </label>
+              <div class="relative">
+                <select 
+                  id="customer" 
+                  name="customer" 
+                  class="form-select pl-10 transition-all focus:ring-2 focus:ring-primary/50" 
+                  required
+                >
+                  <option value="" disabled selected>Seleccionar cliente</option>
+                  {% for customer in customers %}
+                  <option value="{{ customer.id }}">{{ customer.name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Sección 3: Producto y Cantidad -->
+        <div class="space-y-6">
+          <h3 class="text-lg font-medium text-gray-900 border-b pb-2">Detalles del Producto</h3>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="space-y-2 md:col-span-2">
+              <label for="product" class="text-sm font-medium text-gray-700 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-package"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+                Producto
+              </label>
+              <div class="relative">
+                <select 
+                  id="product" 
+                  name="product" 
+                  class="form-select pl-10 transition-all focus:ring-2 focus:ring-primary/50"
+                   
+                  required
+                >
+                  <option value="" disabled selected>Seleccionar producto</option>
+                  {% for product in products %}
+                  <option value="{{ product.id }}" data-price="{{ product.price }}">{{ product.name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            
+            <div class="space-y-2">
+              <label for="quantity" class="text-sm font-medium text-gray-700 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-list-ordered"><line x1="10" x2="21" y1="6" y2="6"/><line x1="10" x2="21" y1="12" y2="12"/><line x1="10" x2="21" y1="18" y2="18"/><path d="M4 6h1v4"/><path d="M4 10h2"/><path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+                Cantidad
+              </label>
+              <div class="relative">
+                <input 
+                  type="number" 
+                  id="quantity" 
+                  name="quantity" 
+                  min="1" 
+                  placeholder="1" 
+                  class="form-input pl-10 transition-all focus:ring-2 focus:ring-primary/50" 
+                  value="1" 
+                  required
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Sección 4: Precios -->
+        <div class="space-y-6">
+          <h3 class="text-lg font-medium text-gray-900 border-b pb-2">Información de Precios</h3>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="space-y-2">
+              <label for="price" class="text-sm font-medium text-gray-700 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tag"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>
+                Precio Unitario
+              </label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">$</span>
+                <input 
+                  type="number" 
+                  id="price" 
+                  name="price" 
+                  step="0.01" 
+                  class="form-input pl-8 transition-all focus:ring-2 focus:ring-primary/50" 
+                  required
+                >
+              </div>
+            </div>
+            
+            <div class="space-y-2">
+              <label for="discount" class="text-sm font-medium text-gray-700 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-percent"><line x1="19" x2="5" y1="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>
+                Descuento 
+              </label>
+              <div class="relative">
+                <input 
+                  type="number" 
+                  id="discount" 
+                  name="discount" 
+                  min="0" 
+                  max="100" 
+                  placeholder="0" 
+                  class="form-input pl-10 transition-all focus:ring-2 focus:ring-primary/50" 
+                  value="0"
+                >
+              </div>
+            </div>
+            
+            <div class="space-y-2">
+              <label for="total" class="text-sm font-medium text-gray-700 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calculator"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
+                Total
+              </label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">$</span>
+                <input 
+                  type="number" 
+                  id="total" 
+                  name="total" 
+                  step="0.01" 
+                  class="form-input pl-8 bg-gray-50 transition-all focus:ring-2 focus:ring-primary/50" 
+                  readonly
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Sección 5: Método de Pago -->
+        <div class="space-y-6">
+          <h3 class="text-lg font-medium text-gray-900 border-b pb-2">Método de Pago</h3>
+          
+          <div class="space-y-2">
+            <label for="payment" class="text-sm font-medium text-gray-700 flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-credit-card"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+              Método de Pago
+            </label>
+            <div class="relative">
+              <select 
+                id="payment" 
+                name="payment_method" 
+                class="form-select pl-10 transition-all focus:ring-2 focus:ring-primary/50" 
+                required
+              >
+                <option value="" disabled selected>Seleccionar método de pago</option>
+                <option value="cash">Efectivo</option>
+                <option value="credit">Tarjeta de Crédito</option>
+                <option value="debit">Tarjeta de Débito</option>
+                <option value="transfer">Transferencia Bancaria</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Sección 6: Detalles Adicionales -->
+        <div class="space-y-6">
+          <h3 class="text-lg font-medium text-gray-900 border-b pb-2">Detalles Adicionales</h3>
+          
+          <div class="space-y-2">
+            <label for="details" class="text-sm font-medium text-gray-700 flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/></svg>
+              Detalles de la Venta
+            </label>
+            <textarea 
+              id="details" 
+              name="details" 
+              placeholder="Ingrese cualquier detalle adicional sobre la venta..." 
+              class="form-textarea min-h-[100px] transition-all focus:ring-2 focus:ring-primary/50"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Botones de acción -->
+      <div class="px-6 py-4 bg-gray-50 border-t border-gray-200 rounded-b-xl flex flex-col sm:flex-row gap-3 sm:justify-end">
+        <button type="button" id="cancelButton" class="btn btn-outline hover:bg-gray-100 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x mr-2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+          Cancelar
+        </button>
+        <button type="submit" class="btn button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check mr-2"><path d="M20 6 9 17l-5-5"/></svg>
+          Registrar Venta
+        </button>
+      </div>
+    </form>
+  </div>
 </div>
+
 {% include 'footer.html' %}
 {% endblock %}
+

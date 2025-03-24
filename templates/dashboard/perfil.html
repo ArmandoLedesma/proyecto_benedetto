@@ -6,139 +6,260 @@
 <!-- Incluir header -->
 {% include 'headerd.html' %}
 
+<div class="container mx-auto px-4 py-8 max-w-5xl">
+    <!-- Tarjeta de Perfil Principal -->
+    <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-8 transition-all duration-300 hover:shadow-xl animate-fadeIn">
+        <!-- Banner fijo (sin opción de cambio) -->
+        <div class="relative">
+            <!-- Banner con gradiente mejorado (Tonalidades verdes)-->
 
-<div class="container mx-auto px-4 py-16">
-    <!-- Encabezado del Perfil -->
-    <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
-        <div class="md:flex">
-            <!-- Banner y Foto de perfil -->
-            <div class="w-full relative">
-                <!-- Banner -->
-                <div
-                    class="h-32 sm:h-48 w-full text-4xl font-bold text-white flex justify-center items-center bg-gradient-to-r from-red-500 to-red-700 capitalize">
-                    Bienvenido: {{
-                    usuario_activo.nombre }}!
+            <div class="h-48 w-full bg-gradient-to-br from-lime-700 via-lime-500 to-lime-300 relative overflow-hidden">
+                <!-- Elementos decorativos en el banner -->
+                <div class="absolute inset-0 overflow-hidden">
+                    <div class="pizza-pattern opacity-10"></div>
                 </div>
+                
+                <!-- Nombre de usuario superpuesto -->
+                <div class="absolute top-1/2 left-8 transform -translate-y-1/2 animate-slideInLeft">
+                    <h1 class="text-3xl md:text-4xl font-bold text-white drop-shadow-md capitalize">
+                        ¡Hola, {{ usuario_activo.nombre }}!
+                    </h1>
+                    <p class="text-white text-lg opacity-90 mt-2 drop-shadow-md">Bienvenido a tu perfil de Benedetto Pizza</p>
+                </div>
+            </div>
 
-                <!-- Foto de perfil superpuesta -->
-                <div
-                    class="absolute left-4 sm:left-8 -bottom-12 sm:-bottom-16 border-4 border-white rounded-full shadow-lg">
+            <!-- Foto de perfil mejorada -->
+            <div class="absolute left-8 -bottom-16 border-4 border-white rounded-full shadow-xl animate-slideInUp">
+                <div class="relative group">
                     {% if usuario.foto_perfil %}
                     <img src="{{ url_for('static', filename='img/usuarios/usuario.jpg' ~ usuario.foto_perfil) }}"
-                        alt="Foto de perfil" class="w-24 h-24 sm:w-32 sm:h-32 rounded-full object-cover">
+                        alt="Foto de perfil" class="w-32 h-32 rounded-full object-cover transition-transform duration-300 group-hover:scale-105">
                     {% else %}
-                    <div
-                        class="w-24 h-24 sm:w-32 sm:h-32 rounded-full bg-gray-300 flex items-center justify-center text-gray-600">
-                        <i class="fa-solid fa-user text-3xl sm:text-5xl"></i>
+                    <div class="w-32 h-32 rounded-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center text-gray-500 transition-transform duration-300 group-hover:scale-105">
+                        <i class="fa-solid fa-user text-5xl"></i>
                     </div>
                     {% endif %}
-                </div>
-
-                <!-- Botón editar perfil -->
-                <div class="absolute right-4 bottom-4">
-                    <button onclick="toggleEditMode()"
-                        class="bg-white text-red-600 hover:bg-red-50 text-sm font-medium py-2 px-4 rounded-full shadow-md transition-colors duration-300">
-                        <i class="fa-solid fa-pen-to-square mr-1"></i> Editar perfil
-                    </button>
+                    
+                    <!-- Overlay para cambiar foto -->
+                    <div class="absolute inset-0 rounded-full bg-black bg-opacity-0 group-hover:bg-opacity-40 flex items-center justify-center transition-all duration-300 opacity-0 group-hover:opacity-100 cursor-pointer" id="cambiar-foto">
+                        <i class="fa-solid fa-camera text-white text-2xl"></i>
+                    </div>
+                    
+                    <!-- Input oculto para seleccionar archivo -->
+                    <input type="file" id="foto-input" class="hidden" accept="image/*">
                 </div>
             </div>
         </div>
 
-        <!-- Información básica -->
-        <div class="pt-4 sm:pt-20 px-4 sm:px-8 pb-8">
-            <div id="view-mode">
-                <h1 class="text-2xl sm:text-3xl font-bold text-gray-800"> Datos del usuario:
-                </h1>
-
-
-                <ul class="space-y-3 flex flex-row justify-between mt-6">
-                    <li class="flex items-start">
-                        <i class="fa-solid fa-circle-user text-red-500 mt-1 w-5"></i>
-                        <span class="ml-2 text-gray-600 capitalize">{{ usuario_activo.rol}}</span>
-                    </li>
-                    <li class="flex items-start">
-                        <i class="fa-solid fa-envelope text-red-500 mt-1 w-5"></i>
-                        <span class="ml-2 text-gray-600">{{ usuario_activo.email }}</span>
-                    </li>
-                    <li class="flex items-start">
-                        <i class="fa-solid fa-id-card text-red-500 mt-1 w-5"></i>
-                        <span class="ml-2 text-gray-600 capitalize">{{ usuario_activo.estado }}</span>
-                    </li>
-                    <!-- <li class="flex items-start">
-                        <i class="fa-solid fa-phone text-red-500 mt-1 w-5"></i>
-                        <span class="ml-2 text-gray-600">{{ usuario_activo.telefono }}</span>
-                    </li> -->
-                    <!-- <li class="flex items-start">
-                        <i class="fa-solid fa-cake-candles text-red-500 mt-1 w-5"></i>
-                        <span class="ml-2 text-gray-600">{{ usuario.fecha_nacimiento }}</span>
-                    </li> -->
-                </ul>
-                <!-- <p class="text-gray-500 text-sm mt-2">
-                    {{ usuario.sucursal }}
-                </p> -->
-            </div>
-
-            <!-- Formulario de edición (inicialmente oculto) -->
-            <div id="edit-mode" class="hidden">
-                <form action="{{ url_for('dashboard_bp.actualizar_perfil') }}" method="POST"
-                    enctype="multipart/form-data">
-                    <div class="space-y-4">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div>
-                                <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre</label>
-                                <input type="text" id="nombre" name="nombre" value="{{ usuario.nombre }}"
-                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring focus:ring-red-500">
+        <!-- Sección de Información de Usuario -->
+        <div class="pt-20 px-8 pb-8">
+            <div class="flex flex-col md:flex-row gap-8">
+                <!-- Columna izquierda: Información básica -->
+                <div class="w-full md:w-1/2 transition-all duration-500 hover:translate-y-[-5px]">
+                    <div class="bg-gray-50 rounded-lg p-6 shadow-sm">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center animate-fadeIn">
+                            <i class="fa-solid fa-circle-info text-lime-600 mr-2"></i>
+                            Información Personal
+                        </h2>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center p-3 border-b border-gray-200 hover:bg-white transition-colors duration-300 rounded">
+                                <i class="fa-solid fa-circle-user text-lime-600 w-6 text-lg"></i>
+                                <div class="ml-3">
+                                    <p class="text-sm text-gray-500">Rol</p>
+                                    <p class="text-gray-700 font-medium capitalize">{{ usuario_activo.rol }}</p>
+                                </div>
                             </div>
-                            <div>
-                                <label for="apellido" class="block text-sm font-medium text-gray-700">Apellido</label>
-                                <input type="text" id="apellido" name="apellido" value="{{ usuario.apellido }}"
-                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring focus:ring-red-500">
+                            
+                            <div class="flex items-center p-3 border-b border-gray-200 hover:bg-white transition-colors duration-300 rounded">
+                                <i class="fa-solid fa-envelope text-lime-600 w-6 text-lg"></i>
+                                <div class="ml-3">
+                                    <p class="text-sm text-gray-500">Correo Electrónico</p>
+                                    <p class="text-gray-700 font-medium">{{ usuario_activo.email }}</p>
+                                </div>
                             </div>
-                        </div>
-
-                        <div>
-                            <label for="foto_perfil" class="block text-sm font-medium text-gray-700">Foto de
-                                perfil</label>
-                            <input type="file" id="foto_perfil" name="foto_perfil" accept="image/*"
-                                class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-red-50 file:text-red-600 hover:file:bg-red-100">
-                        </div>
-
-                        <div class="flex justify-end space-x-3">
-                            <button type="button" onclick="toggleEditMode()"
-                                class="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
-                                Cancelar
-                            </button>
-                            <button type="submit"
-                                class="px-4 py-2 bg-red-600 text-white rounded-md text-sm font-medium hover:bg-red-700">
-                                Guardar cambios
-                            </button>
+                            
+                            <div class="flex items-center p-3 border-b border-gray-200 hover:bg-white transition-colors duration-300 rounded">
+                                <i class="fa-solid fa-id-card text-lime-600 w-6 text-lg"></i>
+                                <div class="ml-3">
+                                    <p class="text-sm text-gray-500">Estado</p>
+                                    <p class="text-gray-700 font-medium capitalize">{{ usuario_activo.estado }}</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </form>
+                </div>
+                
+                <!-- Columna derecha: Preferencias de Pizza -->
+                <div class="w-full md:w-1/2 transition-all duration-500 hover:translate-y-[-5px]">
+                    <div class="bg-gray-50 rounded-lg p-6 shadow-sm mb-6 animate-fadeIn" style="animation-delay: 0.1s">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                            <i class="fa-solid fa-pizza-slice text-lime-600 mr-2"></i>
+                            Nuestras Especialidades
+                        </h2>
+                        
+                        <div class="space-y-4">
+                            <div class="bg-white p-4 rounded-lg shadow-sm transition-all duration-300 hover:shadow-md">
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 bg-lime-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                        <i class="fa-solid fa-pizza-slice text-lime-600 text-xl"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h3 class="font-semibold text-gray-800">Pizza Margarita</h3>
+                                        <p class="text-gray-500 text-sm">La clásica italiana con tomate y queso mozzarella</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white p-4 rounded-lg shadow-sm transition-all duration-300 hover:shadow-md">
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 bg-lime-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                        <i class="fa-solid fa-pepper-hot text-lime-600 text-xl"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h3 class="font-semibold text-gray-800">Pizza Pepperoni</h3>
+                                        <p class="text-gray-500 text-sm">Con extra de queso y pepperoni crujiente</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white p-4 rounded-lg shadow-sm transition-all duration-300 hover:shadow-md">
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 bg-lime-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                        <i class="fa-solid fa-cheese text-lime-600 text-xl"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h3 class="font-semibold text-gray-800">Pizza 4 Quesos</h3>
+                                        <p class="text-gray-500 text-sm">Deliciosa combinación de quesos selectos</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    <!-- Nueva sección: Próximos eventos -->
+    <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-8 transition-all duration-300 hover:shadow-xl hover:translate-y-[-5px] animate-fadeIn" style="animation-delay: 0.5s">
+        <div class="p-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <i class="fa-solid fa-calendar-days text-lime-600 mr-2"></i>
+                Próximos Eventos
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors duration-300">
+                    <div class="text-lg font-bold text-zinc-800">15 de Abril</div>
+                    <h3 class="font-medium text-gray-800">Noche de Pizza 2x1</h3>
+                    <p class="text-gray-600 text-sm mt-2">Todas las pizzas medianas al 2x1. ¡No te lo pierdas!</p>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors duration-300">
+                    <div class="text-lg font-bold text-zinc-800">22 de Abril</div>
+                    <h3 class="font-medium text-gray-800">Festival de Sabores</h3>
+                    <p class="text-gray-600 text-sm mt-2">Ven a probar nuestras nuevas creaciones exclusivas.</p>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors duration-300">
+                    <div class="text-lg font-bold text-zinc-800">30 de Abril</div>
+                    <h3 class="font-medium text-gray-800">Hora Feliz</h3>
+                    <p class="text-gray-600 text-sm mt-2">De 4pm a 7pm, 30% de descuento en bebidas y entradas.</p>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-{% include 'footer.html' %}
-
-<script>
-    function toggleEditMode() {
-        const viewMode = document.getElementById('view-mode');
-        const editMode = document.getElementById('edit-mode');
-
-        if (viewMode.classList.contains('hidden')) {
-            viewMode.classList.remove('hidden');
-            editMode.classList.add('hidden');
-        } else {
-            viewMode.classList.add('hidden');
-            editMode.classList.remove('hidden');
-        }
+<!-- Estilos para animaciones -->
+<style>
+    .pizza-pattern {
+        /*Background-image en formato SVG embebido con pequeñas siluetas de pizzas cayendo atras*/
+        background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Cg fill="%23f9f871"%3E%3Cpath d="M50 0C22.4 0 0 22.4 0 50s22.4 50 50 50 50-22.4 50-50S77.6 0 50 0zm0 90c-22.1 0-40-17.9-40-40S27.9 10 50 10s40 17.9 40 40-17.9 40-40 40z"/%3E%3Cpath d="M50 5C24.3 5 5 24.3 5 50s19.3 45 45 45 45-19.3 45-45S75.7 5 50 5zm0 85c-21.8 0-39.5-17.7-39.5-39.5S28.2 11 50 11s39.5 17.7 39.5 39.5-17.7 39.5-39.5 39.5z"/%3E%3Cpath d="M50 10C25.4 10 5 30.4 5 55s20.4 45 45 45 45-20.4 45-45S74.6 10 50 10zm0 85c-21.8 0-39.5-17.7-39.5-39.5S28.2 16 50 16s39.5 17.7 39.5 39.5-17.7 39.5-39.5 39.5z"/%3E%3C/g%3E%3C/svg%3E');
+        width: 200%;
+        height: 200%;
+        animation: slide 50s linear infinite;
     }
+    
+    @keyframes slide {
+        0% { transform: translate(-50%, -50%) rotate(0deg); }
+        100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes slideInLeft {
+        from { opacity: 0; transform: translate(-30px, -50%); }
+        to { opacity: 1; transform: translate(0, -50%); }
+    }
+    
+    @keyframes slideInUp {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .animate-fadeIn {
+        animation: fadeIn 0.6s ease-out forwards;
+    }
+    
+    .animate-slideInLeft {
+        animation: slideInLeft 0.8s ease-out forwards;
+    }
+    
+    .animate-slideInUp {
+        animation: slideInUp 0.8s ease-out forwards;
+    }
+</style>
 
-    // Implementar Chart.js para gráficos y dar funcionamiento según el resumen de actividad
-
+<!-- Script para funcionalidad de cambio de foto -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const cambiarFotoBtn = document.getElementById('cambiar-foto');
+        const fotoInput = document.getElementById('foto-input');
+        
+        if (cambiarFotoBtn && fotoInput) {
+            cambiarFotoBtn.addEventListener('click', function() {
+                fotoInput.click();
+            });
+            
+            fotoInput.addEventListener('change', function() {
+                if (this.files && this.files[0]) {
+                    // Aquí puedes agregar código para previsualizar la imagen
+                    // o simular la subida al servidor
+                    alert('La foto ha sido seleccionada. Se procesará para actualizar tu perfil.');
+                    
+                    // Para una demostración visual, simularemos un cambio:
+                    const imgPreview = cambiarFotoBtn.previousElementSibling;
+                    if (imgPreview.tagName === 'IMG') {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            imgPreview.src = e.target.result;
+                        }
+                        reader.readAsDataURL(this.files[0]);
+                    } else if (imgPreview.classList.contains('fa-user')) {
+                        const parent = imgPreview.parentElement;
+                        const newImg = document.createElement('img');
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            newImg.src = e.target.result;
+                            newImg.classList.add('w-32', 'h-32', 'rounded-full', 'object-cover');
+                            parent.innerHTML = '';
+                            parent.appendChild(newImg);
+                        }
+                        reader.readAsDataURL(this.files[0]);
+                    }
+                }
+            });
+        }
+    });
 </script>
 
+{% include 'footer.html' %}
 
 {% endblock %}

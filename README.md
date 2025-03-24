@@ -76,3 +76,7 @@ touch modules/products/{model.py,repositories.py,services.py,routes.py}
 touch modules/sales/{model.py,repositories.py,services.py,routes.py}
 touch modules/categories/{model.py,repositories.py,services.py,routes.py}
 
+
+
+
+
