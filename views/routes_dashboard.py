@@ -7,6 +7,7 @@ from modules.employees.services import EmpleadoService
 from modules.categories.services import CategoriaService
 from modules.products.services import ProductoService
 from modules.clients.services import ClienteService
+from modules.sucursales.services import SucursalService
 
 
 # Instancia de blueprint 
@@ -16,6 +17,8 @@ empleados_services = EmpleadoService()
 categorias_services = CategoriaService()
 productos_services = ProductoService()
 clientes_services = ClienteService()
+sucursales_services = SucursalService()
+
 
 
 # Protege todas las rutas del dashboard
@@ -176,13 +179,19 @@ def show_form_ventas():
     productos_list = [producto.to_dict() for producto in productos]
     # Obtenemos la lista de clientes a través del servicio
     clientes = clientes_services.get_all_clientes()
+    print (f"clientes: {clientes}")
     # Convertimos cada objeto cliente a diccionario
-    #clientes_list = [cliente.to_dict() for cliente in clientes]
+    clientes_list = [cliente.to_dict() for cliente in clientes]
+    print (f"clientes_list: {clientes_list}")
     # Obtenemos la lista de empleados a través del servicio
     empleados = empleados_services.get_all_empleados()
     # Convertimos cada objeto empleado a diccionario
     empleados_list = [empleado.to_dict() for empleado in empleados]
-    return render_template("dashboard/form_ventas.html", empleados=empleados_list, productos=productos_list)
+    # Obtenemos la lista de sucursales a través del servicio
+    sucursales = sucursales_services.get_all()
+    # Convertimos cada objeto sucursal a diccionario
+    sucursales_list = [sucursal.to_dict() for sucursal in sucursales]
+    return render_template("dashboard/form_ventas.html", empleados=empleados_list, productos=productos_list, clientes=clientes_list, sucursales=sucursales_list)
 
 @dashboard_bp.route("/perfil")
 def show_perfil():
