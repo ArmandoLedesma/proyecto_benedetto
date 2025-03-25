@@ -1,10 +1,13 @@
 from flask import Blueprint,render_template, request, redirect, url_for, flash 
 from flask_login import login_required, current_user
+from views.rol_permiso import rol_requerido
 
 from data import items, items_categorias, items_clientes, items_empleados, items_sucursales, items_tradicionales, items_hamburguesa, items_lazana, items_perro_caliente, items_bebidas, items_desgranado
 from modules.employees.services import EmpleadoService
 from modules.categories.services import CategoriaService
 from modules.products.services import ProductoService
+from modules.clients.services import ClienteService
+
 
 # Instancia de blueprint 
 dashboard_bp = Blueprint('dashboard_bp', __name__, template_folder="dashboard")
@@ -12,6 +15,7 @@ dashboard_bp = Blueprint('dashboard_bp', __name__, template_folder="dashboard")
 empleados_services = EmpleadoService()
 categorias_services = CategoriaService()
 productos_services = ProductoService()
+clientes_services = ClienteService()
 
 
 # Protege todas las rutas del dashboard
@@ -26,9 +30,31 @@ def require_login():
 def show_dashboard():
     usuario_activo = current_user
     print(f"Usuario activo en el dashboard: {usuario_activo}")
-    return render_template('dashboard/dashboard.html', items = items, items_categorias= items_categorias, usuario_activo=usuario_activo)
+    print(f"Usuario activo el rol del usuario es : {usuario_activo.rol}")
+
+    if current_user.rol == 'empleado':  # O 'admin', u otro rol de administrador
+        return render_template('dashboard/dashboard.html', items = items, items_categorias= items_categorias, usuario_activo=usuario_activo) # Dashboard admin
+    elif current_user.rol == 'cliente':
+        return redirect(url_for('dashboard_bp.dashboard_cliente'))  # Redirige al dashboard del cliente
+    else:
+        # Manejar roles desconocidos (opcional: mostrar una página de error)
+        flash("Rol de usuario desconocido.", "error")
+        return redirect(url_for('auth_bp.logout')) # O redirigir a una página de error
+
+
+    
+
+# Nueva ruta para el dashboard del cliente (en routes_dashboard.py)
+@dashboard_bp.route('/dashboard-cliente')
+@login_required
+@rol_requerido('cliente')
+def dashboard_cliente():
+    return render_template('dashboard/dashboard-cliente.html') # Usa tu plantilla del dashboard de cliente
+
+
 
 @dashboard_bp.route("/categorias")
+@rol_requerido('empleado')
 def show_categorias():
     # Obtenemos la lista de categorias a través del servicio
     categorias = categorias_services.get_all()
@@ -40,6 +66,7 @@ def show_categorias():
 
 
 @dashboard_bp.route("/empleados")
+@rol_requerido('empleado')
 def show_empleados():
     return render_template("dashboard/empleados.html")
     # Obtenemos la lista de empleados a través del servicio
@@ -50,15 +77,18 @@ def show_empleados():
     #return render_template("dashboard/empleados.html", items= items_empleados)
 
 @dashboard_bp.route("/clientes")
+@rol_requerido('empleado')
 def show_clientes():
     return render_template("dashboard/clientes.html", items= items_clientes)
 
 @dashboard_bp.route("/sucursales")
+@rol_requerido('empleado')
 def show_sucursales():
     return render_template("dashboard/sucursales.html")
 
 
 @dashboard_bp.route("/carta_pizza")
+@rol_requerido('empleado')
 def show_carta_pizza():
     # Obtenemos la lista de productos a través del servicio
     productos = productos_services.get_all()
@@ -71,6 +101,7 @@ def show_carta_pizza():
     return render_template("dashboard/carta_pizza.html", items= items_tradicionales)
 
 @dashboard_bp.route("/carta_hamburguesa")
+@rol_requerido('empleado')
 def show_carta_hamburguesa():
     # Obtenemos la lista de productos a través del servicio
     productos = productos_services.get_all()
@@ -82,6 +113,7 @@ def show_carta_hamburguesa():
     return render_template("dashboard/carta_hamburguesa.html", items= items_hamburguesa)
 
 @dashboard_bp.route("/carta_lazana")
+@rol_requerido('empleado')
 def show_carta_lazana():
     # Obtenemos la lista de productos a través del servicio
     productos = productos_services.get_all()
@@ -93,6 +125,7 @@ def show_carta_lazana():
     return render_template("dashboard/carta_lazana.html", items= items_lazana)
 
 @dashboard_bp.route("/carta_perro_caliente")
+@rol_requerido('empleado')
 def show_carta_perro_caliente():
      # Obtenemos la lista de productos a través del servicio
     productos = productos_services.get_all()
@@ -104,6 +137,7 @@ def show_carta_perro_caliente():
     return render_template("dashboard/carta_perro_caliente.html", items= items_perro_caliente)
 
 @dashboard_bp.route("/carta_desgranado")
+@rol_requerido('empleado')
 def show_carta_desgranado():
     # Obtenemos la lista de productos a través del servicio
     productos = productos_services.get_all()
@@ -115,6 +149,7 @@ def show_carta_desgranado():
     return render_template("dashboard/carta_desgranado.html", items= items_desgranado)
 
 @dashboard_bp.route("/carta_bebidas")
+@rol_requerido('empleado')
 def show_carta_bebidas():
     # Obtenemos la lista de productos a través del servicio
     productos = productos_services.get_all()
@@ -127,12 +162,27 @@ def show_carta_bebidas():
 
 
 @dashboard_bp.route("/productos")
+@rol_requerido('empleado')
 def show_productos():
     return render_template("dashboard/productos.html")
 
 @dashboard_bp.route("/form_ventas")
+@rol_requerido('empleado')
 def show_form_ventas():
-    return render_template("dashboard/form_ventas.html")
+
+    # Obtenemos la lista de productos a través del servicio
+    productos = productos_services.get_all()
+    # Convertimos cada objeto producto a diccionario
+    productos_list = [producto.to_dict() for producto in productos]
+    # Obtenemos la lista de clientes a través del servicio
+    clientes = clientes_services.get_all_clientes()
+    # Convertimos cada objeto cliente a diccionario
+    #clientes_list = [cliente.to_dict() for cliente in clientes]
+    # Obtenemos la lista de empleados a través del servicio
+    empleados = empleados_services.get_all_empleados()
+    # Convertimos cada objeto empleado a diccionario
+    empleados_list = [empleado.to_dict() for empleado in empleados]
+    return render_template("dashboard/form_ventas.html", empleados=empleados_list, productos=productos_list)
 
 @dashboard_bp.route("/perfil")
 def show_perfil():
@@ -168,6 +218,7 @@ def show_perfil():
 
 @dashboard_bp.route("/perfil/actualizar", methods=['POST'])
 def actualizar_perfil():
+    
     # Obtener el usuario actual
     from flask_login import current_user
     
@@ -193,3 +244,5 @@ def actualizar_perfil():
     # Redireccionar de vuelta al perfil con un mensaje
     flash('Perfil actualizado correctamente', 'success')
     return redirect(url_for('dashboard_bp.show_perfil'))
+
+

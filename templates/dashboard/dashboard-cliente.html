@@ -41,7 +41,8 @@
     <header class="relative z-50">
         <div class="relative flex items-center justify-between py-4 px-4 sm:px-6 bg-white shadow-md">
             <!-- Logo con ajuste responsive -->
-            <div class="flex flex-row justify-center items-center font-roboto text-xl sm:text-2xl md:text-3xl font-semibold tracking-wide">
+            <div
+                class="flex flex-row justify-center items-center font-roboto text-xl sm:text-2xl md:text-3xl font-semibold tracking-wide">
                 <img class="h-auto w-10 sm:w-12 md:w-16 object-contain"
                     src="{{ url_for('static', filename='img/pizzas/logo.png') }}" alt="Logo Benedetto Pizza">
                 <span class="ml-2 text-zinc-700 truncate">Benedetto</span>
@@ -64,7 +65,8 @@
                             class="text-sm lg:text-base py-1 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Menú</a>
                     </li>
                     <li><a href="/cliente/mis-pedidos"
-                            class="text-sm lg:text-base py-1 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Mis Pedidos</a>
+                            class="text-sm lg:text-base py-1 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Mis
+                            Pedidos</a>
                     </li>
                     <li><a href="/cliente/sucursales"
                             class="text-sm lg:text-base py-1 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Sucursales</a>
@@ -85,7 +87,8 @@
                                     <a href="/cliente/perfil" class="block w-full text-left px-4 py-2">Mi Perfil</a>
                                 </li>
                                 <li class="hover:bg-gray-200">
-                                    <a href="/cliente/direcciones" class="block w-full text-left px-4 py-2">Mis Direcciones</a>
+                                    <a href="/cliente/direcciones" class="block w-full text-left px-4 py-2">Mis
+                                        Direcciones</a>
                                 </li>
                                 <hr class="text-gray-300">
                                 <li class="hover:bg-gray-200">
@@ -125,7 +128,8 @@
                 </li>
                 <li>
                     <a href="/cliente/mis-pedidos"
-                        class="block py-2 px-4 rounded-md hover:bg-red-50 hover:text-red-600 transition-colors">Mis Pedidos</a>
+                        class="block py-2 px-4 rounded-md hover:bg-red-50 hover:text-red-600 transition-colors">Mis
+                        Pedidos</a>
                 </li>
                 <li>
                     <a href="/cliente/sucursales"
@@ -133,15 +137,18 @@
                 </li>
                 <li class="border-t border-gray-200 pt-4 mt-4">
                     <a href="/cliente/perfil"
-                        class="block py-2 px-4 rounded-md hover:bg-red-50 hover:text-red-600 transition-colors">Mi Perfil</a>
+                        class="block py-2 px-4 rounded-md hover:bg-red-50 hover:text-red-600 transition-colors">Mi
+                        Perfil</a>
                 </li>
                 <li>
                     <a href="/cliente/direcciones"
-                        class="block py-2 px-4 rounded-md hover:bg-red-50 hover:text-red-600 transition-colors">Mis Direcciones</a>
+                        class="block py-2 px-4 rounded-md hover:bg-red-50 hover:text-red-600 transition-colors">Mis
+                        Direcciones</a>
                 </li>
                 <li>
                     <a href="{{ url_for('auth_bp.logout' ) }}"
-                        class="block py-2 px-4 rounded-md text-red-600 hover:bg-red-50 transition-colors">Cerrar sesión</a>
+                        class="block py-2 px-4 rounded-md text-red-600 hover:bg-red-50 transition-colors">Cerrar
+                        sesión</a>
                 </li>
             </ul>
         </nav>
@@ -149,19 +156,23 @@
 
     <!-- Tarjetas - versión para clientes -->
     <div class="container mx-auto px-4 py-6 sm:py-8">
-        <h1 class="text-2xl sm:text-3xl font-roboto font-bold text-zinc-800 mb-6 text-center sm:text-left">¡Bienvenido, {{ current_user.nombre }}!</h1>
+        <h1 class="text-2xl sm:text-3xl font-roboto font-bold text-zinc-800 mb-6 text-center sm:text-left">¡Bienvenido,
+            {{ current_user.nombre }}!</h1>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <!-- Tarjeta de Menú -->
             <div class="flex">
-                <div class="rounded-lg overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow duration-300 flex flex-col w-full h-full">
+                <div
+                    class="rounded-lg overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow duration-300 flex flex-col w-full h-full">
                     <div class="relative pt-[56.25%] w-full bg-gray-100">
                         <img class="absolute top-0 left-0 w-full h-full object-cover"
-                            src="{{ url_for('static', filename='img/pizzas/menu.jpg') }}" alt="Nuestro Menú" loading="lazy">
+                            src="{{ url_for('static', filename='img/pizzas/menu.jpg') }}" alt="Nuestro Menú"
+                            loading="lazy">
                     </div>
                     <div class="px-4 sm:px-6 py-4 font-roboto flex-grow">
                         <h2 class="text-lg sm:text-xl mb-2 text-zinc-800 font-semibold">Nuestro Menú</h2>
-                        <p class="text-gray-700 text-sm sm:text-base">Descubre nuestras deliciosas pizzas y productos. ¡Encuentra tu favorita!</p>
+                        <p class="text-gray-700 text-sm sm:text-base">Descubre nuestras deliciosas pizzas y productos.
+                            ¡Encuentra tu favorita!</p>
                     </div>
                     <div class="px-4 sm:px-6 py-4 flex justify-center sm:justify-start">
                         <a href="/cliente/productos"
@@ -171,17 +182,20 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Tarjeta de Mis Pedidos -->
             <div class="flex">
-                <div class="rounded-lg overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow duration-300 flex flex-col w-full h-full">
+                <div
+                    class="rounded-lg overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow duration-300 flex flex-col w-full h-full">
                     <div class="relative pt-[56.25%] w-full bg-gray-100">
                         <img class="absolute top-0 left-0 w-full h-full object-cover"
-                            src="{{ url_for('static', filename='img/pizzas/pedidos.jpg') }}" alt="Mis Pedidos" loading="lazy">
+                            src="{{ url_for('static', filename='img/pizzas/pedidos.jpg') }}" alt="Mis Pedidos"
+                            loading="lazy">
                     </div>
                     <div class="px-4 sm:px-6 py-4 font-roboto flex-grow">
                         <h2 class="text-lg sm:text-xl mb-2 text-zinc-800 font-semibold">Mis Pedidos</h2>
-                        <p class="text-gray-700 text-sm sm:text-base">Consulta el estado de tus pedidos actuales e historial de pedidos anteriores.</p>
+                        <p class="text-gray-700 text-sm sm:text-base">Consulta el estado de tus pedidos actuales e
+                            historial de pedidos anteriores.</p>
                     </div>
                     <div class="px-4 sm:px-6 py-4 flex justify-center sm:justify-start">
                         <a href="/cliente/mis-pedidos"
@@ -191,17 +205,20 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Tarjeta de Sucursales -->
             <div class="flex">
-                <div class="rounded-lg overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow duration-300 flex flex-col w-full h-full">
+                <div
+                    class="rounded-lg overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow duration-300 flex flex-col w-full h-full">
                     <div class="relative pt-[56.25%] w-full bg-gray-100">
                         <img class="absolute top-0 left-0 w-full h-full object-cover"
-                            src="{{ url_for('static', filename='img/pizzas/sucursal.jpg') }}" alt="Nuestras Sucursales" loading="lazy">
+                            src="{{ url_for('static', filename='img/pizzas/sucursal.jpg') }}" alt="Nuestras Sucursales"
+                            loading="lazy">
                     </div>
                     <div class="px-4 sm:px-6 py-4 font-roboto flex-grow">
                         <h2 class="text-lg sm:text-xl mb-2 text-zinc-800 font-semibold">Nuestras Sucursales</h2>
-                        <p class="text-gray-700 text-sm sm:text-base">Encuentra la sucursal más cercana. Consulta horarios y direcciones.</p>
+                        <p class="text-gray-700 text-sm sm:text-base">Encuentra la sucursal más cercana. Consulta
+                            horarios y direcciones.</p>
                     </div>
                     <div class="px-4 sm:px-6 py-4 flex justify-center sm:justify-start">
                         <a href="/cliente/sucursales"
@@ -211,17 +228,20 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Tarjeta de Promociones (si aplica) -->
             <div class="flex">
-                <div class="rounded-lg overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow duration-300 flex flex-col w-full h-full">
+                <div
+                    class="rounded-lg overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow duration-300 flex flex-col w-full h-full">
                     <div class="relative pt-[56.25%] w-full bg-gray-100">
                         <img class="absolute top-0 left-0 w-full h-full object-cover"
-                            src="{{ url_for('static', filename='img/pizzas/promociones.jpg') }}" alt="Promociones" loading="lazy">
+                            src="{{ url_for('static', filename='img/pizzas/promociones.jpg') }}" alt="Promociones"
+                            loading="lazy">
                     </div>
                     <div class="px-4 sm:px-6 py-4 font-roboto flex-grow">
                         <h2 class="text-lg sm:text-xl mb-2 text-zinc-800 font-semibold">Promociones Especiales</h2>
-                        <p class="text-gray-700 text-sm sm:text-base">Descubre nuestras promociones exclusivas y ahorra en tus pedidos favoritos.</p>
+                        <p class="text-gray-700 text-sm sm:text-base">Descubre nuestras promociones exclusivas y ahorra
+                            en tus pedidos favoritos.</p>
                     </div>
                     <div class="px-4 sm:px-6 py-4 flex justify-center sm:justify-start">
                         <a href="/cliente/promociones"
@@ -250,34 +270,34 @@
 
     <!-- Script para el menú móvil -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const menuToggle = document.getElementById('menu-toggle');
             const closeMenu = document.getElementById('close-menu');
             const menu = document.getElementById('menu');
-            
+
             if (menuToggle && closeMenu && menu) {
-                menuToggle.addEventListener('click', function() {
+                menuToggle.addEventListener('click', function () {
                     menu.classList.remove('hidden');
                     menu.classList.add('translate-x-0');
                 });
-                
-                closeMenu.addEventListener('click', function() {
+
+                closeMenu.addEventListener('click', function () {
                     menu.classList.add('hidden');
                     menu.classList.remove('translate-x-0');
                 });
             }
-            
+
             // Para el dropdown del usuario
             const userBtn = document.querySelector('.user-btn');
             const userMenu = document.getElementById('user-menu');
-            
+
             if (userBtn && userMenu) {
-                userBtn.addEventListener('click', function() {
+                userBtn.addEventListener('click', function () {
                     userMenu.classList.toggle('hidden');
                 });
-                
+
                 // Cerrar al hacer clic fuera
-                document.addEventListener('click', function(event) {
+                document.addEventListener('click', function (event) {
                     if (!userBtn.contains(event.target) && !userMenu.contains(event.target)) {
                         userMenu.classList.add('hidden');
                     }
@@ -287,4 +307,6 @@
     </script>
 
 </main>
+
+{% include 'footer.html' %}
 {% endblock %}
