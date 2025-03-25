@@ -8,16 +8,10 @@ from modules.users.services import UsuarioService
 auth_bp = Blueprint('auth_bp', __name__)
 usuario_service = UsuarioService()
 
-
-
-
-
 @auth_bp.route("/registro")
 def registrarse():
     
     return render_template("auth/registro.html")
-
-
 
 #! ---Logica de autenticacion
 @auth_bp.route("/login", methods=["GET", "POST"])
@@ -37,7 +31,7 @@ def login():
             #print (f"Usuario activo: {usuario_activo}")
             print ("Inicio de sesión exitoso")
             flash("Inicio de sesión exitoso", "success")
-            
+            # Redireccion al controlador para el dashboard
             return redirect(url_for('dashboard_bp.show_dashboard'))
         else:
             
@@ -63,8 +57,6 @@ def logout():
     logout_user()
     flash("Sesión cerrada correctamente", "success")
     return redirect(url_for('auth_bp.login'))
-
-
 
 #! Rutas para el registro / creacion del usuarios
 """
