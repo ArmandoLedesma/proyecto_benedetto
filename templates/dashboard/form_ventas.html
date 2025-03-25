@@ -23,13 +23,13 @@
 
 
         <!-- Sección 1: Información Básica -->
-        <!--! Sacar de aqui la fecha y ver que se hace con el codigo de la factura       
+
         <div class="space-y-6">
           <h3 class="text-lg font-medium text-gray-900 border-b pb-2">Información Básica</h3>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="space-y-2">
-              <label for="invoice" class="text-sm font-medium text-gray-700 flex items-center gap-2">
+              <label for="sucursal" class="text-sm font-medium text-gray-700 flex items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                   class="lucide lucide-receipt">
@@ -37,12 +37,16 @@
                   <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8" />
                   <path d="M12 17.5v-11">
                 </svg>
-                Número de Factura
+                Sucursal
               </label>
               <div class="relative">
-                <input type="text" id="invoice" name="invoice" placeholder="FAC-0001"
-                  class="form-input pl-10 transition-all focus:ring-2 focus:ring-primary/50"
-                  value="{{ invoice_number }}" required>
+                <select id="sucursal" name="sucursal"
+                  class="form-select pl-10 transition-all focus:ring-2 focus:ring-primary/50" required>
+                  <option value="" disabled selected>Seleccionar sucursal</option>
+                  {% for sucursal in sucursales %}
+                  <option value="{{ sucursal.id }}">{{ sucursal.nombre_sucursal }}</option>
+                  {% endfor %}
+                </select>
               </div>
             </div>
 
@@ -65,7 +69,7 @@
             </div>
           </div>
         </div>
--->
+
         <!-- Sección 2: Cliente y Empleado -->
         <div class="space-y-6">
           <h3 class="text-lg font-medium text-gray-900 border-b pb-2">Cliente y Empleado</h3>
@@ -93,7 +97,7 @@
             </div>
 
             <div class="space-y-2">
-              <label for="customer" class="text-sm font-medium text-gray-700 flex items-center gap-2">
+              <label for="cliente" class="text-sm font-medium text-gray-700 flex items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                   class="lucide lucide-users">
@@ -105,11 +109,11 @@
                 Cliente
               </label>
               <div class="relative">
-                <select id="customer" name="customer"
+                <select id="cliente" name="cliente"
                   class="form-select pl-10 transition-all focus:ring-2 focus:ring-primary/50" required>
                   <option value="" disabled selected>Seleccionar cliente</option>
-                  {% for customer in customers %}
-                  <option value="{{ customer.id }}">{{ customer.name }}</option>
+                  {% for cliente in clientes %}
+                  <option value="{{ cliente.id }}">{{ cliente.nombre }}</option>
                   {% endfor %}
                 </select>
               </div>
@@ -187,7 +191,7 @@
               <div class="relative">
                 <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">$</span>
                 <input type="number" id="precio" name="precio" step="0.01"
-                  class="form-input pl-8 transition-all focus:ring-2 focus:ring-primary/50" required>
+                  class="form-input pl-8 transition-all focus:ring-2 focus:ring-primary/50 text-right" required>
               </div>
             </div>
 
@@ -307,10 +311,64 @@
           Registrar Venta
         </button>
       </div>
+
+      <!-- Probar la data de formulario pero antes de cerrar -->
+      <script>
+        document.getElementById('salesForm').addEventListener('submit', function (event) {
+          event.preventDefault(); // Evita que el formulario se envíe (por ahora)
+
+          // Obtener los datos del formulario
+          const formData = new FormData(this);
+          const formObject = {};
+          formData.forEach((value, key) => {
+            formObject[key] = value;
+          });
+
+          // Mostrar la data del formulario en la consola
+          console.log('Datos del formulario:', formObject);
+
+          // Aquí es donde enviarías los datos al backend (ej: con fetch)
+          // fetch('/tu-ruta-del-backend', {
+          //   method: 'POST',
+          //   headers: {
+          //     'Content-Type': 'application/json',
+          //   },
+          //   body: JSON.stringify(formObject),
+          // })
+          // .then(response => response.json())
+          // .then(data => {
+          //   console.log('Success:', data);
+          // })
+          // .catch((error) => {
+          //   console.error('Error:', error);
+          // });
+        });
+      </script>
+
+
     </form>
   </div>
 </div>
 
+
+<!--! Script -->
+<!-- Para el datepicker -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Obtener la fecha actual
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // Enero es 0
+    const day = String(today.getDate()).padStart(2, '0');
+    const formattedDate = `${year}-${month}-${day}`;
+
+    // Establecer la fecha actual en el input
+    const saleDateInput = document.getElementById('sale_date');
+    if (saleDateInput) {
+      saleDateInput.value = formattedDate;
+    }
+  });
+</script>
 
 <!-- Colocar el precio -->
 <script>
