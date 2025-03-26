@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% include 'headerd.html' %}
+
+<!-- Contenido -->
+<main>
+    <!-- Contenedor de ventas -->
+    <div class="container font-roboto mt-8 mx-auto py-5">
+        <div class="flex flex-col justify-center items-center py-4 gap-1">
+            <h2 class="text-4xl font-medium text-zinc-800 sm:text-3xl">Ventas</h2>
+            <p class="font-light text-gray-800 text-center sm:text-sm">¡Bienvenido al panel de control de Ventas!</p>
+        </div>
+    </div>
+    <!-- Fin de contenedor de ventas -->
+
+    <!-- Tabla para el listado de ventas -->
+    <div class="container mx-auto p-5 sm:p-3">
+        <div class="overflow-x-auto bg-neutral-200 rounded-lg shadow-lg">
+            <table class="w-full table-auto border-collapse">
+                <thead>
+                    <tr class="bg-zinc-800 text-white uppercase text-sm font-medium">
+                        <th class="py-4 px-6 text-left sm:px-3 sm:py-2">ID Venta</th>
+                        <th class="py-4 px-6 text-left sm:px-3 sm:py-2">Fecha Venta</th>
+                        <th class="py-4 px-6 text-left sm:px-3 sm:py-2">Cliente ID</th>
+                        <th class="py-4 px-6 text-left sm:px-3 sm:py-2">Empleado ID</th>
+                        <th class="py-4 px-6 text-left sm:px-3 sm:py-2">Sucursal ID</th>
+                        <th class="py-4 px-6 text-left sm:px-3 sm:py-2">Método Pago ID</th>
+                        <th class="py-4 px-6 text-left sm:px-3 sm:py-2">Total</th>
+                        <th class="py-4 px-6 text-left sm:px-3 sm:py-2">Detalles Venta</th>
+                        <th class="py-4 px-6 text-center sm:px-3 sm:py-2">Detalles de Productos</th>
+                    </tr>
+                </thead>
+                <tbody id="ventasTablebody" class="text-gray-700 text-sm font-medium">
+                    <!-- Aquí se renderizan las filas con JavaScript -->
+                </tbody>
+            </table>
+
+            <!-- Paginación -->
+            <div id="paginationContainer"
+                class="bg-white px-6 py-4 border-t border-gray-300 flex items-center justify-between sm:px-3 sm:py-2">
+                <div class="flex items-center">
+                    <span class="text-sm text-gray-700 sm:text-xs">
+                        Mostrando <span id="startRecord" class="font-medium">1</span> a
+                        <span id="endRecord" class="font-medium">10</span> de
+                        <span id="totalRecords" class="font-medium">0</span> registros
+                    </span>
+                </div>
+                <div class="flex items-center space-x-2 sm:space-x-1">
+                    <button id="prevPageBtn"
+                        class="px-3 py-1 rounded border border-gray-300 bg-white text-gray-700 text-sm hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed sm:px-2 sm:py-1 sm:text-xs">
+                        Anterior
+                    </button>
+                    <div id="pageNumbers" class="flex items-center space-x-1 sm:space-x-0">
+                        <!-- Números de página generados dinámicamente -->
+                    </div>
+                    <button id="nextPageBtn"
+                        class="px-3 py-1 rounded border border-gray-300 bg-white text-gray-700 text-sm hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed sm:px-2 sm:py-1 sm:text-xs">
+                        Siguiente
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Importar script de paginación -->
+    <script src="{{ url_for('static', filename='js/pagination.js') }}"></script>
+
+    <script>
+        // Función para renderizar una fila de venta en la tabla
+        function renderVentaRow(venta) {
+            const row = document.createElement('tr');
+            row.className = 'border-b border-gray-300 hover:bg-gray-300 transition duration-200 ease-in-out';
+
+            // Función para formatear las líneas de producto como una lista HTML
+            function formatLineasProducto(lineas) {
+                let listaHTML = '<ul>';
+                lineas.forEach(linea => {
+                    listaHTML += `<li>${linea.producto_nombre} (Cantidad: ${linea.cantidad}, Precio: ${linea.precio_unitario}, Descuento: ${linea.descuento}%)</li>`;
+                });
+                listaHTML += '</ul>';
+                return listaHTML;
+            }
+
+            row.innerHTML = `
+                <td class="py-4 px-6 bg-white sm:px-3 sm:py-2">${venta.id}</td>
+                <td class="py-4 px-6 bg-white sm:px-3 sm:py-2">${venta.fecha_venta}</td>
+                <td class="py-4 px-6 bg-white sm:px-3 sm:py-2">${venta.cliente_id}</td>
+                <td class="py-4 px-6 bg-white sm:px-3 sm:py-2">${venta.empleado_id}</td>
+                <td class="py-4 px-6 bg-white sm:px-3 sm:py-2">${venta.sucursal_id}</td>
+                <td class="py-4 px-6 bg-white sm:px-3 sm:py-2">${venta.metodo_pago_id}</td>
+                <td class="py-4 px-6 bg-white sm:px-3 sm:py-2">${venta.total}</td>
+                <td class="py-4 px-6 bg-white sm:px-3 sm:py-2">${venta.detalles}</td>
+                <td class="py-4 px-6 bg-white text-left sm:px-3 sm:py-2">${formatLineasProducto(venta.lineas_producto)}</td>
+            `;
+            return row;
+        }
+
+        // Inicializar la paginación al cargar la página
+        document.addEventListener('DOMContentLoaded', () => {
+            window.paginationController.init({
+                fetchUrl: '/api/v1/ventas',
+                renderCallback: renderVentaRow,
+                recordsKey: 'ventas',
+                tableBodyId: 'ventasTablebody',
+                recordsPerPage: 5 // Ajusta la cantidad de registros por página
+            });
+        });
+    </script>
+
+</main>
+
+{% include 'footer.html' %}
+
+{% endblock %}
