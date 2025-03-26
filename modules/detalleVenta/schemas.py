@@ -2,9 +2,14 @@ from pydantic import BaseModel, ConfigDict
 from typing import List, Optional
 from datetime import date
 from decimal import Decimal
-from modules.detalleVenta.schemas import DetalleVentaCreateSchema
 
+class DetalleVentaCreateSchema(BaseModel):  # Renombrar la clase
+    producto_id: int
+    cantidad: int
+    precio_unitario: Decimal
+    descuento: Optional[Decimal] = 0
 
+    model_config = ConfigDict(extra="ignore")
 
 class VentaCreateSchema(BaseModel):
     fecha_venta: date
