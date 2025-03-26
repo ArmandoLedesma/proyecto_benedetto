@@ -1,10 +1,11 @@
 from database.db import db
+from datetime import date
 
 from modules.categories.model import Categoria
 from modules.clients.model import Cliente
 from modules.employees.model import Empleado
 from modules.factura.model import Factura
-from modules.lineaProductos.model import LineaProducto
+from modules.detalleVenta.model import DetalleVenta
 from modules.metodoPago.model import MetodoPago
 from modules.pedidos.model import Pedido
 from modules.proveedores.model import Proveedor
@@ -13,12 +14,43 @@ from modules.sucursales.model import Sucursal
 from modules.users.model import Usuario
 from modules.ventas.model import Venta
 
+
+
 from decimal import Decimal
 from werkzeug.security import generate_password_hash
 
 # Función para recrear la base de datos y agregar datos de prueba
 def db_create(app):
     with app.app_context():
+        """ 
+        # Finalmente, borramos las tablas que no tienen dependencias
+         # **IMPORTANTE: Borrar las tablas en el orden correcto**
+        # 1. Tablas que dependen de otras (tienen FKs)
+        #    (Borrar primero DetalleVenta, luego Venta, etc.)
+        db.drop_all(
+            [
+                DetalleVenta.__table__,  # DetalleVenta depende de Venta y Producto
+                Venta.__table__,  # Venta depende de Empleado, Cliente, Sucursal, MetodoPago
+                Factura.__table__, #Factura depende de Ventas y MetodoPago
+                Producto.__table__,  # Producto depende de Categoria
+                Pedido.__table__,
+            ]
+        )
+
+        # 2. Tablas de las que dependen otras (borrar en orden inverso)
+        db.drop_all(
+            [
+                MetodoPago.__table__,
+                Empleado.__table__,
+                Cliente.__table__,
+                Sucursal.__table__,
+                Categoria.__table__,
+                Usuario.__table__, # Asegúrate de incluir Usuario
+                Proveedor.__table__,
+                # ... (otras tablas)
+            ]
+        )
+        # 3. Tablas que no tienen dependencias (borrar al final) """
         db.drop_all()
         db.create_all()
 
@@ -497,5 +529,63 @@ def db_create(app):
             sucursal = Sucursal(**data)
             db.session.add(sucursal)
         db.session.commit()
+
+
+        # Insertar datos de prueba en MetodoPago
+        metodos_pago_data = [
+            {"nombre": "Efectivo", "descripcion": "Pago en efectivo"},
+            {"nombre": "Tarjeta de Crédito", "descripcion": "Pago con tarjeta de crédito"},
+            {"nombre": "Tarjeta de Débito", "descripcion": "Pago con tarjeta de débito"},
+            {"nombre": "Transferencia Bancaria", "descripcion": "Pago mediante transferencia bancaria"}
+        ]
+
+        for metodo_data in metodos_pago_data:
+            metodo = MetodoPago(**metodo_data)
+            db.session.add(metodo)
+        db.session.commit()
+
+
+          # Insertar datos de prueba en Ventas (Después de crear Empleados, Clientes, Sucursales y MetodoPago)
+        # Asegúrate de que los IDs de empleado, cliente, sucursal y método de pago existan
+        venta_data = {
+            "fecha_venta": date(2024, 1, 20),  # Usar date del módulo datetime
+            "empleado_id": 1001,  # Reemplaza con un ID de empleado válido
+            "cliente_id": 11323,  # Reemplaza con un ID de cliente válido
+            "sucursal_id": 1,  # Reemplaza con un ID de sucursal válido
+            "metodo_pago_id": 1,  # Reemplaza con un ID de método de pago válido
+            "total": Decimal("150.00"),
+            "detalles": "Venta de prueba desde create_tables.py",
+        }
+
+        nueva_venta = Venta(**venta_data)
+        db.session.add(nueva_venta)
+        db.session.flush()  # Para obtener el ID de la venta
+
+        # Insertar detalles de venta (Después de crear la venta)
+        detalle_venta_data = [
+            {
+                "producto_id": 1,  # Reemplaza con un ID de producto válido
+                "cantidad": 2,
+                "precio_unitario": Decimal("25.00"),
+                "descuento": Decimal("0.00"),
+                "venta_id": nueva_venta.id, # Asigna el ID de la venta
+            },
+            {
+                "producto_id": 2,  # Reemplaza con un ID de producto válido
+                "cantidad": 1,
+                "precio_unitario": Decimal("50.00"),
+                "descuento": Decimal("10.00"),
+                "venta_id": nueva_venta.id, # Asigna el ID de la venta
+            },
+        ]
+
+        for detalle_data in detalle_venta_data:
+            detalle = DetalleVenta(**detalle_data)
+            db.session.add(detalle)
+        db.session.commit()
+
+        print("✅ Venta de prueba insertada correctamente.")
+
+
 
         print("✅ Tablas creadas y datos insertados correctamente.")

@@ -18,7 +18,6 @@ class Empleado(db.Model):
     
     
     # Relaciones con otras tablas verificar el servicio dado que no es generico
-    
     # sucursal_id = db.Column(db.Integer, db.ForeignKey('sucursales.id'), nullable=True)
     # sucursal = db.relationship('Sucursal', backref='empleados', lazy=True)
 

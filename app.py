@@ -20,6 +20,9 @@ from modules.sucursales.routes import sucursales_bp
 from modules.users.routes import usuarios_bp
 from modules.products.routes import productos_bp
 from modules.categories.routes import categorias_bp
+from modules.metodoPago.routes import metodo_pago_bp
+from modules.detalleVenta.routes import detalle_ventas_bp
+from modules.ventas.routes import ventas_bp
 
 # Importar blueprint de vistas
 from views.routes_main import main_bp
@@ -55,6 +58,9 @@ def create_app():
     app.register_blueprint(usuarios_bp, url_prefix="/api/v1")
     app.register_blueprint(productos_bp, url_prefix="/api/v1")
     app.register_blueprint(categorias_bp, url_prefix="/api/v1")
+    app.register_blueprint(metodo_pago_bp, url_prefix="/api/v1")
+    app.register_blueprint(detalle_ventas_bp, url_prefix="/api/v1")
+    app.register_blueprint(ventas_bp, url_prefix="/api/v1")
 
     # Registrar blueprints de vistas
     app.register_blueprint(main_bp)
