@@ -169,6 +169,12 @@ def show_carta_bebidas():
 def show_productos():
     return render_template("dashboard/productos.html")
 
+@dashboard_bp.route("/ventas")
+@rol_requerido('empleado')
+def show_ventas():
+    return render_template("dashboard/ventas.html")
+
+
 @dashboard_bp.route("/form_ventas")
 @rol_requerido('empleado')
 def show_form_ventas():
