@@ -1,39 +1,57 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const menuButton = document.getElementById("user-menu-button");
-    const userMenu = document.getElementById("user-menu");
+    console.log("🔍 Dropdown con transición JS iniciado");
 
-    if (menuButton && userMenu) {
-        // Estilos iniciales para la animación
-        userMenu.classList.add("opacity-0", "scale-95", "hidden", "transition-all", "duration-300", "ease-out");
+    function setupDropdowns() {
+        const headers = document.querySelectorAll("header"); // Detectar todos los headers
 
-        // Toggle del menú de usuario al hacer clic en el botón
-        menuButton.addEventListener("click", function (event) {
-            event.stopPropagation();
+        headers.forEach(header => {
+            const menuButton = header.querySelector(".user-btn");
+            const userMenu = header.querySelector(".popup-window");
 
-            const isHidden = userMenu.classList.contains("hidden");
+            if (!menuButton || !userMenu) return;
 
-            if (isHidden) {
-                userMenu.classList.remove("hidden");
-                setTimeout(() => {
-                    userMenu.classList.remove("opacity-0", "scale-95");
-                    userMenu.classList.add("opacity-100", "scale-100");
-                }, 10);
-            } else {
-                userMenu.classList.remove("opacity-100", "scale-100");
-                userMenu.classList.add("opacity-0", "scale-95");
-                setTimeout(() => userMenu.classList.add("hidden"), 300);
-            }
+            // Establecer estilos iniciales
+            userMenu.style.opacity = "0";
+            userMenu.style.transform = "translateY(-10px)";
+            userMenu.style.transition = "opacity 0.3s ease-out, transform 0.3s ease-out";
+            userMenu.classList.add("hidden");
+
+            menuButton.addEventListener("click", function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+
+                if (userMenu.classList.contains("hidden")) {
+                    userMenu.classList.remove("hidden");
+
+                    // Permitir que el navegador registre el cambio de display antes de animar
+                    setTimeout(() => {
+                        userMenu.style.opacity = "1";
+                        userMenu.style.transform = "translateY(0)";
+                    }, 10);
+                } else {
+                    userMenu.style.opacity = "0";
+                    userMenu.style.transform = "translateY(-10px)";
+
+                    setTimeout(() => {
+                        userMenu.classList.add("hidden");
+                    }, 300); // Ocultar después de la animación
+                }
+            });
+
+            // Cierre global
+            document.addEventListener("click", function (event) {
+                if (!header.contains(event.target)) {
+                    userMenu.style.opacity = "0";
+                    userMenu.style.transform = "translateY(-10px)";
+
+                    setTimeout(() => {
+                        userMenu.classList.add("hidden");
+                    }, 300);
+                }
+            });
         });
-
-        // Cierra el menú si se hace clic fuera de él
-        document.addEventListener("click", function (event) {
-            if (!menuButton.contains(event.target) && !userMenu.contains(event.target)) {
-                userMenu.classList.remove("opacity-100", "scale-100");
-                userMenu.classList.add("opacity-0", "scale-95");
-                setTimeout(() => userMenu.classList.add("hidden"), 300);
-            }
-        });
-    } else {
-        console.warn("Dropdown de usuario no encontrado en esta página.");
     }
+
+    setupDropdowns();
+    console.log("✅ Dropdown con transición JS completado");
 });

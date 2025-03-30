@@ -514,4 +514,71 @@ input[readonly] {
 }
 
 
+/*  */
+/* Tooltip hover effects */
+.group:hover .group-hover\:opacity-100 {
+  opacity: 1;
+}
 
+.group:hover .group-hover\:visible {
+  visibility: visible;
+}
+
+.group:hover .group-hover\:translate-y-0 {
+  transform: translateY(0) translateX(-50%);
+}
+
+.group:hover .group-hover\:scale-110 {
+  transform: scale(1.1);
+}
+
+/* Tooltip arrow */
+.after\:content-\[\'\'\]:after {
+  content: '';
+}
+
+.after\:absolute:after {
+  position: absolute;
+}
+
+.after\:top-full:after {
+  top: 100%;
+}
+
+.after\:left-1\/2:after {
+  left: 50%;
+}
+
+.after\:-translate-x-1\/2:after {
+  transform: translateX(-50%);
+}
+
+.after\:border-8:after {
+  border-width: 8px;
+}
+
+.after\:border-transparent:after {
+  border-color: transparent;
+}
+
+.after\:border-t-gray-800:after {
+  border-top-color: #1f2937;
+}
+
+/* Define primary color if not already in your Tailwind config */
+:root {
+  --color-primary-2: #4f46e5;
+  --color-primary-hover: #4338ca;
+}
+
+.border-primary {
+  border-color: var(--color-primary);
+}
+
+.ring-primary\/30 {
+  --tw-ring-color: rgba(var(--color-primary), 0.3);
+}
+
+.hover\:border-primary:hover {
+  border-color: var(--color-primary);
+}

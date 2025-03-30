@@ -2,10 +2,13 @@
 
 {% block content %}
 
+<!-- Header -->
+{% include 'dashboard/header_cliente.html' %}
+
 <!-- Contenido -->
 <main class="min-h-screen bg-gray-50">
 
-    <!--! Bloque de mensajes de flash flask - versión mejorada -->
+    <!--! Bloque de mensajes de flash flask -->
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
     <div class="fixed top-16 sm:top-20 right-2 sm:right-6 z-50 space-y-2 w-auto max-w-xs sm:max-w-sm md:max-w-md">
@@ -37,122 +40,7 @@
     {% endif %}
     {% endwith %}
 
-    <!-- Header para clientes con menú simplificado -->
-    <header class="relative z-50">
-        <div class="relative flex items-center justify-between py-4 px-4 sm:px-6 bg-white shadow-md">
-            <!-- Logo con ajuste responsive -->
-            <div
-                class="flex flex-row justify-center items-center font-roboto text-xl sm:text-2xl md:text-3xl font-semibold tracking-wide">
-                <img class="h-auto w-10 sm:w-12 md:w-16 object-contain"
-                    src="{{ url_for('static', filename='img/pizzas/logo.png') }}" alt="Logo Benedetto Pizza">
-                <span class="ml-2 text-zinc-700 truncate">Benedetto</span>
-            </div>
-
-            <!-- Menú hamburguesa (móvil) -->
-            <button id="menu-toggle"
-                class="md:hidden flex items-center justify-center w-10 h-10 text-2xl text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-200 rounded-md"
-                aria-label="Abrir menú">
-                &#9776;
-            </button>
-
-            <!-- Navbar en pantallas grandes - versión cliente -->
-            <nav class="hidden md:flex font-roboto text-gray-600 drop-shadow-md">
-                <ul class="flex flex-row justify-center items-center space-x-4 lg:space-x-8">
-                    <li><a href="/cliente/"
-                            class="text-sm lg:text-base py-1 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Inicio</a>
-                    </li>
-                    <li><a href="/cliente/productos"
-                            class="text-sm lg:text-base py-1 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Menú</a>
-                    </li>
-                    <li><a href="/cliente/mis-pedidos"
-                            class="text-sm lg:text-base py-1 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Mis
-                            Pedidos</a>
-                    </li>
-                    <li><a href="/cliente/sucursales"
-                            class="text-sm lg:text-base py-1 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Sucursales</a>
-                    </li>
-
-                    <!-- Dropdown de Usuario (gestionado por dropdown.js) -->
-                    <li class="relative popup">
-                        <button id="user-menu-button" class="user-btn p-2 rounded-full hover:bg-gray-100"
-                            aria-label="Menú de usuario" aria-expanded="false" aria-haspopup="true">
-                            <i class="fa-regular fa-user"></i>
-                        </button>
-
-                        <!-- Contenido del Dropdown -->
-                        <div id="user-menu"
-                            class="hidden popup-window absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg font-roboto z-50">
-                            <ul class="py-2 text-gray-700">
-                                <li class="hover:bg-gray-200">
-                                    <a href="/cliente/perfil" class="block w-full text-left px-4 py-2">Mi Perfil</a>
-                                </li>
-                                <li class="hover:bg-gray-200">
-                                    <a href="/cliente/direcciones" class="block w-full text-left px-4 py-2">Mis
-                                        Direcciones</a>
-                                </li>
-                                <hr class="text-gray-300">
-                                <li class="hover:bg-gray-200">
-                                    <a href="{{ url_for('auth_bp.logout' ) }}"
-                                        class="block w-full text-left px-4 py-2 text-red-600">Cerrar sesión</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-
-        <!-- Navbar en móviles - versión cliente -->
-        <nav id="menu"
-            class="hidden md:hidden fixed top-0 left-0 w-full h-screen bg-white shadow-md z-50 transform transition-transform duration-300 ease-in-out overflow-y-auto">
-            <div class="flex justify-between items-center p-4 border-b border-gray-200">
-                <div class="flex items-center">
-                    <img class="h-8 w-8 object-contain" src="{{ url_for('static', filename='img/pizzas/logo.png') }}"
-                        alt="Logo">
-                    <span class="ml-2 font-roboto font-semibold">Benedetto Pizza</span>
-                </div>
-                <button id="close-menu"
-                    class="text-2xl text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-200 rounded-md p-1"
-                    aria-label="Cerrar menú">
-                    &times;
-                </button>
-            </div>
-            <ul class="flex flex-col p-4 space-y-4">
-                <li>
-                    <a href="/cliente/"
-                        class="block py-2 px-4 rounded-md hover:bg-red-50 hover:text-red-600 transition-colors">Inicio</a>
-                </li>
-                <li>
-                    <a href="/cliente/productos"
-                        class="block py-2 px-4 rounded-md hover:bg-red-50 hover:text-red-600 transition-colors">Menú</a>
-                </li>
-                <li>
-                    <a href="/cliente/mis-pedidos"
-                        class="block py-2 px-4 rounded-md hover:bg-red-50 hover:text-red-600 transition-colors">Mis
-                        Pedidos</a>
-                </li>
-                <li>
-                    <a href="/cliente/sucursales"
-                        class="block py-2 px-4 rounded-md hover:bg-red-50 hover:text-red-600 transition-colors">Sucursales</a>
-                </li>
-                <li class="border-t border-gray-200 pt-4 mt-4">
-                    <a href="/cliente/perfil"
-                        class="block py-2 px-4 rounded-md hover:bg-red-50 hover:text-red-600 transition-colors">Mi
-                        Perfil</a>
-                </li>
-                <li>
-                    <a href="/cliente/direcciones"
-                        class="block py-2 px-4 rounded-md hover:bg-red-50 hover:text-red-600 transition-colors">Mis
-                        Direcciones</a>
-                </li>
-                <li>
-                    <a href="{{ url_for('auth_bp.logout' ) }}"
-                        class="block py-2 px-4 rounded-md text-red-600 hover:bg-red-50 transition-colors">Cerrar
-                        sesión</a>
-                </li>
-            </ul>
-        </nav>
-    </header>
+    
 
     <!-- Tarjetas - versión para clientes -->
     <div class="container mx-auto px-4 py-6 sm:py-8">
@@ -166,7 +54,7 @@
                     class="rounded-lg overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow duration-300 flex flex-col w-full h-full">
                     <div class="relative pt-[56.25%] w-full bg-gray-100">
                         <img class="absolute top-0 left-0 w-full h-full object-cover"
-                            src="{{ url_for('static', filename='img/pizzas/menu.jpg') }}" alt="Nuestro Menú"
+                            src="{{ url_for('static', filename='img/dashboard_cliente/menu_cliente.png') }}" alt="Nuestro Menú"
                             loading="lazy">
                     </div>
                     <div class="px-4 sm:px-6 py-4 font-roboto flex-grow">
@@ -175,7 +63,7 @@
                             ¡Encuentra tu favorita!</p>
                     </div>
                     <div class="px-4 sm:px-6 py-4 flex justify-center sm:justify-start">
-                        <a href="/cliente/productos"
+                        <a href="/dashboard/menu-cliente"
                             class="button bg-red-600 hover:bg-red-700 text-white py-2 px-4 sm:px-6 rounded-lg transition-colors duration-300 text-sm sm:text-base w-full sm:w-auto">
                             Ver menú
                         </a>
@@ -189,7 +77,7 @@
                     class="rounded-lg overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow duration-300 flex flex-col w-full h-full">
                     <div class="relative pt-[56.25%] w-full bg-gray-100">
                         <img class="absolute top-0 left-0 w-full h-full object-cover"
-                            src="{{ url_for('static', filename='img/pizzas/pedidos.jpg') }}" alt="Mis Pedidos"
+                            src="{{ url_for('static', filename='img/dashboard_cliente/pedidos.png') }}" alt="Mis Pedidos"
                             loading="lazy">
                     </div>
                     <div class="px-4 sm:px-6 py-4 font-roboto flex-grow">
@@ -212,7 +100,7 @@
                     class="rounded-lg overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow duration-300 flex flex-col w-full h-full">
                     <div class="relative pt-[56.25%] w-full bg-gray-100">
                         <img class="absolute top-0 left-0 w-full h-full object-cover"
-                            src="{{ url_for('static', filename='img/pizzas/sucursal.jpg') }}" alt="Nuestras Sucursales"
+                            src="{{ url_for('static', filename='img/dashboard_cliente/sucursal.jpg') }}" alt="Nuestras Sucursales"
                             loading="lazy">
                     </div>
                     <div class="px-4 sm:px-6 py-4 font-roboto flex-grow">
@@ -228,45 +116,8 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Tarjeta de Promociones (si aplica) -->
-            <div class="flex">
-                <div
-                    class="rounded-lg overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow duration-300 flex flex-col w-full h-full">
-                    <div class="relative pt-[56.25%] w-full bg-gray-100">
-                        <img class="absolute top-0 left-0 w-full h-full object-cover"
-                            src="{{ url_for('static', filename='img/pizzas/promociones.jpg') }}" alt="Promociones"
-                            loading="lazy">
-                    </div>
-                    <div class="px-4 sm:px-6 py-4 font-roboto flex-grow">
-                        <h2 class="text-lg sm:text-xl mb-2 text-zinc-800 font-semibold">Promociones Especiales</h2>
-                        <p class="text-gray-700 text-sm sm:text-base">Descubre nuestras promociones exclusivas y ahorra
-                            en tus pedidos favoritos.</p>
-                    </div>
-                    <div class="px-4 sm:px-6 py-4 flex justify-center sm:justify-start">
-                        <a href="/cliente/promociones"
-                            class="button bg-red-600 hover:bg-red-700 text-white py-2 px-4 sm:px-6 rounded-lg transition-colors duration-300 text-sm sm:text-base w-full sm:w-auto">
-                            Ver promociones
-                        </a>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
-
-    <!-- Responsivo para cuando no hay items o hay pocos -->
-    {% if items|length == 0 %}
-    <div class="container mx-auto px-4 py-16 text-center">
-        <div class="bg-white rounded-lg shadow-lg p-8 max-w-md mx-auto">
-            <h2 class="text-xl text-zinc-800 mb-4">No hay elementos disponibles</h2>
-            <p class="text-gray-600 mb-6">Por favor, inténtalo nuevamente más tarde.</p>
-            <a href="/cliente/"
-                class="button bg-red-600 hover:bg-red-700 text-white py-2 px-6 rounded-lg transition-colors duration-300">
-                Volver al inicio
-            </a>
-        </div>
-    </div>
-    {% endif %}
 
     <!-- Script para el menú móvil -->
     <script>
