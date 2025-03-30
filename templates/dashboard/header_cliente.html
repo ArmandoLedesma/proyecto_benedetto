@@ -1,0 +1,116 @@
+<!-- Header para clientes con menú simplificado -->
+<header class="relative z-50">
+    <div class="relative flex items-center justify-between py-4 px-4 sm:px-6 bg-white shadow-md">
+      <!-- Logo con ajuste responsivo -->
+      <div
+          class="flex flex-row justify-center items-center font-roboto text-xl sm:text-2xl md:text-3xl font-semibold tracking-wide">
+          <img class="h-auto w-10 sm:w-12 md:w-16 object-contain"
+              src="{{ url_for('static', filename='img/pizzas/logo.png') }}" alt="Logo Benedetto Pizza">
+          <span class="ml-2 text-zinc-700 truncate">Benedetto</span>
+      </div>
+
+      <!-- Menú hamburguesa (móvil) -->
+      <button id="menu-toggle"
+          class="md:hidden flex items-center justify-center w-10 h-10 text-2xl text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-200 rounded-md"
+          aria-label="Abrir menú">
+          &#9776;
+      </button>
+
+      <!-- Navbar en pantallas grandes - versión cliente -->
+        <nav class="hidden md:flex font-roboto text-gray-600 drop-shadow-md">
+            <ul class="flex flex-row justify-center items-center space-x-4 lg:space-x-8">
+              <li><a href="/dashboard/dashboard-cliente"
+                      class="text-sm lg:text-base py-1 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Inicio</a>
+              </li>
+              <li><a href="/dashboard/categorias"
+                      class="text-sm lg:text-base py-1 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Menú</a>
+              </li>
+              <li><a href="/cliente/mis-pedidos"
+                      class="text-sm lg:text-base py-1 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Mis
+                      Pedidos</a>
+              </li>
+              <li><a href="/cliente/sucursales"
+                      class="text-sm lg:text-base py-1 border-b-2 border-transparent hover:border-red-600 transition-all duration-300 ease-in-out">Sucursales</a>
+              </li>
+
+                <!-- Dropdown de Usuario (gestionado por dropdown.js) -->
+                <li class="relative popup">
+
+                    <!-- Botón de usuario -->
+                    <button class="user-btn p-2 rounded-full hover:bg-gray-100">
+                        <i class="fa-regular fa-user"></i>
+                    </button>
+
+                    <!-- Contenido del Dropdown -->
+                    <div class="hidden popup-window absolute right-[-18px] mt-7 w-48 bg-white border border-gray-200 rounded-lg shadow-lg font-roboto z-50">
+                        <ul class="py-2 text-gray-700">
+                            <li class="hover:bg-gray-200">
+                              <a href="/cliente/perfil" class="block w-full text-left px-4 py-2">Mi Perfil</a>
+                            </li>
+                            <li class="hover:bg-gray-200">
+                              <a href="/cliente/direcciones" class="block w-full text-left px-4 py-2">Mis
+                                Direcciones</a>
+                            </li>
+                            <hr class="text-gray-300">
+                            <li class="hover:bg-gray-200">
+                                <a href="{{ url_for('auth_bp.logout' ) }}"
+                                  class="block w-full text-left px-4 py-2 text-red-600">Cerrar sesión</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+  <!-- Navbar en móviles - versión cliente -->
+  <nav id="menu"
+      class="hidden md:hidden fixed top-0 left-0 w-full h-screen bg-white shadow-md z-50 transform transition-transform duration-300 ease-in-out overflow-y-auto">
+      <div class="flex justify-between items-center p-4 border-b border-gray-200">
+          <div class="flex items-center">
+              <img class="h-8 w-8 object-contain" src="{{ url_for('static', filename='img/pizzas/logo.png') }}"
+                  alt="Logo">
+              <span class="ml-2 font-roboto font-semibold">Benedetto Pizza</span>
+          </div>
+          <button id="close-menu"
+              class="text-2xl text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-200 rounded-md p-1"
+              aria-label="Cerrar menú">
+              &times;
+          </button>
+      </div>
+      <ul class="flex flex-col p-4 space-y-4">
+          <li>
+              <a href="/cliente/"
+                  class="block py-2 px-4 rounded-md hover:bg-red-50 hover:text-red-600 transition-colors">Inicio</a>
+          </li>
+          <li>
+              <a href="/cliente/productos"
+                  class="block py-2 px-4 rounded-md hover:bg-red-50 hover:text-red-600 transition-colors">Menú</a>
+          </li>
+          <li>
+              <a href="/cliente/mis-pedidos"
+                  class="block py-2 px-4 rounded-md hover:bg-red-50 hover:text-red-600 transition-colors">Mis
+                  Pedidos</a>
+          </li>
+          <li>
+              <a href="/cliente/sucursales"
+                  class="block py-2 px-4 rounded-md hover:bg-red-50 hover:text-red-600 transition-colors">Sucursales</a>
+          </li>
+          <li class="border-t border-gray-200 pt-4 mt-4">
+              <a href="/cliente/perfil"
+                  class="block py-2 px-4 rounded-md hover:bg-red-50 hover:text-red-600 transition-colors">Mi
+                  Perfil</a>
+          </li>
+          <li>
+              <a href="/cliente/direcciones"
+                  class="block py-2 px-4 rounded-md hover:bg-red-50 hover:text-red-600 transition-colors">Mis
+                  Direcciones</a>
+          </li>
+          <li>
+              <a href="{{ url_for('auth_bp.logout' ) }}"
+                  class="block py-2 px-4 rounded-md text-red-600 hover:bg-red-50 transition-colors">Cerrar
+                  sesión</a>
+          </li>
+      </ul>
+  </nav>
+</header>

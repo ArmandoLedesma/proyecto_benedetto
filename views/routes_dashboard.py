@@ -2,7 +2,7 @@ from flask import Blueprint,render_template, request, redirect, url_for, flash
 from flask_login import login_required, current_user
 from views.rol_permiso import rol_requerido
 
-from data import items, items_categorias, items_clientes, items_empleados, items_sucursales, items_tradicionales, items_hamburguesa, items_lazana, items_perro_caliente, items_bebidas, items_desgranado
+from data import items, items_categorias, items_clientes, items_empleados, items_sucursales, items_tradicionales, items_hamburguesa, items_lazana, items_perro_caliente, items_bebidas, items_desgranado, items_categorias_cliente
 from modules.employees.services import EmpleadoService
 from modules.categories.services import CategoriaService
 from modules.products.services import ProductoService
@@ -47,12 +47,17 @@ def show_dashboard():
 
     
 
-# Nueva ruta para el dashboard del cliente (en routes_dashboard.py)
+# Nueva ruta para el dashboard de clientes 
 @dashboard_bp.route('/dashboard-cliente')
 @login_required
 @rol_requerido('cliente')
 def dashboard_cliente():
     return render_template('dashboard/dashboard-cliente.html') # Usa tu plantilla del dashboard de cliente
+
+
+
+
+
 
 
 
@@ -254,4 +259,58 @@ def actualizar_perfil():
     flash('Perfil actualizado correctamente', 'success')
     return redirect(url_for('dashboard_bp.show_perfil'))
 
+
+
+
+@dashboard_bp.route("/menu-cliente")
+@login_required
+@rol_requerido('cliente')
+def menu_cliente():
+    # Obtenemos la lista de productos a través del servicio
+    productos = productos_services.get_all()
+    
+    # Convertimos cada objeto producto a diccionario
+    productos_list = [producto.to_dict() for producto in productos]
+    
+    # Opcionalmente, puedes obtener todas las categorías
+    categorias = categorias_services.get_all()
+    categorias_list = [categoria.to_dict() for categoria in categorias]
+    
+    
+    categorias_menu = items_categorias_cliente
+    
+    # Renderizamos la vista pasando los productos y categorías
+    return render_template("dashboard/menu_cliente.html", 
+                           items=productos_list, 
+                           items_categorias=categorias_list,
+                           categorias_menu=categorias_menu)
+
+# Si quieres rutas específicas por categoría para clientes
+@dashboard_bp.route("/menu-cliente/categoria/<int:categoria_id>")
+@login_required
+@rol_requerido('cliente')
+def menu_cliente_por_categoria(categoria_id):
+    # Obtenemos la lista de productos a través del servicio
+    productos = productos_services.get_all()
+    
+    # Convertimos cada objeto producto a diccionario
+    productos_list = [producto.to_dict() for producto in productos]
+    
+    # Filtramos los productos por categoría
+    productos_categoria = [producto for producto in productos_list if producto['categoria_id'] == categoria_id]
+    
+    # Obtenemos todas las categorías para el menú de navegación
+    categorias = categorias_services.get_all()
+    categorias_list = [categoria.to_dict() for categoria in categorias]
+    
+    
+    categorias_menu = items_categorias_cliente
+    
+    # Renderizamos la vista pasando los productos filtrados y todas las categorías
+    return render_template("dashboard/menu_cliente.html", 
+                           items=productos_categoria, 
+                           items_categorias=categorias_list,
+                           categoria_seleccionada=categoria_id,
+                           productos=productos_list,  
+                           categorias_menu=categorias_menu)
 

@@ -587,3 +587,45 @@ items_sucursales = [
         "telefono": "0000000001",
     },
 ]
+
+#Imagenes para los iconos de las categorias 
+items_categorias_cliente = [ 
+                            
+    {
+        "id": 1,  
+        "imagen": "img/icono_categoria/pizza.png",
+        "nombre": "Pizzas"
+        
+    },
+    {
+        "id": 2,  
+        "imagen": "img/icono_categoria/hamburguesa.png",
+        "nombre": "Hamburguesas"
+        
+    },
+    {
+        "id": 3,  
+        "imagen": "img/icono_categoria/lazana.png",
+        "nombre": "Lazañas"
+        
+    },
+    {
+        "id": 4,  
+        "imagen": "img/icono_categoria/hotdog.png",
+        "nombre": "Perro caliente"
+        
+    },
+    {
+        "id": 5,  
+        "imagen": "img/icono_categoria/desgranado.png",
+        "nombre": "Desgranado"
+        
+    },
+    {
+        "id": 6,  
+        "imagen": "img/icono_categoria/bebidas.png",
+        "nombre": "Bebidas"
+    }
+   
+   
+]
